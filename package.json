@@ -17,8 +17,9 @@
   },
   "homepage": "https://github.com/UKParliData/TopicPages",
   "devDependencies": {
-    "express": "^4.12.2",
+    "finalhandler": "^0.3.3",
     "grunt": "^0.4.5",
-    "less": "^2.4.0"
+    "less": "^2.4.0",
+    "serve-static": "^1.9.1"
   }
 }
