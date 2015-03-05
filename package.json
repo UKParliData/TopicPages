@@ -1,0 +1,24 @@
+{
+  "name": "TopicPages",
+  "version": "1.0.0",
+  "description": "data.parliament.uk demonstrator application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/UKParliData/TopicPages.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/UKParliData/TopicPages/issues"
+  },
+  "homepage": "https://github.com/UKParliData/TopicPages",
+  "devDependencies": {
+    "express": "^4.12.2",
+    "grunt": "^0.4.5",
+    "less": "^2.4.0"
+  }
+}
