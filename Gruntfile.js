@@ -7,6 +7,13 @@ module.exports = function(grunt) {
                 }
             }
         },
+        bower: {
+            install: {
+                options: {
+                    copy: false
+                }
+            }
+        },
         bowerRequirejs: {
             target: {
                 rjsConfig: 'src/assets/js/main.js'
@@ -21,5 +28,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-bower-requirejs');
-    grunt.registerTask('default', ['watch']);
+    grunt.loadNpmTasks('grunt-bower-task');
+    grunt.registerTask('default', ['less', 'bower', 'bowerRequirejs']);
 };
