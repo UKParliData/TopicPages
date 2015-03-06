@@ -3,8 +3,8 @@ require.config({
 
   },
   paths: {
-    jquery: "../../../bower_components/jquery/dist/jquery",
-    requirejs: "../../../bower_components/requirejs/require"
+    jquery: "../lib/jquery/dist/jquery",
+    requirejs: "../lib/requirejs/require"
   },
   packages: [
 
