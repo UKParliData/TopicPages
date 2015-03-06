@@ -1,0 +1,26 @@
+{
+  "name": "TopicPages",
+  "version": "0.0.0",
+  "homepage": "https://github.com/UKParliData/TopicPages",
+  "authors": [
+    "James McKay <mckayj@parliament.uk>"
+  ],
+  "description": "Topic Pages demonstrator app",
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "requirejs": "~2.1.16"
+  }
+}
