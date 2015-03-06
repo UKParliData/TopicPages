@@ -7,6 +7,16 @@ module.exports = function(grunt) {
                 }
             }
         },
+        bower : {
+            install: {
+                options: {
+                    targetDir: 'src/assets',
+                    layout: 'byComponent',
+                    cleanTargetDir: true,
+                    cleanBowerDir: true
+                }
+            }
+        },
         watch: {
             files: ['src/less/*.less', 'src/less/**/*.less'],
             tasks: ['less']
@@ -15,5 +25,6 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-bower-task');
     grunt.registerTask('default', ['watch']);
 };
