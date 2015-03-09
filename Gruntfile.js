@@ -1,9 +1,12 @@
 module.exports = function(grunt) {
+    var fs = require('fs'),
+        path = require('path');
+
     grunt.initConfig({
         less: {
             development: {
                 files: {
-                    'src/style.css': 'src/less/main.less'
+                    'src/assets/css/style.css': 'src/assets/less/app.less'
                 }
             }
         },
@@ -20,7 +23,7 @@ module.exports = function(grunt) {
             }
         },
         watch: {
-            files: ['src/less/*.less', 'src/less/**/*.less'],
+            files: ['src/assets/less/*.less', 'src/assets/less/**/*.less'],
             tasks: ['less']
         }
     });
@@ -29,5 +32,20 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-bower-requirejs');
     grunt.loadNpmTasks('grunt-bower-task');
-    grunt.registerTask('default', ['less', 'bower', 'bowerRequirejs']);
+
+    grunt.registerTask('create-directories', function() {
+        var dirs = [
+            'src/assets/css',
+            'src/assets/lib'
+        ];
+
+        dirs.forEach(function(dir) {
+            var fullPath = path.resolve(__dirname, dir);
+            if (!fs.existsSync(fullPath)) {
+                fs.mkdirSync(fullPath);
+            }
+        });
+    });
+
+    grunt.registerTask('default', ['create-directories', 'less', 'bower', 'bowerRequirejs']);
 };
