@@ -27,7 +27,6 @@ define(['jquery'], function($) {
                 dataType: 'json',
                 success: function(data) {
                     terms = terms.concat(data.result.items);
-                    console.log(data);
                     var maxPage = data.result.totalResults / data.result.itemsPerPage;
                     page++;
 
