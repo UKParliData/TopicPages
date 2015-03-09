@@ -2,12 +2,16 @@
 <html>
     <head>
         <title>Topic Pages</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
     </head>
     <body>
         <div id="loading">
-            <p>Loading taxonomy...</p>
-            <progress id="progress-meter"></progress>
-            <div id="progress-value">0%</span>
+            <div id="progress">
+                Loading taxonomy...
+                <br />
+                <progress id="progress-meter"></progress>
+                <div id="progress-value">0%</div>
+            </div>
         </div>
     </body>
     <script src="assets/lib/requirejs/require.js" data-main="assets/js/main"></script>
