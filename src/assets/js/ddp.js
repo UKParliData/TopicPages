@@ -9,15 +9,16 @@ define(['jquery'], function($) {
     /* ====== loadTopics ====== */
 
     var terms = null;
+    var loaded = false;
 
-    function getTerms(doneCallback, progressCallback) {
+    function loadTerms(doneCallback, progressCallback) {
 
         var deferred = $.Deferred();
 
         if (!progressCallback) progressCallback = function() {};
         if (!doneCallback) doneCallback = function() {};
 
-        function loadTerms(page) {
+        function loadTermsPage(page) {
             var url = ddpBase
                 + 'terms.json?_pageSize=' + termPageSize
                 + '&_page=' + page
@@ -39,9 +40,10 @@ define(['jquery'], function($) {
                     deferred.notify(state);
 
                     if (data.result.items.length == termPageSize) {
-                        loadTerms(page);
+                        loadTermsPage(page);
                     }
                     else {
+                        loaded = true;
                         doneCallback(terms);
                         deferred.resolve(terms);
                     }
@@ -55,13 +57,19 @@ define(['jquery'], function($) {
         }
         else {
             terms = [];
-            loadTerms(0);
+            loadTermsPage(0);
         }
 
         return deferred.promise();
     }
 
     return {
-        getTerms: getTerms
+        loadTerms: loadTerms,
+        getTerms: function() {
+            if (terms == null) {
+                throw 'Taxonomy has not yet been loaded.';
+            }
+            return terms;
+        }
     };
 });

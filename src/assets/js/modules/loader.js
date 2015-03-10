@@ -20,7 +20,7 @@ define([
 
     var terms;
 
-    ddp.getTerms()
+    ddp.loadTerms()
         .progress(function(state) {
             vm.loaded(state.loaded);
             vm.expected(state.expected);
