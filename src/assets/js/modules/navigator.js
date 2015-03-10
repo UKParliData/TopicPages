@@ -19,7 +19,7 @@ define(['knockout'], function(ko) {
         }
 
         self.goHome = function(parameters) {
-            self.navigateTo('term-selector');
+            self.navigateTo('home');
         }
     };
 

@@ -1,7 +1,8 @@
 define([
     'knockout',
     'ddp',
-    'text!../../../modules/progress.html'
+    'text!../../../modules/progress.html',
+    'modules/navigator'
 ], function(ko, ddp, tpl, nav) {
     "use strict";
 
@@ -27,6 +28,7 @@ define([
         })
         .done(function(result) {
             terms = result;
+            nav.goHome();
         });
 
     return {
