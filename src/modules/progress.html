@@ -1,9 +1,8 @@
 <div id="loading">
     <div id="progress">
-        Loading taxonomy...
+        <div data-bind="text: caption"></div>
         <br />
-        <progress id="progress-meter"
-            data-bind="attr: {max: expected, value: loaded}"></progress>
-        <div id="progress-value" data-bind="text: percentage">0%</div>
+        <progress data-bind="attr: {max: expected, value: loaded}"></progress>
+        <div data-bind="text: percentage">0%</div>
     </div>
 </div>
