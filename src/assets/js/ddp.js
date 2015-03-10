@@ -8,7 +8,7 @@ define(['jquery'], function($) {
 
     /* ====== loadTopics ====== */
 
-    var terms = false;
+    var terms = null;
 
     function getTerms(doneCallback, progressCallback) {
 
@@ -42,6 +42,9 @@ define(['jquery'], function($) {
                         loadTerms(page);
                     }
                     else {
+                        if (sessionStorage) {
+                            sessionStorage.setItem('terms', terms);
+                        }
                         doneCallback(terms);
                         deferred.resolve(terms);
                     }
@@ -49,7 +52,10 @@ define(['jquery'], function($) {
             });
         }
 
-        if (terms !== false) {
+        if (sessionStorage) {
+            terms = sessionStorage.getItem('terms');
+        }
+        if (terms !== null) {
             doneCallback(terms);
             deferred.resolve(terms);
         }
