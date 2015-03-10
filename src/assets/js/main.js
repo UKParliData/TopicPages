@@ -13,4 +13,16 @@ require.config({
 
   ]
 });
-require(['app']);
+
+define([
+    'jquery',
+    'knockout',
+    'navigator'
+], function($, ko, navigator) {
+    "use strict";
+
+    $.support.cors = true;
+    ko.components.register('loader', { require: 'modules/loader' });
+    ko.components.register('home', { require: 'modules/home' });
+    ko.applyBindings(navigator);
+});
