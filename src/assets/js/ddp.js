@@ -11,12 +11,9 @@ define(['jquery'], function($) {
     var terms = null;
     var loaded = false;
 
-    function loadTerms(doneCallback, progressCallback) {
+    function loadTerms() {
 
         var deferred = $.Deferred();
-
-        if (!progressCallback) progressCallback = function() {};
-        if (!doneCallback) doneCallback = function() {};
 
         function loadTermsPage(page) {
             var url = ddpBase
@@ -36,7 +33,6 @@ define(['jquery'], function($) {
                         expected: data.result.totalResults,
                     };
 
-                    progressCallback(state);
                     deferred.notify(state);
 
                     if (data.result.items.length == termPageSize) {
@@ -44,7 +40,6 @@ define(['jquery'], function($) {
                     }
                     else {
                         loaded = true;
-                        doneCallback(terms);
                         deferred.resolve(terms);
                     }
                 }
@@ -52,7 +47,6 @@ define(['jquery'], function($) {
         }
 
         if (terms !== null) {
-            doneCallback(terms);
             deferred.resolve(terms);
         }
         else {
