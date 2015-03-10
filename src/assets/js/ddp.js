@@ -22,12 +22,12 @@ define(['jquery'], function($) {
                 + 'terms.json?_pageSize=' + termPageSize
                 + '&_page=' + page
                 + '&class=' + termClass;
+
             $.ajax({
                 url: url,
                 dataType: 'json',
                 success: function(data) {
                     terms = terms.concat(data.result.items);
-                    var maxPage = data.result.totalResults / data.result.itemsPerPage;
                     page++;
 
                     var state = {
@@ -38,7 +38,7 @@ define(['jquery'], function($) {
                     progressCallback(state);
                     deferred.notify(state);
 
-                    if (page < maxPage) {
+                    if (data.result.items.length == termPageSize) {
                         loadTerms(page);
                     }
                     else {
