@@ -6,7 +6,8 @@ require.config({
     jquery: "../lib/jquery/dist/jquery",
     requirejs: "../lib/requirejs/require",
     knockout: "../lib/knockout/dist/knockout",
-    selectize: "../lib/selectize/dist/js/selectize"
+    selectize: "../lib/selectize/dist/js/selectize",
+    text: "../lib/text/text"
   },
   packages: [
 
