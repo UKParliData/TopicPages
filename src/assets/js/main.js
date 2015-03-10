@@ -7,7 +7,8 @@ require.config({
     requirejs: "../lib/requirejs/require",
     knockout: "../lib/knockout/dist/knockout",
     selectize: "../lib/selectize/dist/js/selectize",
-    text: "../lib/text/text"
+    text: "../lib/text/text",
+    toastr: "../lib/toastr/toastr"
   },
   packages: [
 
