@@ -1,7 +1,7 @@
 define([
     'jquery',
     'knockout',
-    'modules/navigator'
+    'navigator'
 ], function($, ko, navigator) {
     "use strict";
 
