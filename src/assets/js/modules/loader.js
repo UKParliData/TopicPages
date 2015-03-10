@@ -1,7 +1,7 @@
 define([
     'knockout',
     'ddp',
-    'text!/modules/progress.html'
+    'text!../../../modules/progress.html'
 ], function(ko, ddp, tpl, nav) {
     "use strict";
 

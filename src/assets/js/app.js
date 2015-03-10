@@ -6,6 +6,6 @@ define([
     "use strict";
 
     $.support.cors = true;
-    ko.components.register('loader', { require: '/assets/js/modules/loader.js' });
+    ko.components.register('loader', { require: 'modules/loader' });
     ko.applyBindings(navigator);
 });
