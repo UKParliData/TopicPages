@@ -25,5 +25,6 @@ define([
     $.support.cors = true;
     ko.components.register('loader', { require: 'modules/loader' });
     ko.components.register('home', { require: 'modules/home' });
+    ko.components.register('error', { template: { require: 'text!../templates/error.html' } });
     ko.applyBindings(navigator);
 });

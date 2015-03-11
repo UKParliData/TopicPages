@@ -24,6 +24,8 @@ define(['jquery'], function($) {
             $.ajax({
                 url: url,
                 dataType: 'json',
+                method: 'GET',
+                timeout: 60000,
                 success: function(data) {
                     terms = terms.concat(data.result.items);
                     page++;
@@ -42,6 +44,9 @@ define(['jquery'], function($) {
                         loaded = true;
                         deferred.resolve(terms);
                     }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    deferred.reject(textStatus, errorThrown);
                 }
             });
         }

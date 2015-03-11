@@ -29,6 +29,9 @@ define([
         .done(function(result) {
             terms = result;
             nav.goHome();
+        })
+        .fail(function() {
+            nav.navigateTo('error');
         });
 
     return {
