@@ -1,0 +1,17 @@
+<div class="centre-window">
+    <div class="centre-window-content">
+        <p>Search for a term:</p>
+        <p>
+            <select
+                data-bind="
+                    enable: (members().length > 0),
+                    value: selectedMPId,
+                    optionsText: 'name',
+                    optionsValue: 'id',
+                    options: members,
+                    optionsCaption: 'Choose an MP',
+                    selectize: {}"
+                class="something" />
+        </p>
+    </div>
+</div>

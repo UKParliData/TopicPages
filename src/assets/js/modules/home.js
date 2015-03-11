@@ -1,5 +1,5 @@
 define([
-    'text!../../../modules/home.html'
+    'text!../../templates/home.html'
 ], function(tpl) {
     "use strict";
 
