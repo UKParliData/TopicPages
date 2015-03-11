@@ -4,12 +4,12 @@
         <p>
             <select
                 data-bind="
-                    enable: (members().length > 0),
-                    value: selectedMPId,
+                    enable: (topics().length > 0),
+                    value: selectedTopic,
                     optionsText: 'name',
                     optionsValue: 'id',
-                    options: members,
-                    optionsCaption: 'Choose an MP',
+                    options: topics,
+                    optionsCaption: 'Choose a topic',
                     selectize: {}"
                 class="something" />
         </p>
