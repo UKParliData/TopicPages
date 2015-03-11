@@ -1,4 +1,4 @@
-define(['jquery'], function($) {
+define(['jquery', 'es5-shim'], function($) {
     /**
      * The base URL for the DDP ELDA endpoint
      */
@@ -11,8 +11,15 @@ define(['jquery'], function($) {
     var terms = null;
     var loaded = false;
 
-    function loadTerms() {
+    function readTerm(term) {
+        return {
+            id: parseInt(/[0-9]+$/.exec(term._about)[0], 10),
+            name: term.prefLabel._value
+        };
+    }
 
+
+    function loadTerms() {
         var deferred = $.Deferred();
 
         function loadTermsPage(page) {
@@ -27,7 +34,7 @@ define(['jquery'], function($) {
                 method: 'GET',
                 timeout: 60000,
                 success: function(data) {
-                    terms = terms.concat(data.result.items);
+                    terms = terms.concat(data.result.items.map(readTerm));
                     page++;
 
                     var state = {

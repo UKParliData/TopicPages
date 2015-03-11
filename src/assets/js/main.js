@@ -8,7 +8,8 @@ require.config({
     knockout: "../lib/knockout/dist/knockout",
     selectize: "../lib/selectize/dist/js/selectize",
     text: "../lib/text/text",
-    toastr: "../lib/toastr/toastr"
+    toastr: "../lib/toastr/toastr",
+    "es5-shim": "../lib/es5-shim/es5-shim"
   },
   packages: [
 
