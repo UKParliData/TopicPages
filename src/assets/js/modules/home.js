@@ -11,6 +11,17 @@ define([
 
         self.topics = ko.observableArray(ddp.getTerms());
         self.selectedTopic = ko.observable(null);
+
+        self.showPage = function(a) {
+            console.log(a);
+        };
+
+        self.pages = [
+            { pageTitle: 'Briefing Papers', target: 'briefing-papers' },
+            { pageTitle: 'Early Day Motions', target: 'edms' }
+        ];
+
+        console.log(self);
     }
 
     return {

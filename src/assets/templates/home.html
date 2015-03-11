@@ -11,7 +11,10 @@
                     options: topics,
                     optionsCaption: 'Choose a topic',
                     selectize: {}"
-                class="something" />
+                class="term-selector"></select>
+        </p>
+        <p data-bind="visible: selectedTopic, foreach: pages">
+            <button data-bind="click: $parent.showPage, text: pageTitle"></button>
         </p>
     </div>
 </div>
