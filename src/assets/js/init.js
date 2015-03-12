@@ -9,11 +9,20 @@ define([
 
     /* ===== Components ====== */
 
-    ko.components.register('loader', { require: 'modules/loader' });
-    ko.components.register('home', { require: 'modules/home' });
+    var componentLoader = {
+        getConfig: function(name, callback) {
+            if (name.substr(0, 8) === 'modules/') {
+                callback({ require: name });
+            }
+            else {
+                callback(null);
+            }
+        }
+    };
+
+    ko.components.loaders.unshift(componentLoader);
+
     ko.components.register('error', { template: { require: 'text!../templates/error.html' } });
-    ko.components.register('briefing-papers', { require: 'modules/briefing-papers' });
-    ko.components.register('edms', { require: 'modules/edms' });
     ko.applyBindings(navigator);
 
     ko.bindingHandlers.selectize = {

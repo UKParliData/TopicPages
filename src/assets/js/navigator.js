@@ -7,6 +7,10 @@ define(['knockout'], function(ko) {
         self.parameters = ko.observable(null);
         self.messages = ko.observable([]);
 
+        self.moduleOfSelectedComponent = ko.pureComputed(function() {
+            return 'modules/' + this.selectedComponent();
+        }, this);
+
         self.removeMessage = function() {
             self.messages.remove(this);
         }
