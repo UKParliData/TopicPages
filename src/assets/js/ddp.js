@@ -14,7 +14,8 @@ define(['jquery', 'es5-shim', 'utils'], function($) {
     function readTerm(term) {
         return {
             id: parseInt(/[0-9]+$/.exec(term._about)[0], 10),
-            name: term.prefLabel._value
+            name: term.prefLabel._value,
+            uri: term._about
         };
     }
 

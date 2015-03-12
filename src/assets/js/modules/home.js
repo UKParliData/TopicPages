@@ -2,8 +2,9 @@ define([
     'text!../../templates/home.html',
     'ddp',
     'knockout',
+    'navigator',
     'selectize'
-], function(tpl, ddp, ko) {
+], function(tpl, ddp, ko, nav) {
     "use strict";
 
     var viewModel = function() {
@@ -13,15 +14,13 @@ define([
         self.selectedTopic = ko.observable(null);
 
         self.showPage = function(a) {
-            console.log(a);
+            nav.navigateTo(a.target, self.selectedTopic());
         };
 
         self.pages = [
             { pageTitle: 'Briefing Papers', target: 'briefing-papers' },
             { pageTitle: 'Early Day Motions', target: 'edms' }
         ];
-
-        console.log(self);
     }
 
     return {
