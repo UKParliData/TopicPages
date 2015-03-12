@@ -13,6 +13,7 @@ define([
     ko.components.register('home', { require: 'modules/home' });
     ko.components.register('error', { template: { require: 'text!../templates/error.html' } });
     ko.components.register('briefing-papers', { require: 'modules/briefing-papers' });
+    ko.components.register('edms', { require: 'modules/edms' });
     ko.applyBindings(navigator);
 
     ko.bindingHandlers.selectize = {

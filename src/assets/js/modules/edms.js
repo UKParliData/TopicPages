@@ -1,5 +1,5 @@
 define([
-    'text!../../templates/briefing-papers.html',
+    'text!../../templates/edms.html',
     'navigator',
     'config'
 ], function(tpl, nav, cfg) {
