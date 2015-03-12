@@ -1,10 +1,9 @@
-define(['jquery', 'es5-shim', 'utils'], function($) {
-    /**
-     * The base URL for the DDP ELDA endpoint
-     */
-    var ddpBase = 'http://lda.data.parliament.uk/'
-    var termPageSize = 1000;
-    var termQuery = ddpBase + 'terms.json?class=ID&_page={0}&_pageSize={1}';
+define([
+    'jquery',
+    'config',
+    'es5-shim',
+    'utils'
+], function($, cfg) {
 
     /* ====== loadTopics ====== */
 
@@ -24,7 +23,7 @@ define(['jquery', 'es5-shim', 'utils'], function($) {
         var deferred = $.Deferred();
 
         function loadTermsPage(page) {
-            var url = termQuery.format(page, termPageSize);
+            var url = cfg.topics.query.format(page, cfg.topics.pageSize);
 
             $.ajax({
                 url: url,
@@ -42,7 +41,7 @@ define(['jquery', 'es5-shim', 'utils'], function($) {
 
                     deferred.notify(state);
 
-                    if (data.result.items.length == termPageSize) {
+                    if (data.result.items.length == cfg.topics.pageSize) {
                         loadTermsPage(page);
                     }
                     else {
