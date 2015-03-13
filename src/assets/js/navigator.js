@@ -25,18 +25,18 @@ define(['knockout'], function(ko) {
 
         self.removeMessage = function() {
             self.messages.remove(this);
-        }
+        };
 
         self.navigateTo = function(component, parameters) {
             if (parameters) {
                 self.parameters(parameters);
             }
             self.selectedComponent(component);
-        }
+        };
 
         self.goHome = function(parameters) {
             self.navigateTo('home');
-        }
+        };
     };
 
     var navigator = new Navigator();
