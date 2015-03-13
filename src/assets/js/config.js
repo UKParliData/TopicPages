@@ -5,8 +5,8 @@ define(function() {
 
     return {
         topics: {
-            pageSize: 1000,
-            query: ddpBase + 'terms.json?class=ID&_page={0}&_pageSize={1}'
+            pageSize: 100,
+            query: ddpBase + 'terms.json?class=TPG&_page={0}&_pageSize={1}'
         },
         briefingpapers: {
             pageSize: 10,
