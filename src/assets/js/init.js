@@ -20,9 +20,9 @@ define([
         }
     };
 
-    ko.components.loaders.unshift(componentLoader);
+    ko.components.loaders.push(componentLoader);
 
-    ko.components.register('error', { template: { require: 'text!../templates/error.html' } });
+    ko.components.register('modules/error', { template: { require: 'text!../templates/error.html' } });
     ko.applyBindings(navigator);
 
     ko.bindingHandlers.selectize = {
