@@ -2,8 +2,9 @@ define([
     'jquery',
     'knockout',
     'navigator',
+    'ddp',
     'selectize'
-], function($, ko, navigator) {
+], function($, ko, navigator, ddp) {
     "use strict";
     $.support.cors = true;
 
@@ -45,4 +46,18 @@ define([
             }
         }
     }
+
+    ddp.loadTerms()
+        .progress(function(state) {
+            navigator.loading.inProgress(true);
+            navigator.loading.loaded(state.loaded);
+            navigator.loading.expected(state.expected);
+        })
+        .done(function(result) {
+            navigator.loading.inProgress(false);
+            navigator.terms(result);
+        })
+        .fail(function() {
+            navigator.navigateTo('error');
+        });
 });

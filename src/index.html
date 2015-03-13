@@ -5,7 +5,22 @@
         <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
     </head>
     <body>
+        <header id="mainHeading">
+        </header>
+
         <div id="all">
+            <h1>
+                Topical - browse Parliamentary data by topic
+            </h1>
+
+            <div id="loading" data-bind="visible: loading.inProgress()">
+                <progress data-bind="attr: { max: loading.expected(), value: loading.loaded() }"></progress>
+            </div>
+
+            <div id="search" data-bind="visible: !loading.inProgress()">
+                hello
+            </div>
+
             <div id="stage" data-bind="component: { name: moduleOfSelectedComponent }"></div>
         </div>
     </body>

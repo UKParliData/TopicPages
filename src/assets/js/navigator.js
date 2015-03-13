@@ -3,13 +3,22 @@ define(['knockout'], function(ko) {
     function Navigator() {
         var self = this;
 
-        self.selectedComponent = ko.observable('loader');
+        self.loading = {
+            inProgress: ko.observable(true),
+            loaded: ko.observable(100),
+            expected: ko.observable(100)
+        };
+
+        self.selectedComponent = ko.observable(null);
+        self.moduleOfSelectedComponent = ko.pureComputed(function() {
+            if (self.selectedComponent == null) {
+                return null;
+            }
+            return 'modules/' + self.selectedComponent();
+        });
+
         self.parameters = ko.observable(null);
         self.messages = ko.observable([]);
-
-        self.moduleOfSelectedComponent = ko.pureComputed(function() {
-            return 'modules/' + this.selectedComponent();
-        }, this);
 
         self.removeMessage = function() {
             self.messages.remove(this);
