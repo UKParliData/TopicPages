@@ -5,20 +5,22 @@ define(['knockout'], function(ko) {
 
         self.loading = {
             inProgress: ko.observable(true),
-            loaded: ko.observable(100),
+            loaded: ko.observable(0),
             expected: ko.observable(100)
         };
 
         self.selectedComponent = ko.observable(null);
         self.moduleOfSelectedComponent = ko.pureComputed(function() {
-            if (self.selectedComponent == null) {
-                return null;
+            if (self.selectedComponent() == null) {
+                return 'modules/home';
             }
             return 'modules/' + self.selectedComponent();
         });
 
         self.parameters = ko.observable(null);
-        self.messages = ko.observable([]);
+        self.messages = ko.observableArray([]);
+
+        self.terms = ko.observableArray([]);
 
         self.removeMessage = function() {
             self.messages.remove(this);

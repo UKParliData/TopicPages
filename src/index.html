@@ -13,16 +13,21 @@
                 Topical - browse Parliamentary data by topic
             </h1>
 
-            <div id="loading" data-bind="visible: loading.inProgress()">
-                <progress data-bind="attr: { max: loading.expected(), value: loading.loaded() }"></progress>
-            </div>
+            <div id="loading" data-bind="visible: loading.inProgress(), template: { name: 'loading-template' }"></div>
 
-            <div id="search" data-bind="visible: !loading.inProgress()">
-                hello
-            </div>
+            <div id="search" data-bind="visible: !loading.inProgress(), template: { name: 'search-template' }"></div></div>
 
             <div id="stage" data-bind="component: { name: moduleOfSelectedComponent }"></div>
         </div>
     </body>
+
+    <script type="text/html" id="loading-template">
+        <progress data-bind="attr: { max: loading.expected(), value: loading.loaded() }"></progress>
+    </script>
+
+    <script type="text/html" id="search-template">
+        Search box will go in here.
+    </script>
+
     <script src="assets/lib/requirejs/require.js" data-main="assets/js/main"></script>
 </html>
