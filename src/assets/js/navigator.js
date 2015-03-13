@@ -20,7 +20,8 @@ define(['knockout'], function(ko) {
         self.parameters = ko.observable(null);
         self.messages = ko.observableArray([]);
 
-        self.terms = ko.observableArray([]);
+        self.topics = ko.observableArray([]);
+        self.selectedTopic = ko.observable(null);
 
         self.removeMessage = function() {
             self.messages.remove(this);

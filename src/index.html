@@ -26,7 +26,17 @@
     </script>
 
     <script type="text/html" id="search-template">
-        Search box will go in here.
+        <select
+            data-bind="
+                enable: (topics().length > 0),
+                value: selectedTopic,
+                optionsText: 'name',
+                optionsValue: 'uri',
+                options: topics,
+                optionsCaption: 'Choose a topic',
+                selectize: {}"
+            class="term-selector"></select>
+
     </script>
 
     <script src="assets/lib/requirejs/require.js" data-main="assets/js/main"></script>
