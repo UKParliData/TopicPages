@@ -1,20 +1,5 @@
-<div class="centre-window">
-    <div class="centre-window-content">
-        <p>Search for a term:</p>
-        <p>
-            <select
-                data-bind="
-                    enable: (topics().length > 0),
-                    value: selectedTopic,
-                    optionsText: 'name',
-                    optionsValue: 'uri',
-                    options: topics,
-                    optionsCaption: 'Choose a topic',
-                    selectize: {}"
-                class="term-selector"></select>
-        </p>
-        <p data-bind="visible: selectedTopic, foreach: pages">
-            <button data-bind="click: $parent.showPage, text: pageTitle"></button>
-        </p>
-    </div>
-</div>
+<h2>Welcome to Topical</h2>
+
+<p>
+    This is where you can explore Parliamentary data by topic.
+</p>
