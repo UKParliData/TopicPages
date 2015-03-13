@@ -1,6 +1,11 @@
 <div>
     <h1>Briefing Papers</h1>
-    <p>
-        Lorem ipsum, dolor sit amet, consectetuer blah blahs
-    </p>
+
+    <ul data-bind="foreach: papers(), visible: !loading()">
+        <li>
+            <h2 data-bind="text: identifier + ' - ' + title"></h2>
+            <p class="date" data-bind="text: date"></p>
+            <p class="description" data-bind="text:description"></p>
+        </li>
+    </ul>
 </div>

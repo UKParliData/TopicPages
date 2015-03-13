@@ -8,9 +8,9 @@ define(function() {
             pageSize: 100,
             query: ddpBase + 'terms.json?class=TPG&_page={0}&_pageSize={1}'
         },
-        briefingpapers: {
+        briefingPapers: {
             pageSize: 10,
-            query: ddpBase + 'briefingpapers.json?_page={0}&topic={1}'
+            queryByTopic: ddpBase + 'briefingpapers.json?_page={0}&topic={1}'
         }
     };
 });
