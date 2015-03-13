@@ -52,7 +52,7 @@ define([
     }
 
     var viewModel = function() {
-        var result = new BriefingPaperViewModel(nav.parameters());
+        var result = new BriefingPaperViewModel(nav.selectedTopic());
         return result;
     };
 

@@ -3,6 +3,11 @@ define(['knockout'], function(ko) {
     function Navigator() {
         var self = this;
 
+        self.pages = [
+            { pageTitle: 'Briefing Papers', target: 'briefing-papers' },
+            { pageTitle: 'Early Day Motions', target: 'edms' }
+        ];
+
         self.loading = {
             inProgress: ko.observable(true),
             loaded: ko.observable(0),
@@ -36,6 +41,10 @@ define(['knockout'], function(ko) {
 
         self.goHome = function(parameters) {
             self.navigateTo('home');
+        };
+
+        self.gotoPage = function(page) {
+            self.navigateTo(page.target);
         };
     };
 

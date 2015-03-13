@@ -17,6 +17,14 @@
 
             <div id="search" data-bind="visible: !loading.inProgress(), template: { name: 'search-template' }"></div>
 
+            <div id="navigation" data-bind="visible: selectedTopic() != null">
+                <ul data-bind="foreach: pages">
+                    <li>
+                        <a href="#" data-bind="click: $parent.gotoPage, text: pageTitle"></a>
+                    </li>
+                </ul>
+            </div>
+
             <div id="stage" data-bind="component: { name: moduleOfSelectedComponent }"></div>
         </div>
     </body>

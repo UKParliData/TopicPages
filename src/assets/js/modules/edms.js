@@ -55,7 +55,7 @@ define([
     }
 
     var viewModel = function() {
-        var result = new EdmViewModel(nav.parameters());
+        var result = new EdmViewModel(nav.selectedTopic());
         return result;
     };
 
