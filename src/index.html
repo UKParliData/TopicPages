@@ -15,7 +15,7 @@
 
             <div id="loading" data-bind="visible: loading.inProgress(), template: { name: 'loading-template' }"></div>
 
-            <div id="search" data-bind="visible: !loading.inProgress(), template: { name: 'search-template' }"></div></div>
+            <div id="search" data-bind="visible: !loading.inProgress(), template: { name: 'search-template' }"></div>
 
             <div id="stage" data-bind="component: { name: moduleOfSelectedComponent }"></div>
         </div>
@@ -36,7 +36,6 @@
                 optionsCaption: 'Choose a topic',
                 selectize: {}"
             class="term-selector"></select>
-
     </script>
 
     <script src="assets/lib/requirejs/require.js" data-main="assets/js/main"></script>
