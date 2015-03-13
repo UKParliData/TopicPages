@@ -1,6 +1,15 @@
 <div>
     <h1>Early Day Motions</h1>
-    <p>
-        Lorem ipsum, dolor sit amet, consectetuer blah blahs
-    </p>
+
+    <ul data-bind="foreach: edms(), visible: !loading()">
+        <li>
+            <h2>
+                <a data-bind="
+                    attr: { href: externalUrl },
+                    text: 'EDM ' + edmNumber + ': ' + title"></a>
+            </h2>
+            <p class="date" data-bind="text: date"></p>
+            <p class="description" data-bind="text: motionText"></p>
+        </li>
+    </ul>
 </div>

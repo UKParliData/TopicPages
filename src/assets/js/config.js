@@ -11,6 +11,10 @@ define(function() {
         briefingPapers: {
             pageSize: 10,
             queryByTopic: ddpBase + 'briefingpapers.json?_page={0}&topic={1}'
+        },
+        edms: {
+            pageSize: 10,
+            queryByTopic: ddpBase + 'edms.json?_page={0}&topic={1}&_view=all'
         }
     };
 });
