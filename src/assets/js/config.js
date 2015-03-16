@@ -15,6 +15,10 @@ define(function() {
         edms: {
             pageSize: 10,
             queryByTopic: ddpBase + 'edms.json?_page={0}&topic={1}&_view=all'
+        },
+        papersLaid : {
+            pageSize: 10,
+            queryByTopic: ddpBase + 'paperslaid.json?_page={0}&topic={1}&exists-topic=true'
         }
     };
 });

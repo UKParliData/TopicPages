@@ -5,7 +5,8 @@ define(['knockout'], function(ko) {
 
         self.pages = [
             { pageTitle: 'Briefing Papers', target: 'briefing-papers' },
-            { pageTitle: 'Early Day Motions', target: 'edms' }
+            { pageTitle: 'Early Day Motions', target: 'edms' },
+            { pageTitle: 'Papers Laid', target: 'papers-laid' }
         ];
 
         self.loading = {
