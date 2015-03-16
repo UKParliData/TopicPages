@@ -25,14 +25,14 @@ define([
         }
     }
 
-    var BriefingPaperViewModel = function(termUri) {
+    var BriefingPaperViewModel = function(topic) {
         var self = this;
 
         self.loading = ko.observable(false);
         self.papers = ko.observableArray([]);
 
         var load = function(page) {
-            var url = cfg.briefingPapers.queryByTopic.format(page, termUri);
+            var url = cfg.briefingPapers.queryByTopic.format(page, topic);
             self.loading(true);
             $.ajax({
                 url: url,
