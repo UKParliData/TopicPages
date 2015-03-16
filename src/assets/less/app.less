@@ -1,23 +1,114 @@
-@background: #ffffff;
-@foreground: #003399;
+// ====== Constants ====== //
 
-body {
-    background-color: @background;
-    color: @foreground;
+@background: #ffffff;
+@header-background: #333366;
+@footer-background: #efefef;
+@keylines: #999999;
+
+@padding-small: 10px;
+
+@selector-width: 200px;
+@gutter-width: 40px;
+@margin-width: 20px;
+@nonstage-width: (@selector-width + @gutter-width + 2 * @margin-width);
+
+@stage-width-min: 400px;
+@stage-width-mid: 600px;
+@stage-width-max: 800px;
+
+// ====== Mixins ====== //
+
+.with-background(@bg) when (lightness(@bg) >= 50%) {
+    background-color: @bg;
+    color: black;
+}
+
+.with-background(@bg) when (lightness(@bg) < 50%) {
+    background-color: @bg;
+    color: white;
+}
+
+.two-column-widths(@stage-width) {
+    #all {
+        width: @stage-width + @gutter-width + @selector-width;
+        margin: 0 auto;
+
+        #selection {
+            width: @selector-width;
+            float: left;
+        }
+
+        #stage {
+            width: @stage-width;
+            float: right;
+        }
+    }
+}
+
+.two-columns(@stage-min, @stage-max) {
+    @media(min-width: (@stage-min + @nonstage-width)) and (max-width: (@stage-max + @nonstage-width)) {
+        .two-column-widths(@stage-min);
+    }
 }
 
 
-.centre-window {
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    text-align: center;
+// ====== General layout ====== //
 
-    .centre-window-content {
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
-        text-align: center;
-        width: auto;
+body {
+    .with-background(@background);
+    font: 14px arial, helvetica, sans-serif;
+    margin: 0px;
+    padding: 0px;
+}
+
+header#main-header {
+    .with-background(@header-background);
+    margin: 0px;
+    padding: @padding-small;
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    z-index: 9999;
+
+    h1 {
+        margin: 0px;
+        padding: 0px;
+        font-size: 1em;
+    }
+}
+
+footer#main-footer {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding: @padding-small;
+    border-top: 1px solid @keylines;
+    background-color: @footer-background;
+    font-size: 80%;
+}
+
+#all {
+    z-index: 0;
+    padding-top: 3.5em;
+}
+
+.two-columns(@stage-width-min, @stage-width-mid);
+.two-columns(@stage-width-mid, @stage-width-max);
+@media(min-width: (@stage-width-max + @nonstage-width)) {
+    .two-column-widths(@stage-width-max);
+}
+
+@media(max-width: (@stage-width-min + @nonstage-width)) {
+    #all {
+        margin-left: @margin-width;
+        margin-right: @margin-width;
+    }
+}
+
+@media(min-width: (@stage-width-min + @nonstage-width)) {
+    #selection {
+        position: fixed;
     }
 }
