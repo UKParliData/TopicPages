@@ -28,14 +28,14 @@ define([
         }
     }
 
-    var EdmViewModel = function(termUri) {
+    var EdmViewModel = function(topic) {
         var self = this;
 
         self.loading = ko.observable(false);
         self.edms = ko.observableArray([]);
 
         var load = function(page) {
-            var url = cfg.edms.queryByTopic.format(page, termUri);
+            var url = cfg.edms.queryByTopic.format(page, topic);
             self.loading(true);
             $.ajax({
                 url: url,
@@ -55,7 +55,7 @@ define([
     }
 
     var viewModel = function() {
-        var result = new EdmViewModel(nav.parameters());
+        var result = new EdmViewModel(nav.selectedTopic());
         return result;
     };
 

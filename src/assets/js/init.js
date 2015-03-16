@@ -2,10 +2,12 @@ define([
     'jquery',
     'knockout',
     'navigator',
+    'ddp',
     'selectize'
-], function($, ko, navigator) {
+], function($, ko, navigator, ddp) {
     "use strict";
     $.support.cors = true;
+
 
     /* ===== Components ====== */
 
@@ -21,9 +23,10 @@ define([
     };
 
     ko.components.loaders.push(componentLoader);
-
     ko.components.register('modules/error', { template: { require: 'text!../templates/error.html' } });
-    ko.applyBindings(navigator);
+
+
+    /* ====== Selectize initialisation ====== */
 
     ko.bindingHandlers.selectize = {
         init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
@@ -45,4 +48,20 @@ define([
             }
         }
     }
+
+    ko.applyBindings(navigator);
+
+    ddp.loadTerms()
+        .progress(function(state) {
+            navigator.loading.inProgress(true);
+            navigator.loading.loaded(state.loaded);
+            navigator.loading.expected(state.expected);
+        })
+        .done(function(result) {
+            navigator.loading.inProgress(false);
+            navigator.topics(result);
+        })
+        .fail(function() {
+            navigator.navigateTo('error');
+        });
 });
