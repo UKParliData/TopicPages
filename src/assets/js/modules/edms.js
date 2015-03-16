@@ -1,66 +1,42 @@
 define([
-    'jquery',
-    'knockout',
-    'navigator',
-    'config',
+    'modules/module',
     'text!../../templates/edms.html',
     'utils'
-], function($, ko, nav, cfg, tpl) {
+], function(module, tpl) {
     "use strict";
 
-    function loadEdm(item) {
-        console.log(item);
-        return {
-            uri: item._about,
-            date: new Date(item.dateTabled._value),
-            motionText: item.motionText,
-            externalUrl: item.externalLocation,
-            edmNumber: item.edmNumber._value,
-            title: item.title,
-            sponsors: item.sponsors.map(function(s, ix) {
-                return {
-                    uri: s._about,
-                    name: item.sponsorPrinted[ix]
-                };
-            }),
-            topics: item.topic,
-            type: item.type
-        }
-    }
+    console.log(module);
 
-    var EdmViewModel = function(topic) {
+    function EdmViewModel() {
         var self = this;
+        module.ModuleViewModel.call(self, 'edms');
 
-        self.loading = ko.observable(false);
-        self.edms = ko.observableArray([]);
+        /* ====== Overridden methods ====== */
 
-        var load = function(page) {
-            var url = cfg.edms.queryByTopic.format(page, topic);
-            self.loading(true);
-            $.ajax({
-                url: url,
-                method: 'GET',
-                dataType: 'json'
-            }).done(function(data) {
-                var result = data.result;
-                var items = result.items;
-                var edms = items.map(loadEdm);
-                self.loading(false);
-                self.edms(edms);
-                console.log(edms);
-            });
+        self.loadItem = function(item) {
+            return {
+                uri: item._about,
+                date: new Date(item.dateTabled._value),
+                motionText: item.motionText,
+                externalUrl: item.externalLocation,
+                edmNumber: item.edmNumber._value,
+                title: item.title,
+                sponsors: item.sponsors.map(function(s, ix) {
+                    return {
+                        uri: s._about,
+                        name: item.sponsorPrinted[ix]
+                    };
+                }),
+                topics: item.topic,
+                type: item.type
+            }
         };
 
-        load(0);
+        self.load(0);
     }
-
-    var viewModel = function() {
-        var result = new EdmViewModel(nav.selectedTopic());
-        return result;
-    };
 
     return {
         template: tpl,
-        viewModel: viewModel
+        viewModel: EdmViewModel
     };
 });
