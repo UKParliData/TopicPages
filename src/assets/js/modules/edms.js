@@ -5,8 +5,6 @@ define([
 ], function(module, tpl) {
     "use strict";
 
-    console.log(module);
-
     function EdmViewModel() {
         var self = this;
         module.ModuleViewModel.call(self, 'edms');

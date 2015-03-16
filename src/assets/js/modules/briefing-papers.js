@@ -12,7 +12,6 @@ define([
         /* ====== Overridden methods ====== */
 
         self.loadItem = function(item) {
-            console.log(item);
             return {
                 uri: item._about,
                 date: new Date(item.date._value),
