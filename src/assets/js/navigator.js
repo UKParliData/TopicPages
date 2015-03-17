@@ -1,14 +1,20 @@
-define(['knockout'], function(ko) {
+define([
+    'knockout',
+    'config'
+], function(ko, cfg) {
 
     function Navigator() {
         var self = this;
 
-        self.pages = [
-            { pageTitle: 'Briefing Papers', target: 'briefing-papers' },
-            { pageTitle: 'Early Day Motions', target: 'edms' },
-            { pageTitle: 'Papers Laid', target: 'papers-laid' },
-            { pageTitle: 'Proceedings', target: 'proceedings' }
-        ];
+        self.pages = [];
+        for (var key in cfg.modules) {
+            if (cfg.modules.hasOwnProperty(key)) {
+                self.pages = self.pages.concat({
+                    pageTitle: cfg.modules[key].title,
+                    target: key
+                });
+            }
+        }
 
         self.loading = {
             inProgress: ko.observable(true),

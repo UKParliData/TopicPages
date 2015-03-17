@@ -14,7 +14,7 @@ define([
 
     function ModuleViewModel(configName) {
         var self = this;
-        var config = cfg[configName];
+        var config = cfg.modules[configName];
         var topic = nav.selectedTopic();
 
         /* ====== Observables ====== */

@@ -5,7 +5,7 @@ define([
 ], function(module, tpl) {
     "use strict";
 
-    function EdmViewModel() {
+    function EdmsViewModel() {
         var self = this;
         module.ModuleViewModel.call(self, 'edms');
 
@@ -35,6 +35,6 @@ define([
 
     return {
         template: tpl,
-        viewModel: EdmViewModel
+        viewModel: EdmsViewModel
     };
 });
