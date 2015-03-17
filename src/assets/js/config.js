@@ -19,6 +19,10 @@ define(function() {
         papersLaid : {
             pageSize: 10,
             queryByTopic: ddpBase + 'paperslaid.json?_page={0}&topic={1}&exists-topic=true'
+        },
+        proceedings: {
+            pageSize: 10,
+            queryByTopic: ddpBase + 'proceedings.json?_view=all&_page={0}&topic={1}'
         }
     };
 });
