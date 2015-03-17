@@ -28,6 +28,11 @@ define(function() {
                 title: 'Proceedings',
                 pageSize: 10,
                 queryByTopic: ddpBase + 'proceedings.json?_view=all'
+            },
+            wms: {
+                title: 'Written Ministerial Statements',
+                pageSize: 10,
+                queryByTopic: ddpBase + 'writtenministerialstatements.json'
             }
         }
     };

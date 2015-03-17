@@ -1,0 +1,9 @@
+<ul data-bind="foreach: items(), visible: !loading()">
+    <li>
+        <h2>
+            <a data-bind="attr: { href: uri }, text: title"></a>
+        </h2>
+        <p class="date" data-bind="text: date"></p>
+        <div data-bind="html:content"></div>
+    </li>
+</ul>
