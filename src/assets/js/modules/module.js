@@ -16,10 +16,10 @@ define([
         var self = this;
         var config = cfg.modules[configName];
         var topic = nav.selectedTopic();
+        console.log('Creating view model for ' + configName + ': ' + topic);
 
         /* ====== Observables ====== */
 
-        self.loading = ko.observable(false);
         self.items = ko.observableArray([]);
 
         /* ====== Public methods ====== */
@@ -28,7 +28,7 @@ define([
             var url = config.queryByTopic;
             url += url.indexOf('?') >= 0 ? '&' : '?';
             url += '_page={0}&topic={1}'.format(page, topic);
-            self.loading(true);
+            nav.componentLoading(true);
             $.ajax({
                 url: url,
                 method: 'GET',
@@ -36,7 +36,7 @@ define([
             }).done(function(data) {
                 var result = data.result;
                 var items = result.items.map(self.loadItem);
-                self.loading(false);
+                nav.componentLoading(false);
                 self.items(items);
             });
         }

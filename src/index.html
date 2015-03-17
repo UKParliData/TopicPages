@@ -31,7 +31,9 @@
                     <!-- ko text: selectedConfig().title -->
                     <!-- /ko -->
                 </h1>
-                <div data-bind="component: { name: moduleOfSelectedComponent }"></div>
+                <div data-bind="component: { name: moduleOfSelectedComponent }, visible: !componentLoading()"></div>
+                <div data-bind="visible: componentLoading, template: { name: 'component-loading-template' } " class="spinner">
+                </div>
             </div>
         </div>
 
@@ -56,6 +58,10 @@
                 optionsCaption: 'Choose a topic',
                 selectize: {}"
             class="term-selector"></select>
+    </script>
+
+    <script type="text/html" id="component-loading-template">
+        <img src="assets/images/ajax-loader.gif" alt="Loading..." />
     </script>
 
     <script src="assets/lib/requirejs/require.js" data-main="assets/js/main"></script>

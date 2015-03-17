@@ -28,6 +28,8 @@ define([
             expected: ko.observable(100)
         };
 
+        self.componentLoading = ko.observable(false);
+
         self.selectedComponent = ko.observable(null);
         self.moduleOfSelectedComponent = ko.pureComputed(function() {
             if (self.selectedComponent() == null) {
