@@ -12,22 +12,22 @@ define(function() {
             briefingPapers: {
                 title: 'Briefing Papers',
                 pageSize: 10,
-                queryByTopic: ddpBase + 'briefingpapers.json?_page={0}&topic={1}'
+                queryByTopic: ddpBase + 'briefingpapers.json'
             },
             edms: {
                 title: 'Early Day Motions',
                 pageSize: 10,
-                queryByTopic: ddpBase + 'edms.json?_page={0}&topic={1}&_view=all'
+                queryByTopic: ddpBase + 'edms.json?_view=all'
             },
             papersLaid : {
                 title: 'Papers Laid',
                 pageSize: 10,
-                queryByTopic: ddpBase + 'paperslaid.json?_page={0}&topic={1}&exists-topic=true'
+                queryByTopic: ddpBase + 'paperslaid.json?exists-topic=true'
             },
             proceedings: {
                 title: 'Proceedings',
                 pageSize: 10,
-                queryByTopic: ddpBase + 'proceedings.json?_view=all&_page={0}&topic={1}'
+                queryByTopic: ddpBase + 'proceedings.json?_view=all'
             }
         }
     };

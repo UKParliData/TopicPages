@@ -25,7 +25,9 @@ define([
         /* ====== Public methods ====== */
 
         self.load = function(page) {
-            var url = config.queryByTopic.format(page, topic);
+            var url = config.queryByTopic;
+            url += url.indexOf('?') >= 0 ? '&' : '?';
+            url += '_page={0}&topic={1}'.format(page, topic);
             self.loading(true);
             $.ajax({
                 url: url,
