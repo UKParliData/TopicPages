@@ -12,7 +12,7 @@ define([
         /* ====== Overridden methods ====== */
 
         self.loadItem = function(item) {
-            return {
+            var result = {
                 uri: item._about,
                 bibliographicCitation: item.bibliographicCitation,
                 date: new Date(item.date._value),
@@ -33,9 +33,12 @@ define([
                 startColRef: item.startColRef,
                 statisticsIndicated: item.statisticsIndicated,
                 status: item.status,
-                title: item.title,
-                volume: parseInt(item.volume._value, 10)
+                title: item.title
+            };
+            if (item.hasOwnProperty('volume')) {
+                result.volume = parseInt(item.volume._value, 10);
             }
+            return result;
         };
 
         self.load(0);
