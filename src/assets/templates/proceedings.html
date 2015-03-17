@@ -1,9 +1,7 @@
-<div>
-    <ul data-bind="foreach: items(), visible: !loading()">
-        <li>
-            <h2 data-bind="text: title"></h2>
-            <p class="date" data-bind="text: date"></p>
-            <p data-bind="text: indexerSummary"></p>
-        </li>
-    </ul>
-</div>
+<ul data-bind="foreach: items(), visible: !loading()">
+    <li>
+        <h2 data-bind="text: title"></h2>
+        <p class="date" data-bind="text: date"></p>
+        <p data-bind="text: indexerSummary"></p>
+    </li>
+</ul>

@@ -1,8 +1,6 @@
-<div>
-    <ul data-bind="foreach: items(), visible: !loading()">
-        <li>
-            <h2 data-bind="text: paperNumber + ' - ' + title"></h2>
-            <p class="date" data-bind="text: dateLaid"></p>
-        </li>
-    </ul>
-</div>
+<ul data-bind="foreach: items(), visible: !loading()">
+    <li>
+        <h2 data-bind="text: paperNumber + ' - ' + title"></h2>
+        <p class="date" data-bind="text: dateLaid"></p>
+    </li>
+</ul>
