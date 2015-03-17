@@ -35,6 +35,13 @@ define([
             }
             return 'modules/' + self.selectedComponent();
         });
+        self.selectedConfig = ko.pureComputed(function() {
+            var cp = self.selectedComponent();
+            if (cfg.modules.hasOwnProperty(cp)) {
+                return cfg.modules[cp];
+            }
+            return null;
+        });
 
         self.parameters = ko.observable(null);
         self.messages = ko.observableArray([]);
