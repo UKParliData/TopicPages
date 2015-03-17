@@ -1,6 +1,6 @@
 <ul data-bind="foreach: items(), visible: !loading()">
     <li>
         <h2 data-bind="text: paperNumber + ' - ' + title"></h2>
-        <p class="date" data-bind="text: dateLaid"></p>
+        <p class="date" data-bind="text: dateLaid.toDateString()"></p>
     </li>
 </ul>
