@@ -16,6 +16,12 @@ define([
             }
         }
 
+        self.pages.sort(function(a, b) {
+            return a.pageTitle < b.pageTitle ? -1
+                : a.pageTitle > b.pageTitle ? 1
+                : 0;
+            });
+
         self.loading = {
             inProgress: ko.observable(true),
             loaded: ko.observable(0),
