@@ -67,6 +67,10 @@ define([
         self.gotoPage = function(page) {
             self.navigateTo(page.target);
         };
+
+        self.selectedTopic.subscribe(function(newValue) {
+            self.moduleOfSelectedComponent.notifySubscribers();
+        });
     };
 
     var navigator = new Navigator();
