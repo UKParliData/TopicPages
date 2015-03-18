@@ -16,7 +16,6 @@ define([
         var self = this;
         var config = cfg.modules[configName];
         var topic = nav.selectedTopic();
-        console.log('Creating view model for ' + configName + ': ' + topic);
 
         /* ====== Observables ====== */
 

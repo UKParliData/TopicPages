@@ -53,9 +53,7 @@ define([
         self.selectedTopic = ko.observable(null);
         self.selectedTopicName = ko.pureComputed(function() {
             var st = self.selectedTopic();
-            st = ddp.getTerm(st);
-            console.log(st);
-            return st.name;
+            return ddp.getTerm(st).name;
         });
 
         self.removeMessage = function() {
