@@ -8,6 +8,7 @@ define([
     /* ====== loadTopics ====== */
 
     var terms = null;
+    var termsLookup = {};
     var loaded = false;
 
     function readTerm(term) {
@@ -45,6 +46,11 @@ define([
                         loadTermsPage(page);
                     }
                     else {
+                        for (var i = 0; i < terms.length; i++) {
+                            termsLookup[terms[i].uri] =
+                            termsLookup[terms[i].id] =
+                                terms[i];
+                        }
                         loaded = true;
                         deferred.resolve(terms);
                     }
@@ -73,6 +79,9 @@ define([
                 throw 'Taxonomy has not yet been loaded.';
             }
             return terms;
+        },
+        getTerm: function(id) {
+            return termsLookup[id];
         }
     };
 });

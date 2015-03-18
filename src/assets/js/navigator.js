@@ -1,7 +1,8 @@
 define([
     'knockout',
-    'config'
-], function(ko, cfg) {
+    'config',
+    'ddp'
+], function(ko, cfg, ddp) {
 
     function Navigator() {
         var self = this;
@@ -50,6 +51,12 @@ define([
 
         self.topics = ko.observableArray([]);
         self.selectedTopic = ko.observable(null);
+        self.selectedTopicName = ko.pureComputed(function() {
+            var st = self.selectedTopic();
+            st = ddp.getTerm(st);
+            console.log(st);
+            return st.name;
+        });
 
         self.removeMessage = function() {
             self.messages.remove(this);

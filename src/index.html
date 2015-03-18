@@ -28,8 +28,9 @@
 
             <div id="stage">
                 <h1 data-bind="if: selectedConfig() != null">
-                    <!-- ko text: selectedConfig().title -->
-                    <!-- /ko -->
+                    <!-- ko text: selectedConfig().title --><!-- /ko -->
+                    -
+                    <!-- ko text: selectedTopicName() --><!-- /ko -->
                 </h1>
                 <div data-bind="component: { name: moduleOfSelectedComponent }, visible: !componentLoading()"></div>
                 <div data-bind="visible: componentLoading, template: { name: 'component-loading-template' } " class="spinner">
