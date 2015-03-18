@@ -1,6 +1,6 @@
 define([
     'modules/module',
-    'text!../../templates/briefing-papers.html',
+    'text!../../templates/html-item-linked.html',
     'utils'
 ], function(module, tpl) {
     "use strict";
@@ -13,18 +13,11 @@ define([
 
         self.loadItem = function(item) {
             return {
-                uri: item._about,
+                uri: item.contentLocation,
                 date: new Date(item.date._value),
-                description: item.description[0],
-                identifier: item.identifier._value,
-                title: item.title,
-                topics: item.topic.map(function(t) {
-                    return {
-                        uri: t._about,
-                        title: t.prefLabel._value
-                    };
-                }),
-                type: item.type
+                title: (item.identifier && item.identifier._value ? item.identifier._value + ': ' : '')
+                    + item.title,
+                content: item.description[0]
             }
         };
 

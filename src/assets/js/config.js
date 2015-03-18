@@ -12,7 +12,7 @@ define(function() {
             briefingPapers: {
                 title: 'Briefing Papers',
                 pageSize: 10,
-                queryByTopic: ddpBase + 'briefingpapers.json'
+                queryByTopic: ddpBase + 'briefingpapers.json?_view=all'
             },
             edms: {
                 title: 'Early Day Motions',
@@ -22,7 +22,7 @@ define(function() {
             papersLaid : {
                 title: 'Papers Laid',
                 pageSize: 10,
-                queryByTopic: ddpBase + 'paperslaid.json?exists-topic=true'
+                queryByTopic: ddpBase + 'paperslaid.json?exists-topic=true&_view=all'
             },
             proceedings: {
                 title: 'Proceedings',

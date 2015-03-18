@@ -1,6 +1,6 @@
 define([
     'modules/module',
-    'text!../../templates/edms.html',
+    'text!../../templates/html-item-linked.html',
     'utils'
 ], function(module, tpl) {
     "use strict";
@@ -13,21 +13,14 @@ define([
 
         self.loadItem = function(item) {
             return {
-                uri: item._about,
+                uri: item.externalLocation,
+                title: (item.edmNumber && item.edmNumber._value
+                        ? 'EDM ' + item.edmNumber._value + ' - ' : ''
+                    )
+                    + item.title,
                 date: new Date(item.dateTabled._value),
-                motionText: item.motionText,
-                externalUrl: item.externalLocation,
-                edmNumber: item.edmNumber._value,
-                title: item.title,
-                sponsors: item.sponsors.map(function(s, ix) {
-                    return {
-                        uri: s._about,
-                        name: item.sponsorPrinted[ix]
-                    };
-                }),
-                topics: item.topic,
-                type: item.type
-            }
+                content: item.motionText
+            };
         };
 
         self.load(0);

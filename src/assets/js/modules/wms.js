@@ -1,6 +1,6 @@
 define([
     'modules/module',
-    'text!../../templates/wms.html',
+    'text!../../templates/html-item-linked.html',
     'utils'
 ], function(module, tpl) {
     "use strict";

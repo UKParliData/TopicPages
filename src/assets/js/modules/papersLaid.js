@@ -1,6 +1,6 @@
 define([
     'modules/module',
-    'text!../../templates/papers-laid.html',
+    'text!../../templates/html-item-linked.html',
     'utils'
 ], function(module, tpl) {
     "use strict";
@@ -13,19 +13,11 @@ define([
 
         self.loadItem = function(item) {
             return {
-                uri: item._about,
-                dateLaid: new Date(item.dateLaid._value),
-                department: item.departmentPrinted._value,
-                member: item.memberPrinted._value,
-                dateModified: new Date(item.modified._value),
-                paperNumber: item.paperNumber._value,
-                parliamentNumber: parseInt(item.parliamentNumber._value, 10),
-                session: item.session[0],
-                sessionNumber: parseInt(item.sessionNumber._value),
+                uri: item.internalLocation,
+                date: new Date(item.dateLaid._value),
                 title: item.title,
-                withdrawn: item.withdrawn._value == 'true',
-                type: item.type
-            }
+                content: null
+            };
         };
 
         self.load(0);
