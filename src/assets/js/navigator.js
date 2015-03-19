@@ -7,6 +7,12 @@ define([
     function Navigator() {
         var self = this;
 
+        self.searchText = ko.observable();
+        self.searchForTerm = function() {
+            // TODO: something more constructive than this
+            console.log(self.searchText());
+        };
+
         self.pages = [];
         for (var key in cfg.modules) {
             if (cfg.modules.hasOwnProperty(key)) {

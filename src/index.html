@@ -49,6 +49,12 @@
     </script>
 
     <script type="text/html" id="search-template">
+
+        <form data-bind="submit: searchForTerm">
+            <input type="text" data-bind="value: searchText" />
+        </form>
+
+
         <select
             data-bind="
                 enable: (topics().length > 0),
