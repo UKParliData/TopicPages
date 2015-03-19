@@ -4,6 +4,8 @@ define(function() {
     var ddpBase = 'http://lda.data.parliament.uk/';
 
     return {
+        ddpBase: ddpBase,
+        timeout: 60000,
         topics: {
             pageSize: 100,
             query: ddpBase + 'terms.json?class=TPG&_page={0}&_pageSize={1}'
