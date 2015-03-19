@@ -12,7 +12,7 @@ define([
 
     /* ====== Module class definition ====== */
 
-    function ModuleViewModel(configName) {
+    function LegacyModuleViewModel(configName) {
         var self = this;
         var config = cfg.modules[configName];
         var topic = nav.selectedTopic();
@@ -47,6 +47,6 @@ define([
 
 
     return {
-        ModuleViewModel : ModuleViewModel
+        LegacyModuleViewModel : LegacyModuleViewModel
     };
 });

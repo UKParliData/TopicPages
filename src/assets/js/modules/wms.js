@@ -7,7 +7,7 @@ define([
 
     function WmsViewModel() {
         var self = this;
-        module.ModuleViewModel.call(self, 'wms');
+        module.LegacyModuleViewModel.call(self, 'wms');
 
         /* ====== Overridden methods ====== */
 

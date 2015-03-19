@@ -7,7 +7,7 @@ define([
 
     function ProceedingsViewModel() {
         var self = this;
-        module.ModuleViewModel.call(self, 'proceedings');
+        module.LegacyModuleViewModel.call(self, 'proceedings');
 
         /* ====== Overridden methods ====== */
 

@@ -7,7 +7,7 @@ define([
 
     function EdmsViewModel() {
         var self = this;
-        module.ModuleViewModel.call(self, 'edms');
+        module.LegacyModuleViewModel.call(self, 'edms');
 
         /* ====== Overridden methods ====== */
 
