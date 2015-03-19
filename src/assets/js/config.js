@@ -13,8 +13,6 @@ define(function() {
         modules: {
             briefingPapers: {
                 title: 'Briefing Papers',
-                pageSize: 10,
-                queryByTopic: ddpBase + 'briefingpapers.json?_view=all'
             },
             edms: {
                 title: 'Early Day Motions',

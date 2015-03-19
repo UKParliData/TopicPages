@@ -7,9 +7,15 @@ define([
 
     function BriefingPapersViewModel() {
         var self = this;
-        module.LegacyModuleViewModel.call(self, 'briefingPapers');
+        module.ModuleViewModel.call(self);
 
         /* ====== Overridden methods ====== */
+
+        self.dataset = 'briefingpapers';
+        self.args = {
+            _view: 'all'
+        };
+
 
         self.loadItem = function(item) {
             return {
