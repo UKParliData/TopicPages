@@ -46,9 +46,6 @@ define([
             return null;
         });
 
-        self.parameters = ko.observable(null);
-        self.messages = ko.observableArray([]);
-
         self.topics = ko.observableArray([]);
         self.selectedTopic = ko.observable(null);
         self.selectedTopicName = ko.pureComputed(function() {
@@ -56,19 +53,8 @@ define([
             return ddp.getTerm(st).name;
         });
 
-        self.removeMessage = function() {
-            self.messages.remove(this);
-        };
-
-        self.navigateTo = function(component, parameters) {
-            if (parameters) {
-                self.parameters(parameters);
-            }
+        self.navigateTo = function(component) {
             self.selectedComponent(component);
-        };
-
-        self.goHome = function(parameters) {
-            self.navigateTo('home');
         };
 
         self.gotoPage = function(page) {
