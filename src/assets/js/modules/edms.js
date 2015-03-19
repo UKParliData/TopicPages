@@ -7,9 +7,14 @@ define([
 
     function EdmsViewModel() {
         var self = this;
-        module.LegacyModuleViewModel.call(self, 'edms');
+        module.ModuleViewModel.call(self);
 
         /* ====== Overridden methods ====== */
+
+        self.dataset = 'edms';
+        self.args = {
+            _view: 'all'
+        };
 
         self.loadItem = function(item) {
             return {

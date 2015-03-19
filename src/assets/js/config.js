@@ -16,8 +16,6 @@ define(function() {
             },
             edms: {
                 title: 'Early Day Motions',
-                pageSize: 10,
-                queryByTopic: ddpBase + 'edms.json?_view=all'
             },
             papersLaid : {
                 title: 'Papers Laid',
