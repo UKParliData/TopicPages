@@ -7,9 +7,15 @@ define([
 
     function PapersLaidViewModel() {
         var self = this;
-        module.LegacyModuleViewModel.call(self, 'papersLaid');
+        module.ModuleViewModel.call(self);
 
         /* ====== Overridden methods ====== */
+
+        self.dataset = 'paperslaid';
+        self.args = {
+            'exists-topic': true,
+            _view: 'all'
+        };
 
         self.loadItem = function(item) {
             return {

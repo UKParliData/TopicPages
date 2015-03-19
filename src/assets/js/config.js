@@ -19,8 +19,6 @@ define(function() {
             },
             papersLaid : {
                 title: 'Papers Laid',
-                pageSize: 10,
-                queryByTopic: ddpBase + 'paperslaid.json?exists-topic=true&_view=all'
             },
             proceedings: {
                 title: 'Proceedings',
