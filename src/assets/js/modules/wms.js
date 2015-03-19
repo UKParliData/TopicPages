@@ -7,9 +7,11 @@ define([
 
     function WmsViewModel() {
         var self = this;
-        module.LegacyModuleViewModel.call(self, 'wms');
+        module.ModuleViewModel.call(self, 'wms');
 
         /* ====== Overridden methods ====== */
+
+        self.dataset = 'writtenministerialstatements';
 
         self.loadItem = function(item) {
             return {

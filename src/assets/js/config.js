@@ -25,8 +25,6 @@ define(function() {
             },
             wms: {
                 title: 'Written Ministerial Statements',
-                pageSize: 10,
-                queryByTopic: ddpBase + 'writtenministerialstatements.json'
             }
         }
     };
