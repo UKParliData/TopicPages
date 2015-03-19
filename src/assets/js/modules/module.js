@@ -3,8 +3,9 @@ define([
     'knockout',
     'config',
     'navigator',
+    'loader',
     'utils'
-], function($, ko, cfg, nav) {
+], function($, ko, cfg, nav, loader) {
 
     function _abstract() {
         throw 'This method has not been defined in the derived class.';
@@ -46,7 +47,38 @@ define([
     }
 
 
+
+    function ModuleViewModel() {
+        var self = this;
+        var topic = nav.selectedTopic();
+
+        /* ====== Observables ====== */
+
+        self.items = ko.observableArray([]);
+
+        /* ====== Public methods ====== */
+
+        self.load = function(page) {
+            nav.componentLoading(true);
+            var args = $.extend({_page: page, topic: topic}, self.args);
+            loader.load(self.dataset, args, self.loadItem)
+                .done(function(items, page, version) {
+                    nav.componentLoading(false);
+                    self.items(items);
+                });
+        };
+
+        /* ====== Overridable methods ====== */
+
+        self.loadItem = _abstract;
+        self.dataset = null;
+        self.args = { };
+    }
+
+
+
     return {
+        ModuleViewModel: ModuleViewModel,
         LegacyModuleViewModel : LegacyModuleViewModel
     };
 });
