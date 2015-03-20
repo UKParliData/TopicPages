@@ -22,7 +22,9 @@
     <script type="text/html" id="app-template">
         <div id="selection">
             <div id="search" data-bind="visible: !loading.inProgress(), template: { name: 'search-template' }"></div>
+        </div>
 
+        <div id="stage">
             <div id="navigation" data-bind="visible: selectedTopic() != null">
                 <ul data-bind="foreach: pages">
                     <li>
@@ -30,9 +32,7 @@
                     </li>
                 </ul>
             </div>
-        </div>
 
-        <div id="stage">
             <h1 data-bind="if: selectedConfig() != null">
                 <!-- ko text: selectedConfig().title --><!-- /ko -->
                 -
