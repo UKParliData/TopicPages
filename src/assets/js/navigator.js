@@ -59,8 +59,45 @@ define([
         };
 
         self.searchForTerm = function() {
-            // TODO: something more constructive than this
-            console.log(self.searchText());
+            var term = self.searchText();
+            var topics = {
+                dataset: 'terms',
+                args: {
+                    _properties: 'prefLabel',
+                    'class': 'TPG',
+                    _view: 'basic',
+                    _search: term
+                },
+                transform: function(entry) {
+                    return {
+                        uri: entry._about,
+                        name: entry.prefLabel._value
+                    };
+                }
+            };
+
+            var terms = {
+                dataset: 'terms',
+                args: {
+                    'exactMatch.class': 'TPG',
+                    _properties: 'prefLabel,exactMatch.prefLabel,exactMatch.class',
+                    _view: 'basic',
+                    _search: term
+                },
+                transform: function(entry) {
+                    return entry.exactMatch
+                        .filter(function(x) { return x['class'] === 'TPG'; })
+                        .map(function(x) { return {
+                            uri: x._about,
+                            name: x.prefLabel._value
+                        }; });
+                }
+            };
+
+            loader.loadMultiple([topics, terms])
+                .done(function(items, version) {
+                    console.log(items, version);
+                });
         };
 
 
