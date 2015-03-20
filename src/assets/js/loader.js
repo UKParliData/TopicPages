@@ -29,7 +29,8 @@ define([
      *      - itemsPerPage: the number of items per page
      *      - page: the zero-based page number
      *      - startIndex: the one-based index of the first result on the page
-     *      - totalResults: the total number of results in the query.
+     *      - totalResults: the total number of results in the query
+     *      - totalPages: the total number of pages in the query.
      *  - version: the DDP API version
      *  If it is unsuccessful, the fail handlers will be called with the same
      *  parameters as the jQuery.ajax fail handlers.
@@ -62,7 +63,8 @@ define([
                 itemsPerPage: data.result.itemsPerPage,
                 page: data.result.page,
                 startIndex: data.result.startIndex,
-                totalResults: data.result.totalResults
+                totalResults: data.result.totalResults,
+                totalPages: Math.ceil(data.result.totalResults / data.result.itemsPerPage)
             };
 
             deferred.resolve(items, page, data['DDP API Version']);
