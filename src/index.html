@@ -28,7 +28,15 @@
             <div id="navigation" data-bind="visible: selectedTopic() != null">
                 <ul data-bind="foreach: pages" id="nav-links">
                     <li data-bind="css: css">
-                        <a href="#" data-bind="click: $parent.gotoPage, text: pageTitle"></a>
+                        <a href="#" data-bind="
+                            click: $parent.gotoPage,
+                            attr: {
+                                title: pageTitle
+                            }
+                        ">
+                            <img data-bind="attr: { src: 'assets/images/nav/' + target + '.jpg' }" />
+                            <div class="nav-page-title" data-bind="text: pageTitle"></div>
+                        </a>
                     </li>
                 </ul>
             </div>

@@ -139,6 +139,8 @@ footer#main-footer {
         padding: 0px;
         float: left;
         background-color: beige;
+        position: relative;
+        font-weight: bold;
 
         &:last-child {
             margin-right: 0px;
@@ -146,7 +148,36 @@ footer#main-footer {
         width: ((100% - (@number-of-links - 1) * @link-spacing) / @number-of-links);
 
         &.selected {
-            font-weight: bold;
+            img {
+                opacity: 1;
+            }
+
+            .nav-page-title {
+                background-color: black;
+                white-space: normal;
+            }
+        }
+
+        img {
+            width: 100%;
+            display: block;
+            opacity: 0.5;
+            margin-bottom: 2.2em;
+        }
+
+        .nav-page-title {
+            padding: 0.5em;
+            margin: 0em;
+            background-color: #808080;
+            color: white;
+            position: absolute;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            line-height: 1.2em;
         }
     }
 }
