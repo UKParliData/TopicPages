@@ -109,7 +109,7 @@ define([
                 var items = [];
                 var version = false;
                 for (var i = 0; i < arguments.length; i++) {
-                    items = items.concat[arguments[i][0]];
+                    items = items.concat(arguments[i][0]);
                     if (version === false) {
                         version = arguments[i][2];
                     }
