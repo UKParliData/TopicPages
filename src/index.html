@@ -11,38 +11,41 @@
             </h1>
         </header>
 
-        <div id="all">
-            <div id="selection">
-                <div id="loading" data-bind="visible: loading.inProgress(), template: { name: 'loading-template' }"></div>
-
-                <div id="search" data-bind="visible: !loading.inProgress(), template: { name: 'search-template' }"></div>
-
-                <div id="navigation" data-bind="visible: selectedTopic() != null">
-                    <ul data-bind="foreach: pages">
-                        <li>
-                            <a href="#" data-bind="click: $parent.gotoPage, text: pageTitle"></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div id="stage">
-                <h1 data-bind="if: selectedConfig() != null">
-                    <!-- ko text: selectedConfig().title --><!-- /ko -->
-                    -
-                    <!-- ko text: selectedTopicName() --><!-- /ko -->
-                </h1>
-                <div data-bind="component: { name: moduleOfSelectedComponent }, visible: !componentLoading()"></div>
-                <div data-bind="visible: componentLoading, template: { name: 'component-loading-template' } " class="spinner">
-                </div>
-            </div>
-        </div>
+        <div id="all" data-bind="template: { name: topLevelView }"></div>
 
         <footer id="main-footer">
             Copyright 2015, Houses of Parliament
         </footer>
 
     </body>
+
+    <script type="text/html" id="app-template">
+        <div id="selection">
+            <div id="loading" data-bind="visible: loading.inProgress(), template: { name: 'loading-template' }"></div>
+
+            <div id="search" data-bind="visible: !loading.inProgress(), template: { name: 'search-template' }"></div>
+
+            <div id="navigation" data-bind="visible: selectedTopic() != null">
+                <ul data-bind="foreach: pages">
+                    <li>
+                        <a href="#" data-bind="click: $parent.gotoPage, text: pageTitle"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="stage">
+            <h1 data-bind="if: selectedConfig() != null">
+                <!-- ko text: selectedConfig().title --><!-- /ko -->
+                -
+                <!-- ko text: selectedTopicName() --><!-- /ko -->
+            </h1>
+            <div data-bind="component: { name: moduleOfSelectedComponent }, visible: !componentLoading()"></div>
+            <div data-bind="visible: componentLoading, template: { name: 'component-loading-template' } " class="spinner">
+            </div>
+        </div>
+    </script>
+
 
     <script type="text/html" id="loading-template">
         <progress data-bind="attr: { max: loading.expected(), value: loading.loaded() }"></progress>

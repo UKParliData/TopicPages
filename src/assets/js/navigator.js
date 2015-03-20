@@ -23,6 +23,7 @@ define([
         self.selectedComponent = ko.observable(null);
         self.selectedTopic = ko.observable(null);
         self.topics = ko.observableArray([]);
+        self.topLevelView = ko.observable('app-template');
 
 
         /* ====== Computed observables ====== */
@@ -46,6 +47,8 @@ define([
             var st = self.selectedTopic();
             return ddp.getTerm(st).name;
         });
+
+
 
 
         /* ====== Public methods ====== */
