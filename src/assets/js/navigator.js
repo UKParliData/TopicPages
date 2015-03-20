@@ -23,7 +23,6 @@ define([
         self.selectedComponent = ko.observable(null);
         self.selectedTopic = ko.observable(null);
         self.topics = ko.observableArray([]);
-        self.topLevelView = ko.observable('app-template');
 
 
         /* ====== Computed observables ====== */
@@ -48,7 +47,14 @@ define([
             return ddp.getTerm(st).name;
         });
 
-
+        self.topLevelView = ko.pureComputed(function() {
+            if (self.loading.inProgress()) {
+                return 'loading-template';
+            }
+            else {
+                return 'app-template';
+            }
+        });
 
 
         /* ====== Public methods ====== */

@@ -21,8 +21,6 @@
 
     <script type="text/html" id="app-template">
         <div id="selection">
-            <div id="loading" data-bind="visible: loading.inProgress(), template: { name: 'loading-template' }"></div>
-
             <div id="search" data-bind="visible: !loading.inProgress(), template: { name: 'search-template' }"></div>
 
             <div id="navigation" data-bind="visible: selectedTopic() != null">
@@ -48,7 +46,12 @@
 
 
     <script type="text/html" id="loading-template">
-        <progress data-bind="attr: { max: loading.expected(), value: loading.loaded() }"></progress>
+        <div id="loading">
+            <p>Loading topics</p>
+            <p>
+                <progress data-bind="attr: { max: loading.expected(), value: loading.loaded() }"></progress>
+            </p>
+        </div>
     </script>
 
     <script type="text/html" id="search-template">
