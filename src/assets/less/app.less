@@ -123,3 +123,30 @@ footer#main-footer {
     text-align: center;
     padding-top: 10em;
 }
+
+#nav-links {
+    overflow: hidden;
+
+    @number-of-links: 5;
+    @link-spacing: 0%;
+
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+
+    li {
+        margin: 0px @link-spacing 0px 0px;
+        padding: 0px;
+        float: left;
+        background-color: beige;
+
+        &:last-child {
+            margin-right: 0px;
+        }
+        width: ((100% - (@number-of-links - 1) * @link-spacing) / @number-of-links);
+
+        &.selected {
+            font-weight: bold;
+        }
+    }
+}

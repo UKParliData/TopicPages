@@ -43,8 +43,8 @@ define([
         });
 
         self.selectedTopicName = ko.pureComputed(function() {
-            var st = self.selectedTopic();
-            return ddp.getTerm(st).name;
+            var term = ddp.getTerm(self.selectedTopic());
+            return term ? term.name : null;
         });
 
         self.topLevelView = ko.pureComputed(function() {
@@ -114,9 +114,19 @@ define([
 
         for (var key in cfg.modules) {
             if (cfg.modules.hasOwnProperty(key)) {
+                var css = {
+                    selected: (function(k) {
+                        return ko.pureComputed(function() {
+                            return k === self.selectedComponent();
+                        });
+                    })(key)
+                };
+                css['nav-link-' + key] = true;
+
                 self.pages = self.pages.concat({
                     pageTitle: cfg.modules[key].title,
-                    target: key
+                    target: key,
+                    css: css
                 });
             }
         }
