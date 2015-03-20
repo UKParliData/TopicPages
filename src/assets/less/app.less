@@ -62,18 +62,18 @@ body {
 }
 
 header#main-header {
-    .with-background(@header-background);
     margin: 0px;
-    padding: @padding-small;
     position: fixed;
+    padding: 0px;
     left: 0px;
     right: 0px;
     top: 0px;
     z-index: 9999;
 
     h1 {
+        .with-background(@header-background);
         margin: 0px;
-        padding: 0px;
+        padding: @padding-small;
         font-size: 1em;
     }
 }
@@ -91,26 +91,8 @@ footer#main-footer {
 
 #all {
     z-index: 0;
-    padding-top: 3.5em;
-}
-
-.two-columns(@stage-width-min, @stage-width-mid);
-.two-columns(@stage-width-mid, @stage-width-max);
-@media(min-width: (@stage-width-max + @nonstage-width)) {
-    .two-column-widths(@stage-width-max);
-}
-
-@media(max-width: (@stage-width-min + @nonstage-width)) {
-    #all {
-        margin-left: @margin-width;
-        margin-right: @margin-width;
-    }
-}
-
-@media(min-width: (@stage-width-min + @nonstage-width)) {
-    #selection {
-        position: fixed;
-    }
+    margin-top: 5.5em;
+    padding-top: 10%;
 }
 
 .spinner {
