@@ -12,11 +12,40 @@ define([
     var loaded = false;
 
     function readTerm(term) {
-        return {
+        var result = {
             id: parseInt(/[0-9]+$/.exec(term._about)[0], 10),
             name: term.prefLabel._value,
             uri: term._about
         };
+        if (term.broader) {
+            if (term.broader.constructor === Array) {
+                result.parents = term.broader
+                    .map(function(x) {
+                        if (x.hasOwnProperty('_about')) {
+                            return x._about;
+                        }
+                        else if (typeof(x) === 'string') {
+                            return x;
+                        }
+                        else {
+                            return null;
+                        }
+                    });
+            }
+            else if (term.broader._about) {
+                result.parents = [term.broader._about];
+            }
+            else if (term.broader.constructor === String) {
+                result.parents = [term.broader];
+            }
+            else {
+                result.parents = [];
+            }
+        }
+        else {
+            result.parents = [];
+        }
+        return result;
     }
 
 
