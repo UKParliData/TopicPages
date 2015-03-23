@@ -4,6 +4,13 @@ define([
     'es5-shim',
     'utils'
 ], function($, cfg) {
+    "use strict";
+
+    var terms = null;
+    var termsLookup = {};
+    var loaded = false;
+    var roots = [];
+
 
     /* ====== loadTopics ====== */
 
@@ -13,6 +20,8 @@ define([
         self.id = parseInt(/[0-9]+$/.exec(term._about)[0], 10);
         self.name = term.prefLabel._value;
         self.uri = term._about;
+        self.children = [];
+        self.parents = [];
 
         var parentIDs;
 
@@ -45,12 +54,22 @@ define([
             parentIDs = [];
         }
 
+        self.setParents = function() {
+            for (var i = 0; i < parentIDs.length; i++) {
+                var parentID = parentIDs[i];
+                var parent = termsLookup[parentID];
+                if (parent) {
+                    self.parents.push(parent);
+                    parent.children.push(self);
+                }
+            }
+            if (!self.parents.length) {
+                roots.push(self);
+            }
+            delete(self.setParents);
+        };
     }
 
-
-    var terms = null;
-    var termsLookup = {};
-    var loaded = false;
 
     function readTerm(term) {
         return new Topic(term);
@@ -62,6 +81,10 @@ define([
             termsLookup[terms[i].uri] =
             termsLookup[terms[i].id] =
                 terms[i];
+        }
+
+        for (var i = 0; i < terms.length; i++) {
+            terms[i].setParents();
         }
     }
 
@@ -125,6 +148,11 @@ define([
         },
         getTerm: function(id) {
             return termsLookup[id];
+        },
+        getBaseTopics: function() {
+            return roots
+                .map(function(x) { return x.children; })
+                .reduce(function(a, b) { return a.concat(b); }, []);
         }
     };
 });
