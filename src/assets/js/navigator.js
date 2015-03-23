@@ -2,9 +2,9 @@ define([
     'knockout',
     'config',
     'loader',
-    'ddp',
+    'topics',
     'es5-shim'
-], function(ko, cfg, loader, ddp) {
+], function(ko, cfg, loader, topics) {
 
     function Navigator() {
         var self = this;
@@ -43,7 +43,7 @@ define([
         });
 
         self.selectedTopicName = ko.pureComputed(function() {
-            var term = ddp.getTerm(self.selectedTopic());
+            var term = topics.getTerm(self.selectedTopic());
             return term ? term.name : null;
         });
 

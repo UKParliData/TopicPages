@@ -30,9 +30,9 @@ define([
     'jquery',
     'knockout',
     'navigator',
-    'ddp',
+    'topics',
     'selectize'
-], function($, ko, navigator, ddp) {
+], function($, ko, navigator, topics) {
     "use strict";
     $.support.cors = true;
 
@@ -79,7 +79,7 @@ define([
 
     ko.applyBindings(navigator);
 
-    ddp.loadTerms()
+    topics.loadTerms()
         .progress(function(state) {
             navigator.loading.inProgress(true);
             navigator.loading.loaded(state.loaded);
