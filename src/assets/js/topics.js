@@ -49,6 +49,15 @@ define([
     }
 
 
+    function postProcessTerms() {
+        for (var i = 0; i < terms.length; i++) {
+            termsLookup[terms[i].uri] =
+            termsLookup[terms[i].id] =
+                terms[i];
+        }
+    }
+
+
     function loadTerms() {
         var deferred = $.Deferred();
 
@@ -75,11 +84,7 @@ define([
                         loadTermsPage(page);
                     }
                     else {
-                        for (var i = 0; i < terms.length; i++) {
-                            termsLookup[terms[i].uri] =
-                            termsLookup[terms[i].id] =
-                                terms[i];
-                        }
+                        postProcessTerms();
                         loaded = true;
                         deferred.resolve(terms);
                     }
@@ -100,6 +105,7 @@ define([
 
         return deferred.promise();
     }
+
 
     return {
         loadTerms: loadTerms,
