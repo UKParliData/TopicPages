@@ -7,19 +7,18 @@ define([
 
     /* ====== loadTopics ====== */
 
-    var terms = null;
-    var termsLookup = {};
-    var loaded = false;
+    var Topic = function(term) {
+        var self = this;
 
-    function readTerm(term) {
-        var result = {
-            id: parseInt(/[0-9]+$/.exec(term._about)[0], 10),
-            name: term.prefLabel._value,
-            uri: term._about
-        };
+        self.id = parseInt(/[0-9]+$/.exec(term._about)[0], 10);
+        self.name = term.prefLabel._value;
+        self.uri = term._about;
+
+        var parentIDs;
+
         if (term.broader) {
             if (term.broader.constructor === Array) {
-                result.parents = term.broader
+                parentIDs = term.broader
                     .map(function(x) {
                         if (x.hasOwnProperty('_about')) {
                             return x._about;
@@ -33,19 +32,28 @@ define([
                     });
             }
             else if (term.broader._about) {
-                result.parents = [term.broader._about];
+                parentIDs = [term.broader._about];
             }
             else if (term.broader.constructor === String) {
-                result.parents = [term.broader];
+                parentIDs = [term.broader];
             }
             else {
-                result.parents = [];
+                parentIDs = [];
             }
         }
         else {
-            result.parents = [];
+            parentIDs = [];
         }
-        return result;
+
+    }
+
+
+    var terms = null;
+    var termsLookup = {};
+    var loaded = false;
+
+    function readTerm(term) {
+        return new Topic(term);
     }
 
 
