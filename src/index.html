@@ -31,17 +31,9 @@
         <footer id="main-footer">
             Copyright 2015, Houses of Parliament
         </footer>
-
     </body>
 
     <script type="text/html" id="app-template">
-        <div id="selection">
-            <div id="search" data-bind="
-                visible: !loading.inProgress(),
-                template: { name: 'search-template' }
-            "></div>
-        </div>
-
         <div id="stage">
 
             <h1 data-bind="if: selectedConfig() != null">

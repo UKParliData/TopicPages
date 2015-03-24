@@ -28,7 +28,7 @@ define([
         /* ====== Computed observables ====== */
 
         self.moduleOfSelectedComponent = ko.pureComputed(function() {
-            if (self.selectedComponent() == null) {
+            if (!self.selectedComponent()) {
                 return 'modules/home';
             }
             return 'modules/' + self.selectedComponent();
@@ -53,6 +53,9 @@ define([
         self.topLevelView = ko.pureComputed(function() {
             if (self.loading.inProgress()) {
                 return 'loading-template';
+            }
+            else if (!self.selectedTopic()) {
+                return 'search-template'
             }
             else {
                 return 'app-template';
@@ -99,7 +102,6 @@ define([
             });
 
         self.selectedTopic.subscribe(function(newValue) {
-            console.log(self.selectedTopic());
             self.moduleOfSelectedComponent.notifySubscribers();
         });
     };
