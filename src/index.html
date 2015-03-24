@@ -26,7 +26,9 @@
             </div>
         </header>
 
-        <div id="all" data-bind="template: { name: topLevelView }"></div>
+        <div id="all">
+          <div id="stage" data-bind="template: { name: topLevelView }"></div>
+        </div>
 
         <footer id="main-footer">
             Copyright 2015, Houses of Parliament
@@ -34,23 +36,20 @@
     </body>
 
     <script type="text/html" id="app-template">
-        <div id="stage">
-
-            <h1 data-bind="if: selectedConfig() != null">
-                <!-- ko text: selectedConfig().title --><!-- /ko -->
-                -
-                <!-- ko text: selectedTopicName() --><!-- /ko -->
-                <a class="change-topic-button" href="#" data-bind="click: goToTopicPicker">Change topic</a>
-            </h1>
-            <div data-bind="
-                component: { name: moduleOfSelectedComponent },
-                visible: !componentLoading()
-            "></div>
-            <div class="spinner" data-bind="
-                visible: componentLoading,
-                template: { name: 'component-loading-template' }
-            "></div>
-        </div>
+        <h1 data-bind="if: selectedConfig() != null">
+            <!-- ko text: selectedConfig().title --><!-- /ko -->
+            -
+            <!-- ko text: selectedTopicName() --><!-- /ko -->
+            <a class="change-topic-button" href="#" data-bind="click: goToTopicPicker">Change topic</a>
+        </h1>
+        <div data-bind="
+            component: { name: moduleOfSelectedComponent },
+            visible: !componentLoading()
+        "></div>
+        <div class="spinner" data-bind="
+            visible: componentLoading,
+            template: { name: 'component-loading-template' }
+        "></div>
     </script>
 
     <script type="text/html" id="loading-template">
