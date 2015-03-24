@@ -80,26 +80,10 @@
     </script>
 
     <script type="text/html" id="search-template">
-
         <div class="accordion" data-bind="foreach: rootTopics">
             <h3 data-bind="text: name"></h3>
             <!-- ko template: 'childTopics-template' --><!-- /ko -->
         </div>
-
-        <form data-bind="submit: searchForTerm">
-            <input type="text" data-bind="value: searchText" />
-        </form>
-
-        <select
-            data-bind="
-                enable: (topics().length > 0),
-                value: selectedTopic,
-                optionsText: 'name',
-                optionsValue: 'uri',
-                options: topics,
-                optionsCaption: 'Choose a topic',
-                selectize: {}"
-            class="term-selector"></select>
     </script>
 
     <script type="text/html" id="component-loading-template">
