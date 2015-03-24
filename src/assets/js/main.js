@@ -37,8 +37,9 @@ define([
     'knockout',
     'navigator',
     'topics',
-    'selectize'
-], function($, ko, navigator, topics) {
+    'selectize',
+    'jquery-ui'
+], function($, ko, nav, topics) {
     "use strict";
     $.support.cors = true;
 
@@ -83,19 +84,25 @@ define([
         }
     }
 
-    ko.applyBindings(navigator);
+    ko.applyBindings(nav);
 
     topics.loadTerms()
         .progress(function(state) {
-            navigator.loading.inProgress(true);
-            navigator.loading.loaded(state.loaded);
-            navigator.loading.expected(state.expected);
+            nav.loading.inProgress(true);
+            nav.loading.loaded(state.loaded);
+            nav.loading.expected(state.expected);
         })
         .done(function(result) {
-            navigator.loading.inProgress(false);
-            navigator.topics(result);
+            nav.loading.inProgress(false);
+            nav.topics(result);
+            nav.rootTopics(topics.getBaseTopics());
+            $('.accordion').accordion({
+                active: false,
+                collapsible: true,
+                heightStyle: 'content'
+            });
         })
         .fail(function() {
-            navigator.navigateTo('error');
+            nav.navigateTo('error');
         });
 });

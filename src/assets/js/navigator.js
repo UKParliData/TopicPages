@@ -23,6 +23,7 @@ define([
         self.selectedComponent = ko.observable(null);
         self.selectedTopic = ko.observable(null);
         self.topics = ko.observableArray([]);
+        self.rootTopics = ko.observableArray([]);
 
 
         /* ====== Computed observables ====== */

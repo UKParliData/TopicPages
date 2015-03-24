@@ -70,7 +70,21 @@
         </div>
     </script>
 
+    <script type="text/html" id="childTopics-template">
+        <ul data-bind="foreach: children">
+            <li>
+                <div data-bind="text: name"></div>
+                <!-- ko template: 'childTopics-template' --><!-- /ko -->
+            </li>
+        </ul>
+    </script>
+
     <script type="text/html" id="search-template">
+
+        <div class="accordion" data-bind="foreach: rootTopics">
+            <h3 data-bind="text: name"></h3>
+            <!-- ko template: 'childTopics-template' --><!-- /ko -->
+        </div>
 
         <form data-bind="submit: searchForTerm">
             <input type="text" data-bind="value: searchText" />
