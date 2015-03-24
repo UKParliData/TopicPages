@@ -11,6 +11,7 @@
     "es5-shim": "~4.1.0",
     "microplugin": "~0.0.3",
     "sifter": "~0.4.1",
-    "require-css": "~0.1.8"
+    "require-css": "~0.1.8",
+    "jquery-ui": "~1.11.4"
   }
 }
