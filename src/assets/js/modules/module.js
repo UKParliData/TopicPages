@@ -23,7 +23,7 @@ define([
 
         self.load = function(page) {
             nav.componentLoading(true);
-            var args = $.extend({_page: page, topic: topic}, self.args);
+            var args = $.extend({_page: page, topic: topic.uri}, self.args);
             loader.load(self.dataset, args, self.loadItem)
                 .done(function(items, page, version) {
                     nav.componentLoading(false);

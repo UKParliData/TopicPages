@@ -1,16 +1,17 @@
 define([
     'jquery',
     'config',
+    'knockout',
     'es5-shim',
     'utils'
-], function($, cfg) {
+], function($, cfg, ko) {
     "use strict";
 
     var terms = null;
     var termsLookup = {};
     var loaded = false;
     var roots = [];
-
+    var selection = ko.observable(null);
 
     /* ====== loadTopics ====== */
 
@@ -68,6 +69,10 @@ define([
             }
             delete(self.setParents);
         };
+
+        self.select = function() {
+            selection(self);
+        }
     }
 
 
@@ -153,6 +158,8 @@ define([
             return roots
                 .map(function(x) { return x.children; })
                 .reduce(function(a, b) { return a.concat(b); }, []);
-        }
+        },
+        selection: selection,
+        Topic: Topic
     };
 });

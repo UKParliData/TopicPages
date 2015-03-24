@@ -73,7 +73,7 @@
     <script type="text/html" id="childTopics-template">
         <ul data-bind="foreach: children">
             <li>
-                <div data-bind="text: name"></div>
+                <a href="#" data-bind="text: name, click: select"></a>
                 <!-- ko template: 'childTopics-template' --><!-- /ko -->
             </li>
         </ul>

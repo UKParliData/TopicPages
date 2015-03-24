@@ -21,7 +21,7 @@ define([
         };
         self.searchText = ko.observable();
         self.selectedComponent = ko.observable(null);
-        self.selectedTopic = ko.observable(null);
+        self.selectedTopic = topics.selection;
         self.topics = ko.observableArray([]);
         self.rootTopics = ko.observableArray([]);
 
@@ -44,7 +44,10 @@ define([
         });
 
         self.selectedTopicName = ko.pureComputed(function() {
-            var term = topics.getTerm(self.selectedTopic());
+            var term = self.selectedTopic();
+            if (term.constructor !== topics.Topic) {
+                term = topics.getTerm(self.selectedTopic());
+            }
             return term ? term.name : null;
         });
 
@@ -139,6 +142,7 @@ define([
             });
 
         self.selectedTopic.subscribe(function(newValue) {
+            console.log(self.selectedTopic());
             self.moduleOfSelectedComponent.notifySubscribers();
         });
     };
