@@ -26,9 +26,6 @@
             </div>
         </header>
 
-
-
-
         <div id="all" data-bind="template: { name: topLevelView }"></div>
 
         <footer id="main-footer">
@@ -39,7 +36,10 @@
 
     <script type="text/html" id="app-template">
         <div id="selection">
-            <div id="search" data-bind="visible: !loading.inProgress(), template: { name: 'search-template' }"></div>
+            <div id="search" data-bind="
+                visible: !loading.inProgress(),
+                template: { name: 'search-template' }
+            "></div>
         </div>
 
         <div id="stage">
@@ -49,18 +49,23 @@
                 -
                 <!-- ko text: selectedTopicName() --><!-- /ko -->
             </h1>
-            <div data-bind="component: { name: moduleOfSelectedComponent }, visible: !componentLoading()"></div>
-            <div data-bind="visible: componentLoading, template: { name: 'component-loading-template' } " class="spinner">
-            </div>
+            <div data-bind="
+                component: { name: moduleOfSelectedComponent },
+                visible: !componentLoading()
+            "></div>
+            <div class="spinner" data-bind="
+                visible: componentLoading,
+                template: { name: 'component-loading-template' }
+            "></div>
         </div>
     </script>
-
 
     <script type="text/html" id="loading-template">
         <div id="loading">
             <p>Loading topics</p>
             <p>
-                <progress data-bind="attr: { max: loading.expected(), value: loading.loaded() }"></progress>
+                <progress data-bind="attr: { max: loading.expected(), value: loading.loaded() }">
+                </progress>
             </p>
         </div>
     </script>
@@ -70,7 +75,6 @@
         <form data-bind="submit: searchForTerm">
             <input type="text" data-bind="value: searchText" />
         </form>
-
 
         <select
             data-bind="
