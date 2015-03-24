@@ -1,11 +1,5 @@
 require.config({
   shim: {
-    selectize: {
-      deps: [
-        'css!../lib/selectize/dist/css/selectize.css',
-        'css!../lib/selectize/dist/css/selectize.default.css'
-      ]
-    },
     'jquery-ui': {
       deps: [
         'css!../lib/jquery-ui/themes/black-tie/jquery-ui.css'
@@ -16,12 +10,9 @@ require.config({
     jquery: '../lib/jquery/dist/jquery',
     requirejs: '../lib/requirejs/require',
     knockout: '../lib/knockout/dist/knockout',
-    selectize: '../lib/selectize/dist/js/selectize',
     text: '../lib/text/text',
     toastr: '../lib/toastr/toastr',
     'es5-shim': '../lib/es5-shim/es5-shim',
-    microplugin: '../lib/microplugin/src/microplugin',
-    sifter: '../lib/sifter/sifter',
     css: '../lib/require-css/css',
     'css-builder': '../lib/require-css/css-builder',
     normalize: '../lib/require-css/normalize',
@@ -37,7 +28,6 @@ define([
     'knockout',
     'navigator',
     'topics',
-    'selectize',
     'jquery-ui'
 ], function($, ko, nav, topics) {
     "use strict";
@@ -61,28 +51,7 @@ define([
     ko.components.register('modules/error', { template: { require: 'text!../templates/error.html' } });
 
 
-    /* ====== Selectize initialisation ====== */
-
-    ko.bindingHandlers.selectize = {
-        init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
-            var options = {
-                options: ko.unwrap(allBindingsAccessor.get("options")),
-                labelField: ko.unwrap(allBindingsAccessor.get("optionsText")),
-                valueField: ko.unwrap(allBindingsAccessor.get("optionsValue")),
-                searchField: ko.unwrap(allBindingsAccessor.get("optionsText")),
-                sortField: ko.unwrap(allBindingsAccessor.get("optionsText"))
-            };
-            var $select = $(element).selectize(options);
-        },
-        update: function (element, valueAccessor, allBindingsAccessor) {
-            var options = ko.unwrap(allBindingsAccessor.get("options"));
-            if (options.length > 0) {
-                for (var i = 0; i < options.length; i++)
-                    $(element).selectize()[0].selectize.addOption(options[i]);
-                $(element).selectize()[0].selectize.enable();
-            }
-        }
-    }
+    /* ====== Accordion initialisation ====== */
 
     ko.bindingHandlers.accordion = {
         init: function(element, valueAccessor) {
@@ -90,7 +59,7 @@ define([
             setTimeout(function() {
                 $(element).accordion(options);
             }, 0);
-            
+
             //handle disposal (if KO removes by the template binding)
               ko.utils.domNodeDisposal.addDisposeCallback(element, function(){
                   $(element).accordion("destroy");
