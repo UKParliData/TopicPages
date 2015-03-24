@@ -84,6 +84,26 @@ define([
         }
     }
 
+    ko.bindingHandlers.accordion = {
+        init: function(element, valueAccessor) {
+            var options = valueAccessor() || {};
+            setTimeout(function() {
+                $(element).accordion(options);
+            }, 0);
+            
+            //handle disposal (if KO removes by the template binding)
+              ko.utils.domNodeDisposal.addDisposeCallback(element, function(){
+                  $(element).accordion("destroy");
+              });
+        },
+        update: function(element, valueAccessor) {
+            if (typeof $(element).data('ui-accordion') != 'undefined') {
+                var options = valueAccessor() || {};
+                $(element).accordion("destroy").accordion(options);
+            }
+        }
+    };
+
     ko.applyBindings(nav);
 
     topics.loadTerms()
@@ -96,11 +116,6 @@ define([
             nav.loading.inProgress(false);
             nav.topics(result);
             nav.rootTopics(topics.getBaseTopics());
-            $('.accordion').accordion({
-                active: false,
-                collapsible: true,
-                heightStyle: 'content'
-            });
         })
         .fail(function() {
             nav.navigateTo('error');

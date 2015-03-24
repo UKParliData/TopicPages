@@ -40,6 +40,7 @@
                 <!-- ko text: selectedConfig().title --><!-- /ko -->
                 -
                 <!-- ko text: selectedTopicName() --><!-- /ko -->
+                <a href="#" data-bind="click: goToTopicPicker">Change topic</a>
             </h1>
             <div data-bind="
                 component: { name: moduleOfSelectedComponent },
@@ -72,7 +73,9 @@
     </script>
 
     <script type="text/html" id="search-template">
-        <div class="accordion" data-bind="foreach: rootTopics">
+        <div data-bind="
+            accordion: { active: false, collapsible: true, heightStyle: 'content' },
+            foreach: rootTopics">
             <h3 data-bind="text: name"></h3>
             <!-- ko template: 'childTopics-template' --><!-- /ko -->
         </div>

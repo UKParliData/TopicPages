@@ -73,6 +73,10 @@ define([
             self.selectedComponent(component);
         };
 
+        self.goToTopicPicker = function() {
+            self.selectedTopic(null);
+        }
+
 
         /* ====== Initialisation ====== */
 
