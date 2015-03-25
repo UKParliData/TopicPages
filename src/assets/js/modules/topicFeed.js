@@ -7,6 +7,21 @@ define([
 ], function($, ko, loader, nav, tpl) {
     "use strict";
 
+    function FeedItemViewModel(item) {
+        var self = this;
+        var uri = item.type, name = uri.split('#').pop();
+
+        self.title = item.title;
+        self.date = new Date(item.date._value);
+        self.type = {
+            uri: uri,
+            name: name,
+            displayName: name.replace(/[A-Z]/g, ' $&').trim()
+        };
+    }
+
+
+
     function FeedViewModel() {
         var self = this;
         var topic = nav.selectedTopic();
@@ -29,16 +44,7 @@ define([
                 _sort: '-date'
             };
             loader.load(dataset, args, function(item) {
-                var uri = item.type, name = uri.split('#').pop();
-                return {
-                    title: item.title,
-                    date: new Date(item.date._value),
-                    type: {
-                        uri: uri,
-                        name: name,
-                        displayName: name.replace(/[A-Z]/g, ' $&').trim()
-                    }
-                };
+                return new FeedItemViewModel(item);
             }).done(function(items, pageInfo, version) {
                 for (var i = 0; i < items.length; i++) {
                     self.items.push(items[i]);
