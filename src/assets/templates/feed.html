@@ -1,9 +1,9 @@
 <ul data-bind="foreach: items, scrollend: load" class="feed">
     <li>
-        <a href="#">
-            <label data-bind="attr: { class: 'feed-label-' + type.name }, text: type.displayName"></label>
-            <span data-bind="text: title"></span>
-            <label data-bind="text: date.toDateString()" class="feed-item-date"></label>
+        <a href="#" data-bind="attr: { class: 'feed-label-' + type.name }">
+            <label class="item-type" data-bind="text: type.displayName"></label>
+            <span data-bind="text: title" class="item-heading"></span>
+            <label data-bind="text: date.toDateString()" class="item-date"></label>
         </a>
     </li>
 </ul>

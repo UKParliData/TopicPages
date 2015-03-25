@@ -186,3 +186,54 @@ footer#main-footer {
         background-color: #3399ff;
     }
 }
+
+.feed {
+    &, li {
+        list-style-type: none;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    border: 1px solid #999;
+
+    li {
+        &:not(:last-child) {
+            border-bottom: 1px dotted #999;
+        }
+
+        a {
+            display: block;
+            margin: 0.5em;
+            text-decoration: none;
+            position: relative;
+
+
+            label {
+                color: white;
+                border-radius: 4px;
+                background-color: #999;
+                padding: 2px 4px;
+                max-width: 10em;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                display: block;
+                position: absolute;
+                font-size: 80%;
+
+                &.item-date {
+                    right: 0px;
+                    top: 0px;
+                }
+            }
+
+            .item-heading {
+                margin: 4px 7em 4px 10em;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+                display: block;
+            }
+        }
+    }
+}
