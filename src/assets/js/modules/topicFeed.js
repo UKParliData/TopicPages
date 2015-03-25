@@ -25,7 +25,8 @@ define([
             var dataset = 'typesterm/' + topic.id;
             var args = {
                 _page: page,
-                _pageSize: 50
+                _pageSize: 50,
+                _sort: '-date'
             };
             loader.load(dataset, args, function(item) {
                 var uri = item.type, name = uri.split('#').pop();
