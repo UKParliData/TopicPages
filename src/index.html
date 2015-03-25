@@ -27,13 +27,39 @@
         </header>
 
         <div id="all">
-          <div id="stage" data-bind="template: { name: topLevelView }"></div>
+            <div id="stage" data-bind="template: { name: topLevelView }"></div>
         </div>
 
         <footer id="main-footer">
             Copyright 2015, Houses of Parliament
         </footer>
     </body>
+
+
+    <!-- ====== Loading template ====== -->
+    <!--
+        Displayed when initialising the application.
+        Rendered in: top level view
+        Context: Navigator.
+    -->
+
+    <script type="text/html" id="loading-template">
+        <div id="loading">
+            <p>Loading topics</p>
+            <p>
+                <progress data-bind="attr: { max: loading.expected(), value: loading.loaded() }">
+                </progress>
+            </p>
+        </div>
+    </script>
+
+
+    <!-- ====== App template ====== -->
+    <!--
+        Displayed when the application has fully loaded
+        Rendered in: top level view
+        Context: Navigator
+    -->
 
     <script type="text/html" id="app-template">
         <h1>
@@ -54,15 +80,29 @@
         "></div>
     </script>
 
-    <script type="text/html" id="loading-template">
-        <div id="loading">
-            <p>Loading topics</p>
-            <p>
-                <progress data-bind="attr: { max: loading.expected(), value: loading.loaded() }">
-                </progress>
-            </p>
+
+    <!-- ====== Topic selector template ====== -->
+    <!--
+        Displayed when selecting a topic.
+        Rendered in: App template
+        Context: Navigator
+    -->
+
+    <script type="text/html" id="topic-selector-template">
+        <div data-bind="
+            accordion: { active: false, collapsible: true, heightStyle: 'content' },
+            foreach: rootTopics">
+            <h3 data-bind="text: name"></h3>
+            <!-- ko template: 'childTopics-template' --><!-- /ko -->
         </div>
     </script>
+
+    <!-- ====== Child topics template ====== -->
+    <!--
+        Displayed when selecting a topic.
+        Rendered: recursively in Search template and self
+        Context: a topic.
+    -->
 
     <script type="text/html" id="childTopics-template">
         <ul data-bind="foreach: children">
@@ -73,14 +113,13 @@
         </ul>
     </script>
 
-    <script type="text/html" id="search-template">
-        <div data-bind="
-            accordion: { active: false, collapsible: true, heightStyle: 'content' },
-            foreach: rootTopics">
-            <h3 data-bind="text: name"></h3>
-            <!-- ko template: 'childTopics-template' --><!-- /ko -->
-        </div>
-    </script>
+
+    <!-- ====== Component loading template ====== -->
+    <!--
+        Displayed when a result view is being loaded.
+        Rendered in: App template.
+        Context: Not used.
+    -->
 
     <script type="text/html" id="component-loading-template">
         <img src="assets/images/ajax-loader.gif" alt="Loading..." />

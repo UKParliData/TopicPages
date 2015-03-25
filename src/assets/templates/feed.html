@@ -1,0 +1,14 @@
+<ul data-bind="foreach: items, scrollend: load" class="feed">
+    <li>
+        <a href="#">
+            <label data-bind="attr: { class: 'feed-label-' + type.name }, text: type.displayName"></label>
+            <span data-bind="text: title"></span>
+            <label data-bind="text: date.toDateString()" class="feed-item-date"></label>
+        </a>
+    </li>
+</ul>
+
+<p data-bind="if: items().length == 0">
+    No items have been found for the topic
+    <!-- ko text: $parent.selectedTopicName --><!-- /ko -->.
+</p>

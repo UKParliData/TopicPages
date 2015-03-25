@@ -51,7 +51,7 @@ define([
     ko.components.register('modules/error', { template: { require: 'text!../templates/error.html' } });
 
 
-    /* ====== Accordion initialisation ====== */
+    /* ====== Custom binding: Accordion ====== */
 
     ko.bindingHandlers.accordion = {
         init: function(element, valueAccessor) {
@@ -72,6 +72,28 @@ define([
             }
         }
     };
+
+    /* ====== Custom binding: onScrollEnd ====== */
+
+    // This is used to implement infinite scrolling.
+
+    ko.bindingHandlers.scrollend = {
+        init: function(element, valueAccessor, allBindings, data, context) {
+            var handler = function() {
+                if ($(window).scrollTop() >= $(document).height() - $(window).height()) {
+                    valueAccessor()();
+                }
+            };
+
+            $(window).on('scroll', handler);
+
+            ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+                $(window).off('scroll', handler);
+            });
+        }
+    }
+
+
 
     ko.applyBindings(nav);
 

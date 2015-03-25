@@ -29,7 +29,7 @@ define([
 
         self.moduleOfSelectedComponent = ko.pureComputed(function() {
             if (!self.selectedComponent()) {
-                return 'modules/home';
+                return 'modules/topicFeed';
             }
             return 'modules/' + self.selectedComponent();
         });
@@ -55,7 +55,7 @@ define([
                 return 'loading-template';
             }
             else if (!self.selectedTopic()) {
-                return 'search-template'
+                return 'topic-selector-template';
             }
             else {
                 return 'app-template';
