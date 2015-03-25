@@ -206,12 +206,11 @@ footer#main-footer {
             margin: 0.5em;
             text-decoration: none;
             position: relative;
+            font-weight: bold;
 
 
             label {
-                color: white;
                 border-radius: 4px;
-                background-color: #999;
                 padding: 2px 4px;
                 max-width: 10em;
                 text-overflow: ellipsis;
@@ -234,6 +233,18 @@ footer#main-footer {
                 white-space: nowrap;
                 display: block;
             }
+
+            .feed-labels(@label-color) {
+                label.item-type {
+                    .with-background(@label-color);
+                }
+            }
+
+            &.ResearchBriefing { .feed-labels(#333399); }
+            &.WrittenMinisterialStatement { .feed-labels(#339933); }
+            &.Proceeding { .feed-labels(#993333); }
+            &.EarlyDayMotion { .feed-labels(#996633); }
+            &.HouseOfCommonsPaper { .feed-labels(#015a2d); }
         }
     }
 }
