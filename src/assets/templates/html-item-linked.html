@@ -1,4 +1,4 @@
-<ul data-bind="foreach: items()">
+<ul data-bind="foreach: items">
     <li>
         <h2>
             <a data-bind="attr: { href: uri }, text: title"></a>
@@ -7,3 +7,10 @@
         <div data-bind="html:content"></div>
     </li>
 </ul>
+
+<p data-bind="if: items().length == 0">
+	No
+	<!-- ko text: $parent.selectedConfig().title --><!-- /ko -->
+	have been found for the topic
+	<!-- ko text: $parent.selectedTopicName --><!-- /ko -->.
+</p>

@@ -36,9 +36,11 @@
     </body>
 
     <script type="text/html" id="app-template">
-        <h1 data-bind="if: selectedConfig() != null">
-            <!-- ko text: selectedConfig().title --><!-- /ko -->
+        <h1>
+            <!-- ko if: selectedConfig() != null -->
+                <!-- ko text: selectedConfig().title --><!-- /ko -->
             -
+            <!-- /ko -->
             <!-- ko text: selectedTopicName() --><!-- /ko -->
             <a class="change-topic-button" href="#" data-bind="click: goToTopicPicker">Change topic</a>
         </h1>
