@@ -50,22 +50,32 @@ define([
         })
         .done(function(data) {
             var items;
+            var dataItems, page;
+
+            if (data.result.hasOwnProperty('items')) {
+                dataItems = data.result.items;
+                page = {
+                    itemsPerPage: data.result.itemsPerPage,
+                    page: data.result.page,
+                    startIndex: data.result.startIndex,
+                    totalResults: data.result.totalResults,
+                    totalPages: Math.ceil(data.result.totalResults / data.result.itemsPerPage)
+                };
+            }
+            else {
+                dataItems = [data.result.primaryTopic];
+                page = null;
+            }
+
             if (typeof(transform) === 'function') {
                 items = [];
-                for (var i = 0; i < data.result.items.length; i++) {
-                    items = items.concat(transform(data.result.items[i]));
+                for (var i = 0; i < dataItems.length; i++) {
+                    items = items.concat(transform(dataItems[i]));
                 }
             }
             else {
                 items = result.items;
             }
-            var page = {
-                itemsPerPage: data.result.itemsPerPage,
-                page: data.result.page,
-                startIndex: data.result.startIndex,
-                totalResults: data.result.totalResults,
-                totalPages: Math.ceil(data.result.totalResults / data.result.itemsPerPage)
-            };
 
             deferred.resolve(items, page, data['DDP API Version']);
         })
