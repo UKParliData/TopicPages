@@ -26,7 +26,8 @@
             </div>
         </header>
 
-        <div id="all">
+        <div id="all" data-bind="css: { 'topic-selected': selectedTopic() != null }" >
+            <div id="selection" data-bind="template: { name: selectorView }"></div>
             <div id="stage" data-bind="template: { name: topLevelView }"></div>
         </div>
 

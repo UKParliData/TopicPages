@@ -7,14 +7,12 @@
 
 @padding-small: 10px;
 
-@selector-width: 200px;
+@selector-width: 400px;
 @gutter-width: 40px;
 @margin-width: 20px;
 @nonstage-width: (@selector-width + @gutter-width + 2 * @margin-width);
 
-@stage-width-min: 400px;
-@stage-width-mid: 600px;
-@stage-width-max: 800px;
+@stage-width-min: 500px;
 
 // ====== Mixins ====== //
 
@@ -50,6 +48,45 @@
         .two-column-widths(@stage-min);
     }
 }
+
+
+@media(max-width: (@nonstage-width + @stage-width-min)) {
+    #all.topic-selected {
+        #selection {
+            display: none;
+        }
+        #stage {
+            display: block;
+        }
+    }
+
+    #all:not(.topic-selected) {
+        #selection {
+            display: block;
+        }
+        #stage {
+            display: none;
+        }
+    }
+}
+
+@media(min-width: (@nonstage-width + @stage-width-min)) {
+    #all {
+        #selection {
+            width: @selector-width;
+            float: left;
+        }
+        #stage {
+            overflow: hidden;
+            padding-left: @gutter-width;
+
+            .change-topic-button {
+                display: none;
+            }
+        }
+    }
+}
+
 
 
 // ====== General layout ====== //

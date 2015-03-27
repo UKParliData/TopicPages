@@ -51,15 +51,15 @@ define([
         });
 
         self.topLevelView = ko.pureComputed(function() {
-            if (self.loading.inProgress()) {
-                return 'loading-template';
-            }
-            else if (!self.selectedTopic()) {
-                return 'topic-selector-template';
-            }
-            else {
-                return 'app-template';
-            }
+            return self.selectedTopic() === null
+                ? 'loading-template'
+                : 'app-template';
+        });
+
+        self.selectorView = ko.pureComputed(function() {
+            return self.loading.inProgress()
+                ? 'loading-template'
+                : 'topic-selector-template';
         });
 
 
