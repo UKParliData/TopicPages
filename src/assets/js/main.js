@@ -16,7 +16,8 @@ require.config({
     css: '../lib/require-css/css',
     'css-builder': '../lib/require-css/css-builder',
     normalize: '../lib/require-css/normalize',
-    'jquery-ui': '../lib/jquery-ui/jquery-ui'
+    'jquery-ui': '../lib/jquery-ui/jquery-ui',
+    vis: '../lib/vis/dist/vis.min'
   },
   packages: [
 
