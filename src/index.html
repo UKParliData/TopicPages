@@ -27,8 +27,10 @@
         </header>
 
         <div id="all" data-bind="css: { 'topic-selected': selectedTopic() != null }" >
-            <div id="selection" data-bind="template: { name: selectorView }"></div>
-            <div id="stage" data-bind="template: { name: topLevelView }"></div>
+            <div id="container">
+                <div id="selection" data-bind="template: { name: selectorView }"></div>
+                <div id="stage" data-bind="template: { name: topLevelView }"></div>
+            </div>
         </div>
 
         <footer id="main-footer">
@@ -90,7 +92,7 @@
     -->
 
     <script type="text/html" id="topic-selector-template">
-        <div data-bind="
+        <div id="selector" data-bind="
             accordion: { active: false, collapsible: true, heightStyle: 'content' },
             foreach: rootTopics">
             <h3 data-bind="text: name"></h3>

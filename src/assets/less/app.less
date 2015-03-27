@@ -73,12 +73,17 @@
 @media(min-width: (@nonstage-width + @stage-width-min)) {
     #all {
         #selection {
+            margin-top: 5.5em;
+            padding-top: 10%;
             width: @selector-width;
-            float: left;
+            position: fixed;
+            overflow: scroll;
+            left: 0px;
+            top: 0px;
+            bottom: 0px;
         }
         #stage {
-            overflow: hidden;
-            padding-left: @gutter-width;
+            padding-left: (@gutter-width + @selector-width);
 
             .change-topic-button {
                 display: none;
