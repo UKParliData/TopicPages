@@ -8,7 +8,7 @@
             <span data-bind="text: title" class="item-heading"></span>
             <label data-bind="text: date.toDateString()" class="item-date"></label>
         </a>
-        <div id="feed-content" data-bind="if: content.visible">
+        <div class="feed-content" data-bind="if: content.visible">
             <h3 data-bind="text: content.heading"></h3>
             <div data-bind="html: content.html"></div>
             <!-- ko text: content.text --><!-- /ko -->
