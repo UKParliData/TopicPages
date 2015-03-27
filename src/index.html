@@ -9,21 +9,6 @@
             <h1>
                 Topical - browse Parliamentary data by topic
             </h1>
-            <div id="navigation">
-                <ul data-bind="foreach: pages" id="nav-links">
-                    <li data-bind="css: css">
-                        <a href="#" data-bind="
-                            click: $parent.gotoPage,
-                            attr: {
-                                title: pageTitle
-                            }
-                        ">
-                            <img data-bind="attr: { src: 'assets/images/nav/' + target + '.jpg' }" />
-                            <div class="nav-page-title" data-bind="text: pageTitle"></div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
         </header>
 
         <div id="all" data-bind="css: { 'topic-selected': selectedTopic() != null }" >
