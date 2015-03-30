@@ -4,7 +4,17 @@
         options: {}
     }"></div>
 
-<ul data-bind="foreach: items, scrollend: load" class="feed">
+<p>
+    Filter this topic:
+    <select data-bind="
+        options: itemTypes,
+        optionsText: 'displayName',
+        value: itemType,
+        optionsCaption: 'Show everything'
+    "></select>
+</p>
+
+<ul data-bind="foreach: filteredItems, scrollend: load" class="feed">
     <li data-bind="attr: { class: type.name }">
         <a href="#" data-bind="click: load" class="item-strapline">
             <label

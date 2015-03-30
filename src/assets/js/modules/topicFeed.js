@@ -139,6 +139,22 @@ define([
         var loading = false;
 
         self.items = ko.observableArray([]);
+        var itemTypes = { };
+        self.itemTypes = ko.observableArray([]);
+
+        self.itemType = ko.observable(false);
+
+        self.filteredItems = ko.pureComputed(function() {
+            var itemType = self.itemType();
+            if (!itemType || !itemType.name) {
+                return self.items();
+            }
+            else {
+                return self.items().filter(function(x) {
+                    return x.type.name == itemType.name;
+                });
+            }
+        });
 
         self.load = function() {
             if (loading || page < 0) return;
@@ -155,8 +171,14 @@ define([
             loader.load(endpoint, args, function(item) {
                 return new FeedItemViewModel(item);
             }).done(function(items, pageInfo, version) {
+
                 for (var i = 0; i < items.length; i++) {
                     self.items.push(items[i]);
+                    var itemType = items[i].type;
+                    if (!itemTypes.hasOwnProperty(itemType.name)) {
+                        itemTypes[itemType.name] = itemType;
+                        self.itemTypes.push(itemType);
+                    }
                 }
                 if (++page >= pageInfo.totalPages) {
                     page = -1;
@@ -170,9 +192,9 @@ define([
         }
 
         self.timeline = function() {
-            return self.items().map(function(x, index, array) {
+            return self.filteredItems().map(function(x, index, array) {
                 return {
-                    id: index,
+                    id: x.id,
                     content: '<div class="event-title">' + x.title + '</div>' +
                         '<div class="event-meta">' +
                             '<span class="event-type">' + x.type.displayName + '</span>' +
