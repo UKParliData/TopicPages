@@ -12,9 +12,13 @@
         </header>
 
         <div id="all" data-bind="css: { 'topic-selected': selectedTopic() != null }" >
-            <div id="container">
+            <div id="container" data-bind="if: !loading.inProgress()">
                 <div id="selection" data-bind="template: { name: selectorView }"></div>
                 <div id="stage" data-bind="template: { name: topLevelView }"></div>
+            </div>
+            <div id="loading" data-bind="if: loading.inProgress()">
+                <p>Loading</p>
+                <img src="assets/images/ajax-loader.gif" alt="Loading..." />
             </div>
         </div>
 
