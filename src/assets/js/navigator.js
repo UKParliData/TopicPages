@@ -52,7 +52,7 @@ define([
 
         self.topLevelView = ko.pureComputed(function() {
             return self.selectedTopic() === null
-                ? 'loading-template'
+                ? 'intro-template'
                 : 'app-template';
         });
 

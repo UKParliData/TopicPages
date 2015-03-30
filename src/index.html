@@ -12,10 +12,7 @@
         </header>
 
         <div id="all" data-bind="css: { 'topic-selected': selectedTopic() != null }" >
-            <div id="container" data-bind="if: !loading.inProgress()">
-                <div id="selection" data-bind="template: { name: selectorView }"></div>
-                <div id="stage" data-bind="template: { name: topLevelView }"></div>
-            </div>
+            <!-- ko template: { name: 'container-template' } --><!-- /ko -->
             <div id="loading" data-bind="if: loading.inProgress()">
                 <p>Loading</p>
                 <img src="assets/images/ajax-loader.gif" alt="Loading..." />
@@ -28,19 +25,26 @@
     </body>
 
 
-    <!-- ====== Loading template ====== -->
+    <script type="text/html" id="container-template">
+        <div id="container" data-bind="if: !loading.inProgress()">
+            <div id="selection" data-bind="template: { name: selectorView }"></div>
+            <div id="stage" data-bind="template: { name: topLevelView }"></div>
+        </div>
+    </script
+
+
+    <!-- ====== Intro template ====== -->
     <!--
         Displayed when initialising the application.
         Rendered in: top level view
         Context: Navigator.
     -->
 
-    <script type="text/html" id="loading-template">
+    <script type="text/html" id="intro-template">
         <div id="loading">
-            <p>Loading topics</p>
+            <h1>Welcome</h1>
             <p>
-                <progress data-bind="attr: { max: loading.expected(), value: loading.loaded() }">
-                </progress>
+                Choose a topic to start exploring our data.
             </p>
         </div>
     </script>
