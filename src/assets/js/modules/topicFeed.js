@@ -149,7 +149,7 @@ define([
             var endpoint = 'typesterm/' + topic.id;
             var args = {
                 _page: page,
-                _pageSize: 50,
+                _pageSize: 500,
                 _sort: '-date'
             };
             loader.load(endpoint, args, function(item) {
