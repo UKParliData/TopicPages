@@ -5,6 +5,13 @@
 @footer-background: #efefef;
 @keylines: #999999;
 
+@researchBriefing: #333399;
+@writtenMinisterialStatement: #339933;
+@proceeding: #993333;
+@earlyDayMotion: #996633;
+@houseOfCommonsPaper: #015a2d;
+
+
 @padding-small: 10px;
 
 @selector-width: 400px;
@@ -283,11 +290,11 @@ footer#main-footer {
             }
         }
 
-        &.ResearchBriefing { .feed-labels(#333399); }
-        &.WrittenMinisterialStatement { .feed-labels(#339933); }
-        &.Proceeding { .feed-labels(#993333); }
-        &.EarlyDayMotion { .feed-labels(#996633); }
-        &.HouseOfCommonsPaper { .feed-labels(#015a2d); }
+        &.ResearchBriefing { .feed-labels(@researchBriefing); }
+        &.WrittenMinisterialStatement { .feed-labels(@writtenMinisterialStatement); }
+        &.Proceeding { .feed-labels(@proceeding); }
+        &.EarlyDayMotion { .feed-labels(@earlyDayMotion); }
+        &.HouseOfCommonsPaper { .feed-labels(@houseOfCommonsPaper); }
 
         .feed-content {
             margin: 0.5em;
@@ -295,13 +302,32 @@ footer#main-footer {
     }
 }
 
-.timeline {
+
+.vis.timeline {
+
+    .color-code(@color) {
+        background-color: lighten(@color, 50%);
+        color: @color;
+        border: 1px solid @color;
+        box-shadow: 2px 2px 2px lighten(@color, 35%);
+        border-radius: 6px;
+    }
+
+    .item.box {
+        &.ResearchBriefing { .color-code(@researchBriefing); }
+        &.WrittenMinisterialStatement { .color-code(@writtenMinisterialStatement); }
+        &.Proceeding { .color-code(@proceeding); }
+        &.EarlyDayMotion { .color-code(@earlyDayMotion); }
+        &.HouseOfCommonsPaper { .color-code(@houseOfCommonsPaper); }
+    }
+
     .event-title {
         font-weight: bold;
     }
 
     .event-meta {
         font-size: 80%;
+        color: black;
 
         .event-date {
             font-style: italic;

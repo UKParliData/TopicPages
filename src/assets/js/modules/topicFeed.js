@@ -179,6 +179,7 @@ define([
                             ' - ' +
                             '<span class="event-date">' + x.date.toDateString() + '</span>' +
                         '</div>',
+                    className: x.type.name,
                     start: x.date
                 };
             });
