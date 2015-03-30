@@ -1,3 +1,9 @@
+<div
+    data-bind="timeline: {
+        items: timeline,
+        options: {}
+    }"></div>
+
 <ul data-bind="foreach: items, scrollend: load" class="feed">
     <li data-bind="attr: { class: type.name }">
         <a href="#" data-bind="click: load" class="item-strapline">

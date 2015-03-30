@@ -4,6 +4,11 @@ require.config({
       deps: [
         'css!../lib/jquery-ui/themes/black-tie/jquery-ui.css'
       ]
+    },
+    'vis': {
+      deps: [
+        'css!../lib/vis/dist/vis.css'
+      ]
     }
   },
   paths: {
@@ -29,8 +34,9 @@ define([
     'knockout',
     'navigator',
     'topics',
-    'jquery-ui'
-], function($, ko, nav, topics) {
+    'vis',
+    'jquery-ui',
+], function($, ko, nav, topics, vis) {
     "use strict";
     $.support.cors = true;
 
@@ -92,9 +98,33 @@ define([
                 $(window).off('scroll', handler);
             });
         }
-    }
+    };
 
 
+    /* ====== Custom binding: timeline ====== */
+
+    // This uses the timeline in the VisJS library
+
+    ko.bindingHandlers.timeline = {
+        init: function(element, valueAccessor, allBindings, data, context) {
+
+            var value = ko.unwrap(valueAccessor());
+            var items = new vis.DataSet(value.items());
+            var options = value.options;
+            var timeline = new vis.Timeline(element, items, options);
+
+            context.updateTimeline = function() {
+                timeline.setItems(new vis.DataSet(value.items()));
+            };
+
+            ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+                timeline.destroy();
+            });
+        },
+        update: function(element, valueAccessor, allBindings, data, context) {
+            context.updateTimeline();
+        }
+    };
 
     ko.applyBindings(nav);
 

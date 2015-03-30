@@ -169,6 +169,18 @@ define([
             });
         }
 
+        self.timeline = function() {
+            return self.items().map(function(x, index, array) {
+                return {
+                    id: index,
+                    content: '<div class="timeline-event-title">' + x.title + '</div>' +
+                        '<div class="timeline-event-type">' + x.type.displayName + '</div>' +
+                        '<div class="timeline-event-date">' + x.date.toDateString() + '</div>',
+                    start: x.date
+                };
+            });
+        };
+
         self.load();
     }
 
