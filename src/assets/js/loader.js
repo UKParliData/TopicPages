@@ -101,6 +101,8 @@ define([
      *  following parameters:
      *  - items: an array of items, processed by the transform function if
      *      present
+     *  - pages: an array of paging information objects, in an order corresponding
+     *      to the entries in the sources array.
      *  - version: the DDP API version
      *  If any of the calls are unsuccessful, the fail handlers will be called
      *  with the same parameters as the jQuery.ajax fail handlers.
@@ -119,20 +121,23 @@ define([
         $.when.apply(this, requests)
             .done(function() {
                 var items = [];
+                var pages = [];
                 var version = false;
                 for (var i = 0; i < arguments.length; i++) {
                     items = items.concat(arguments[i][0]);
+                    pages.push(arguments[i][1]);
                     if (version === false) {
                         version = arguments[i][2];
                     }
                 }
-                deferred.resolve(items, version);
+                deferred.resolve(items, pages, version);
             })
             .fail(function() {
                 deferred.reject.apply(this.arguments);
             });
         return deferred.promise();
     }
+
 
     return {
         load: load,
