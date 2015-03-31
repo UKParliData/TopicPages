@@ -5,7 +5,7 @@ require.config({
         'css!../lib/jquery-ui/themes/black-tie/jquery-ui.css'
       ]
     },
-    'vis': {
+    vis: {
       deps: [
         'css!../lib/vis/dist/vis.css'
       ]
