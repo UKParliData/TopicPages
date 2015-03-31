@@ -115,6 +115,14 @@ define([
 
             context.updateTimeline = function() {
                 timeline.setItems(new vis.DataSet(value.items()));
+                var lastDate = Math.max.apply(null,
+                    value.items().map(function(x) { return x.start; })
+                );
+                var firstDate = lastDate - (180*86400*1000);
+                timeline.setOptions({
+                    start: firstDate,
+                    end: lastDate
+                });
             };
 
             ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
