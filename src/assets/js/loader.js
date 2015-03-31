@@ -134,8 +134,8 @@ define([
         return deferred.promise();
     }
 
-     return {
+    return {
         load: load,
         loadMultiple: loadMultiple
-     };
+    };
 });
