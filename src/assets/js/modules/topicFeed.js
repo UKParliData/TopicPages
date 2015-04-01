@@ -1,10 +1,10 @@
 define([
     'jquery',
     'knockout',
-    'loader',
-    'navigator',
+    '../loader',
+    '../navigator',
     'text!../../templates/feed.html',
-    'utils'
+    '../utils'
 ], function($, ko, loader, nav, tpl) {
     "use strict";
 

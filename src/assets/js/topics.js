@@ -1,10 +1,10 @@
 define([
     'jquery',
-    'config',
     'knockout',
-    'es5-shim',
-    'utils'
-], function($, cfg, ko) {
+    './config',
+    './utils',
+    'es5-shim'
+], function($, ko, cfg) {
     "use strict";
 
     var terms = null;

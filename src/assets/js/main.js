@@ -32,11 +32,11 @@ require.config({
 define([
     'jquery',
     'knockout',
-    'navigator',
-    'topics',
     'vis',
+    './navigator',
+    './topics',
     'jquery-ui',
-], function($, ko, nav, topics, vis) {
+], function($, ko, vis, nav, topics) {
     "use strict";
     $.support.cors = true;
 

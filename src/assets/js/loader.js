@@ -1,8 +1,8 @@
 define([
     'jquery',
-    'config',
+    './config',
     'es5-shim',
-    'utils'
+    './utils'
 ], function($, cfg) {
 
     /* ====== load function ====== */

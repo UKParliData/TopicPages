@@ -1,8 +1,8 @@
 define([
     'knockout',
-    'config',
-    'loader',
-    'topics',
+    './config',
+    './loader',
+    './topics',
     'es5-shim'
 ], function(ko, cfg, loader, topics) {
 
