@@ -110,9 +110,10 @@ define([
      *  data is returned.
      */
 
-    function loadMultiple(sources) {
+    function loadMultiple(sources, extend) {
         var requests = sources.map(function(source) {
-            return load(source.dataset, source.args, source.transform);
+            var args = extend ? $.extend({}, source.args, args) : source.args;
+            return load(source.dataset, args, source.transform);
         });
 
         var result = [];
@@ -133,7 +134,7 @@ define([
                 deferred.resolve(items, pages, version);
             })
             .fail(function() {
-                deferred.reject.apply(this.arguments);
+                deferred.reject.apply(this, arguments);
             });
         return deferred.promise();
     }
