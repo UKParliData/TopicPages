@@ -13,7 +13,8 @@ define([
     var roots = [];
     var selection = ko.observable(null);
 
-    /* ====== loadTopics ====== */
+
+    /* ====== Topic class ====== */
 
     var Topic = function(term) {
         var self = this;
