@@ -13,7 +13,7 @@
 
         <div id="all" data-bind="css: { 'topic-selected': selectedTopic() != null }" >
             <!-- ko template: { name: 'container-template' } --><!-- /ko -->
-            <div id="loading" data-bind="if: loading.inProgress()">
+            <div id="loading" data-bind="visible: loading.inProgress()">
                 <p>Loading</p>
                 <img src="assets/images/ajax-loader.gif" alt="Loading..." />
             </div>
@@ -30,10 +30,11 @@
             <div id="selection" data-bind="template: { name: selectorView }"></div>
             <div id="stage" data-bind="template: { name: topLevelView }"></div>
         </div>
-    </script
+    </script>
 
 
     <!-- ====== Intro template ====== -->
+
     <!--
         Displayed when initialising the application.
         Rendered in: top level view
