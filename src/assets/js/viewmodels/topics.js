@@ -1,8 +1,8 @@
 define([
     'jquery',
     'knockout',
-    './config',
-    './utils',
+    '../config',
+    '../utils',
     'es5-shim'
 ], function($, ko, cfg) {
     "use strict";

@@ -34,7 +34,7 @@ define([
     'knockout',
     'vis',
     './viewmodels/app',
-    './topics',
+    './viewmodels/topics',
     'jquery-ui',
 ], function($, ko, vis, app, topics) {
     "use strict";

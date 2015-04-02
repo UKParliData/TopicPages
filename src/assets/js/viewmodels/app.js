@@ -2,7 +2,7 @@ define([
     'knockout',
     '../config',
     '../loader',
-    '../topics',
+    './topics',
     'es5-shim'
 ], function(ko, cfg, loader, topics) {
     "use strict";
