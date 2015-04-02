@@ -2,12 +2,12 @@ define([
     'jquery',
     'knockout',
     '../loader',
-    '../navigator',
+    '../viewmodels/app',
     '../config',
     '../sources',
     'text!../../templates/feed.html',
     '../utils'
-], function($, ko, loader, nav, cfg, sources, tpl) {
+], function($, ko, loader, app, cfg, sources, tpl) {
     "use strict";
 
     var itemSources = {
@@ -226,7 +226,7 @@ define([
 
     function FeedViewModel() {
         var self = this;
-        var topic = nav.selectedTopic();
+        var topic = app.selectedTopic();
         var page = 0;
         var loading = false;
 
@@ -252,7 +252,7 @@ define([
             if (loading || page < 0) return;
             loading = true;
             if (page == 0) {
-                nav.componentLoading(true);
+                app.componentLoading(true);
             }
             var endpoint = 'typesterm/' + topic.id;
             var args = {
@@ -276,8 +276,8 @@ define([
                     page = -1;
                 }
             }).always(function() {
-                if (nav.componentLoading()) {
-                    nav.componentLoading(false);
+                if (app.componentLoading()) {
+                    app.componentLoading(false);
                 }
                 loading = false;
             });

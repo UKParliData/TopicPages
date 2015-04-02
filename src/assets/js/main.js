@@ -33,10 +33,10 @@ define([
     'jquery',
     'knockout',
     'vis',
-    './navigator',
+    './viewmodels/app',
     './topics',
     'jquery-ui',
-], function($, ko, vis, nav, topics) {
+], function($, ko, vis, app, topics) {
     "use strict";
     $.support.cors = true;
 
@@ -134,20 +134,20 @@ define([
         }
     };
 
-    ko.applyBindings(nav);
+    ko.applyBindings(app);
 
     topics.loadTerms()
         .progress(function(state) {
-            nav.loading.inProgress(true);
-            nav.loading.loaded(state.loaded);
-            nav.loading.expected(state.expected);
+            app.loading.inProgress(true);
+            app.loading.loaded(state.loaded);
+            app.loading.expected(state.expected);
         })
         .done(function(result) {
-            nav.loading.inProgress(false);
-            nav.topics(result);
-            nav.rootTopics(topics.getBaseTopics());
+            app.loading.inProgress(false);
+            app.topics(result);
+            app.rootTopics(topics.getBaseTopics());
         })
         .fail(function() {
-            nav.navigateTo('error');
+            app.navigateTo('error');
         });
 });
