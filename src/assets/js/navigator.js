@@ -5,6 +5,7 @@ define([
     './topics',
     'es5-shim'
 ], function(ko, cfg, loader, topics) {
+    "use strict";
 
     function Navigator() {
         var self = this;
