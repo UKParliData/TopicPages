@@ -1,3 +1,5 @@
+/* OBSOLETE: replaced by app.js */
+
 define([
     'knockout',
     './config',

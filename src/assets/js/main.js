@@ -33,7 +33,7 @@ define([
     'jquery',
     'knockout',
     'vis',
-    './navigator',
+    './app',
     './topics',
     'jquery-ui',
 ], function($, ko, vis, nav, topics) {
