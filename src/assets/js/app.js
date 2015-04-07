@@ -4,7 +4,7 @@ define([
     './loader',
     './topics',
     'es5-shim'
-    ], function(ko, cfg, loader, topics) {
+], function(ko, cfg, loader, topics) {
     "use strict";
 
     function App() {
@@ -22,17 +22,15 @@ define([
                 self.progress.loaded(state.loaded);
                 self.progress.expected(state.expected);
             })
-            .done(function(result) {
-                setTimeout(function() {
-                    self.loading(false);
-                }, 100);
+            .always(function() {
+                self.loading(false);
             })
             .fail(function() {
                 self.selectedModule('error');
             });
 
         topics.selection.subscribe(function(newValue) {
-            self.selectedModule('topicFeed');
+            self.selectedModule('topic');
         });
     }
 

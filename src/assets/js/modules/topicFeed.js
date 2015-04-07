@@ -1,3 +1,5 @@
+/* OBSOLETE: replace with other modules for separate components */
+
 define([
     'jquery',
     'knockout',
