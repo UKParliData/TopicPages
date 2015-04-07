@@ -30,6 +30,10 @@ define([
             .fail(function() {
                 self.selectedModule('error');
             });
+
+        topics.selection.subscribe(function(newValue) {
+            self.selectedModule('topicFeed');
+        });
     }
 
     return new App();
