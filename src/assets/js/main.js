@@ -36,7 +36,7 @@ define([
     './app',
     './topics',
     'jquery-ui',
-], function($, ko, vis, nav, topics) {
+], function($, ko, vis, app, topics) {
     "use strict";
     $.support.cors = true;
 
@@ -134,20 +134,5 @@ define([
         }
     };
 
-    ko.applyBindings(nav);
-
-    topics.loadTerms()
-        .progress(function(state) {
-            nav.loading.inProgress(true);
-            nav.loading.loaded(state.loaded);
-            nav.loading.expected(state.expected);
-        })
-        .done(function(result) {
-            nav.loading.inProgress(false);
-            nav.topics(result);
-            nav.rootTopics(topics.getBaseTopics());
-        })
-        .fail(function() {
-            nav.navigateTo('error');
-        });
+    ko.applyBindings(app);
 });

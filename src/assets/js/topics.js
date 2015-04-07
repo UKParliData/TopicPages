@@ -10,9 +10,10 @@ define([
     var terms = null;
     var termsLookup = {};
     var loaded = false;
-    var roots = [];
+    var roots = ko.observableArray([]);
     var selection = ko.observable(null);
 
+    roots.extend({ rateLimit: { timeout: 100, method: "notifyWhenChangesStop" } });
 
     /* ====== Topic class ====== */
 
@@ -22,8 +23,11 @@ define([
         self.id = parseInt(/[0-9]+$/.exec(term._about)[0], 10);
         self.name = term.prefLabel._value;
         self.uri = term._about;
-        self.children = [];
-        self.parents = [];
+        self.children = ko.observableArray([]);
+        self.parents = ko.observableArray([]);
+
+        self.children.extend({ rateLimit: { timeout: 100, method: "notifyWhenChangesStop" } });
+        self.parents.extend({ rateLimit: { timeout: 100, method: "notifyWhenChangesStop" } });
 
         var parentIDs;
 
@@ -65,7 +69,7 @@ define([
                     parent.children.push(self);
                 }
             }
-            if (!self.parents.length) {
+            if (!self.parents().length) {
                 roots.push(self);
             }
             delete(self.setParents);
@@ -155,11 +159,11 @@ define([
         getTerm: function(id) {
             return termsLookup[id];
         },
-        getBaseTopics: function() {
-            return roots
-                .map(function(x) { return x.children; })
+        getBaseTopics: ko.pureComputed(function() {
+            return roots()
+                .map(function(x) { return x.children(); })
                 .reduce(function(a, b) { return a.concat(b); }, []);
-        },
+        }),
         selection: selection,
         Topic: Topic
     };

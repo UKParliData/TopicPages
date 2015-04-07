@@ -7,7 +7,9 @@ define([
 
 
     function HomeViewModel() {
+        var self = this;
 
+        self.rootTopics = topics.getBaseTopics;
     }
 
     return {
