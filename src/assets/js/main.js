@@ -34,7 +34,7 @@ define([
     'knockout',
     'vis',
     './app',
-    './topics',
+    './models/topics',
     'jquery-ui',
 ], function($, ko, vis, app, topics) {
     "use strict";

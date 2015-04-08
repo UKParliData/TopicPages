@@ -1,6 +1,6 @@
 define([
     'text!../../templates/home.html',
-    '../topics'
+    '../models/topics'
 
 ], function(tpl, topics) {
     "use strict";
