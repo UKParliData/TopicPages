@@ -1,4 +1,5 @@
-/* ====== Sources module ====== */
+/* ====== Documents module ====== */
+
 /**
  * This module contains the definitions and transformation functions for per-topic loading
  * of the datasets.

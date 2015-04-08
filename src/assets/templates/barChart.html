@@ -1,0 +1,11 @@
+<ul data-bind="foreach: byMonth">
+    <li>
+        <strong data-bind="text: month"></strong>
+        <ul data-bind="foreach: getCounts()">
+            <li>
+                <!-- ko text: source.title --><!-- /ko -->:
+                <!-- ko text: count --><!-- /ko -->
+            </li>
+        </ul>
+    </li>
+</ul>
