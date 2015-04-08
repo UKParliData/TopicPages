@@ -1,4 +1,4 @@
-/* OBSOLETE: replace with other modules for separate components */
+/* OBSOLETE: replace with other components for separate components */
 
 define([
     'jquery',

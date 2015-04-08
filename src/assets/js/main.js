@@ -45,7 +45,7 @@ define([
 
     var componentLoader = {
         getConfig: function(name, callback) {
-            if (name.substr(0, 8) === 'modules/') {
+            if (name.substr(0, 11) === 'components/') {
                 callback({ require: name });
             }
             else {
@@ -55,7 +55,7 @@ define([
     };
 
     ko.components.loaders.push(componentLoader);
-    ko.components.register('modules/error', { template: { require: 'text!../templates/error.html' } });
+    ko.components.register('components/error', { template: { require: 'text!../templates/error.html' } });
 
 
     /* ====== Custom binding: Accordion ====== */

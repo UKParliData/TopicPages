@@ -32,15 +32,15 @@ define([
 
         self.moduleOfSelectedComponent = ko.pureComputed(function() {
             if (!self.selectedComponent()) {
-                return 'modules/topicFeed';
+                return 'components/topicFeed';
             }
-            return 'modules/' + self.selectedComponent();
+            return 'components/' + self.selectedComponent();
         });
 
         self.selectedConfig = ko.pureComputed(function() {
             var cp = self.selectedComponent();
-            if (cfg.modules.hasOwnProperty(cp)) {
-                return cfg.modules[cp];
+            if (cfg.components.hasOwnProperty(cp)) {
+                return cfg.components[cp];
             }
             return null;
         });
@@ -83,8 +83,8 @@ define([
 
         /* ====== Initialisation ====== */
 
-        for (var key in cfg.modules) {
-            if (cfg.modules.hasOwnProperty(key)) {
+        for (var key in cfg.components) {
+            if (cfg.components.hasOwnProperty(key)) {
                 var css = {
                     selected: (function(k) {
                         return ko.pureComputed(function() {
@@ -95,7 +95,7 @@ define([
                 css['nav-link-' + key] = true;
 
                 self.pages = self.pages.concat({
-                    pageTitle: cfg.modules[key].title,
+                    pageTitle: cfg.components[key].title,
                     target: key,
                     css: css
                 });
