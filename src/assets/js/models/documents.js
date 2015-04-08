@@ -214,7 +214,7 @@ define([
             .done(function(items, pages, version) {
                 pageNumber++;
 
-                for (i = pages.length - 1; i >= 0; i--) {
+                for (var i = pages.length - 1; i >= 0; i--) {
                     if (pageNumber >= pages[i].totalPages) {
                         activeSources.splice(i, 1);
                     }

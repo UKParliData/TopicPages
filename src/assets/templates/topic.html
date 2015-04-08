@@ -1,10 +1,10 @@
 <h1 data-bind="text: topic.name"></h1>
 
-<ul data-bind="foreach: items">
+<ul class="view-links" data-bind="foreach: views">
     <li>
-        <h3 data-bind="text: title"></h3>
-        <span data-bind="text: date"></span> &bull;
-        <span data-bind="text: type.title"></span>
-        <p data-bind="text: content"></p>
+        <a href="#" data-bind="click: $parent.view, text: caption"></a>
     </li>
 </ul>
+
+<div class="feed-view" data-bind="component: { name: 'modules/' + view().name, params: $data }">
+</div>
