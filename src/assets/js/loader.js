@@ -108,16 +108,23 @@ define([
      *  with the same parameters as the jQuery.ajax fail handlers.
      *  Note that this differs form the load() method above in that no paging
      *  data is returned.
+     *
+     *  On each successful call, a progress notification is issued with the arguments
+     *  passed to the done callback of the individual notification.
      */
 
     function loadMultiple(sources, extend) {
-        var requests = sources.map(function(source) {
-            var args = extend ? $.extend({}, source.args, args) : source.args;
-            return load(source.dataset, args, source.transform);
-        });
-
         var result = [];
         var deferred = $.Deferred();
+
+        var requests = sources.map(function(source) {
+            var args = extend ? $.extend({}, source.args, args) : source.args;
+            return load(source.dataset, args, source.transform)
+                .done(function() {
+                    deferred.notify.apply(this, arguments);
+                });
+        });
+
 
         $.when.apply(this, requests)
             .done(function() {
