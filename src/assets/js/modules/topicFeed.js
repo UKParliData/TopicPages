@@ -6,7 +6,7 @@ define([
     '../loader',
     '../navigator',
     '../config',
-    '../sources',
+    '../models/documents',
     'text!../../templates/feed.html',
     '../utils'
 ], function($, ko, loader, nav, cfg, sources, tpl) {
