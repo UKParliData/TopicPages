@@ -13,8 +13,8 @@ define([
         self.topic = topics.selection();
         self.items = feedLoader.items;
         self.views = [
+            { name: 'barChart', caption: 'Bar Chart' },
             { name: 'feed', caption: 'Feed' },
-            { name: 'barChart', caption: 'Bar Chart' }
         ];
         self.view = ko.observable(self.views[0]);
 
