@@ -10,8 +10,21 @@ define([
         var self = this;
         var feedLoader = new documents.FeedLoader();
 
+        var now = new Date();
+        var startOfMonthoneYearAgo = new Date(Math.floor(now / 86400000 - 365 - now.getDate() + 1) * 86400000);
+
+        console.log(now, startOfMonthoneYearAgo);
+
+        self.startDate =ko.observable(startOfMonthoneYearAgo);
+        self.endDate = ko.observable(now);
         self.topic = topics.selection();
-        self.items = feedLoader.items;
+
+        self.items = ko.pureComputed(function() {
+            return feedLoader.items().filter(function(doc) {
+                return doc.date >= self.startDate() && doc.date <= self.endDate();
+            });
+        });
+
         self.views = [
             { name: 'barChart', caption: 'Bar Chart' },
             { name: 'feed', caption: 'Feed' },
