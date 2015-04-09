@@ -17,7 +17,7 @@ define([
 
         self.year = date.getFullYear();
         self.month = date.getMonth() + 1;
-        self.key = self.year.toString(10) + '/' +
+        self.key = self.year.toString(10) + '-' +
             (self.month < 10 ? '0' : '') +
             self.month.toString(10);
 
@@ -106,6 +106,24 @@ define([
             });
 
             return monthArr;
+        });
+
+        self.graphGroups = ko.pureComputed(function() {
+            return sources.map(function(source, index) {
+                return { id: index, content: source.title };
+            });
+        });
+
+        self.graphItems = ko.pureComputed(function() {
+            return self.byMonth().reduce(function(result, month) {
+                var x = month.month.key;
+                var counts = month.getCounts();
+
+                var items = counts.map(function(source) {
+                    return { x: x, y: source.count, group: sources.indexOf(source.source) };
+                });
+                return result.concat(items);
+            }, []);
         });
     };
 

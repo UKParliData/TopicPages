@@ -134,5 +134,32 @@ define([
         }
     };
 
+
+    /* ====== Custom binding: 2D graph ====== */
+
+    ko.bindingHandlers.graph2d = {
+        init: function(element, valueAccessor, allBindings, data, context) {
+
+            var value = ko.unwrap(valueAccessor());
+            var groups = new vis.DataSet(value.groups());
+            var items = new vis.DataSet(value.items());
+            var options = value.options;
+            var graph2d = new vis.Graph2d(element, items, groups, options);
+
+            context.updateGraph = function() {
+                graph2d.setGroups(new vis.DataSet(value.groups()));
+                graph2d.setItems(new vis.DataSet(value.items()));
+            };
+
+            ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+                graph2d.destroy();
+            });
+
+        },
+        update: function(element, valueAccessor, allBindings, data, context) {
+            context.updateGraph();
+        }
+    };
+
     ko.applyBindings(app);
 });

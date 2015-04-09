@@ -1,11 +1,16 @@
-<ul data-bind="foreach: byMonth">
-    <li>
-        <strong data-bind="text: month"></strong>
-        <ul data-bind="foreach: getCounts()">
-            <li>
-                <!-- ko text: source.title --><!-- /ko -->:
-                <!-- ko text: count --><!-- /ko -->
-            </li>
-        </ul>
-    </li>
-</ul>
+<div data-bind="graph2d: {
+    groups: graphGroups,
+    items: graphItems,
+    options: {
+        style: 'bar',
+        barChart: {
+            handleOverlap: 'stack',
+            align: 'center'
+        },
+        drawPoints: false,
+        dataAxis: {
+            icons: true
+        },
+        orientation: 'top'
+    }
+}"></div>
