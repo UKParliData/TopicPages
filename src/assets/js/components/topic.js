@@ -2,7 +2,8 @@ define([
     'text!../../templates/topic.html',
     'knockout',
     '../models/topics',
-    '../models/documents'
+    '../models/documents',
+    'jquery-ui'
 ], function(tpl, ko, topics, documents) {
     "use strict";
 
@@ -12,8 +13,6 @@ define([
 
         var now = new Date();
         var startOfMonthoneYearAgo = new Date(Math.floor(now / 86400000 - 365 - now.getDate() + 1) * 86400000);
-
-        console.log(now, startOfMonthoneYearAgo);
 
         self.startDate =ko.observable(startOfMonthoneYearAgo);
         self.endDate = ko.observable(now);

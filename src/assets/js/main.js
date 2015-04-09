@@ -68,9 +68,9 @@ define([
             }, 0);
 
             //handle disposal (if KO removes by the template binding)
-              ko.utils.domNodeDisposal.addDisposeCallback(element, function(){
-                  $(element).accordion("destroy");
-              });
+            ko.utils.domNodeDisposal.addDisposeCallback(element, function(){
+                $(element).accordion("destroy");
+            });
         },
         update: function(element, valueAccessor) {
             if (typeof $(element).data('ui-accordion') != 'undefined') {
@@ -79,6 +79,41 @@ define([
             }
         }
     };
+
+
+    /* ====== Custom binding: Date picker ====== */
+
+    ko.bindingHandlers.datepicker = {
+        init: function(element, valueAccessor, allBindingsAccessor) {
+            var options = allBindingsAccessor().datepickerOptions || {},
+                $el = $(element);
+
+            //initialize datepicker with some optional options
+            $el.datepicker(options);
+
+            //handle the field changing
+            ko.utils.registerEventHandler(element, "change", function() {
+                var observable = valueAccessor();
+                observable($el.datepicker("getDate"));
+            });
+
+            //handle disposal (if KO removes by the template binding)
+            ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+                $el.datepicker("destroy");
+            });
+
+        },
+        update: function(element, valueAccessor) {
+            var value = ko.utils.unwrapObservable(valueAccessor()),
+                $el = $(element),
+                current = $el.datepicker("getDate");
+
+            if (value - current !== 0) {
+                $el.datepicker("setDate", value);
+            }
+        }
+    };
+
 
     /* ====== Custom binding: onScrollEnd ====== */
 
@@ -107,7 +142,6 @@ define([
 
     ko.bindingHandlers.timeline = {
         init: function(element, valueAccessor, allBindings, data, context) {
-
             var value = ko.unwrap(valueAccessor());
             var items = new vis.DataSet(value.items());
             var options = value.options;
@@ -139,7 +173,6 @@ define([
 
     ko.bindingHandlers.graph2d = {
         init: function(element, valueAccessor, allBindings, data, context) {
-
             var value = ko.unwrap(valueAccessor());
             var groups = new vis.DataSet(value.groups());
             var items = new vis.DataSet(value.items());
@@ -147,8 +180,10 @@ define([
             var graph2d = new vis.Graph2d(element, items, groups, options);
 
             context.updateGraph = function() {
+                var value = ko.unwrap(valueAccessor());
                 graph2d.setGroups(new vis.DataSet(value.groups()));
                 graph2d.setItems(new vis.DataSet(value.items()));
+                graph2d.setOptions(value.options);
             };
 
             ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
@@ -160,6 +195,7 @@ define([
             context.updateGraph();
         }
     };
+
 
     ko.applyBindings(app);
 });

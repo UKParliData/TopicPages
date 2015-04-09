@@ -1,9 +1,13 @@
 <h1 data-bind="text: topic.name"></h1>
 
-<ul class="view-links" data-bind="foreach: views">
+<ul class="toolbar">
+    <input type="date" data-bind="datepicker: startDate, datepickerOptions: { dateFormat: 'yy-mm-dd' }" />
+    <input type="date" data-bind="datepicker: endDate,   datepickerOptions: { dateFormat: 'yy-mm-dd' }" />
+    <!-- ko foreach: views -->
     <li>
         <a href="#" data-bind="click: $parent.view, text: caption"></a>
     </li>
+    <!-- /ko -->
 </ul>
 
 <div class="feed-view" data-bind="component: { name: 'components/' + view().name, params: $data }">
