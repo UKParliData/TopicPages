@@ -221,7 +221,12 @@ define([
                     }
                 }
 
-                deferred.resolveWith(self);
+                if (activeSources.length) {
+                    self.load(aTopic);
+                }
+                else {
+                    deferred.resolveWith(self);
+                }
             })
             .fail(function() {
                 deferred.rejectWith.apply(self, arguments);

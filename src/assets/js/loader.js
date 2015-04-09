@@ -118,7 +118,7 @@ define([
         var deferred = $.Deferred();
 
         var requests = sources.map(function(source) {
-            var args = extend ? $.extend({}, source.args, args) : source.args;
+            var args = extend ? $.extend({}, source.args, extend) : source.args;
             return load(source.dataset, args, source.transform)
                 .done(function() {
                     deferred.notify.apply(this, arguments);
