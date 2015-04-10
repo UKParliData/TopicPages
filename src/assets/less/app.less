@@ -56,6 +56,13 @@
     }
 }
 
+.clear-floats() {
+    &:after {
+        clear: both;
+        content: "";
+        display: table;
+    }
+}
 
 @media(max-width: (@nonstage-width + @stage-width-min)) {
     #all.topic-selected {
@@ -117,7 +124,7 @@ header#main-header {
     left: 0px;
     right: 0px;
     top: 0px;
-    z-index: 9999;
+    z-index: 9998;
 
     h1 {
         .with-background(@header-background);
@@ -127,9 +134,54 @@ header#main-header {
     }
 }
 
-#stage {
-  margin: 0 1em 3.5em;
+
+ul.toolbar {
+    .clear-floats();
+
+    position: fixed;
+    top: 2.5em;
+    width: 100%;
+    padding: 0px;
+    background-color: #333;
+    border-top: 1px dotted #999;
+    z-index: 9999;
+
+    &, a {
+        color: #fff;
+    }
+
+    &, & li {
+        list-style-type: none;
+        margin: 0px;
+    }
+
+    li {
+        display: block;
+        float: left;
+        border-right: 1px dotted #999;
+
+        a, label {
+            display: block;
+            padding: 6px;
+            text-decoration: none;
+        }
+        a {
+            &:hover, &:active, &:focus {
+                background-color: #f93;
+            }
+        }
+        input {
+            &:hover, &:active, &:focus {
+                border: 4px solid #f93;
+                margin: -6px -6px -6px 0px;
+            }
+            margin: -2px -2px -2px 4px;
+            padding: 2px;
+            border: none;
+        }
+    }
 }
+
 
 footer#main-footer {
     position: fixed;
@@ -145,6 +197,10 @@ footer#main-footer {
 #all {
     z-index: 0;
     margin-top: 3.5em;
+}
+
+#topic-view {
+    margin: 5em 0.5em 3em;
 }
 
 .spinner {
@@ -215,25 +271,6 @@ footer#main-footer {
             right: 0px;
             line-height: 1.2em;
         }
-    }
-}
-
-.change-topic-button {
-    border: 1px solid #999999;
-    border-radius: 8px;
-    padding: 4px;
-    margin-left: 1em;
-    background-color: #333399;
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    display: inline-block;
-    vertical-align: 6px;
-    float: right;
-
-    &:hover {
-        box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.75);
-        background-color: #3399ff;
     }
 }
 

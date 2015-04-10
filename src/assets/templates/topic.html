@@ -1,25 +1,29 @@
-<h1 data-bind="text: topic.name"></h1>
-
 <ul class="toolbar">
     <li>
         <a href="#" data-bind="click: $root.goToTopicPicker">Change topic</a>
     </li>
     <li>
-        <input type="date"
-            data-bind="
-                datepicker: startDate,
-                datepickerOptions: {
-                    dateFormat: 'yy-mm-dd'
-                }" />
+        <label>
+            From:
+            <input type="date"
+                data-bind="
+                    datepicker: startDate,
+                    datepickerOptions: {
+                        dateFormat: 'yy-mm-dd'
+                    }" />
+        </label>
     </li>
 
     <li>
-        <input type="date"
-            data-bind="
-                datepicker: endDate,
-                datepickerOptions: {
-                    dateFormat: 'yy-mm-dd'
-                }" />
+        <label>
+            To:
+            <input type="date"
+                data-bind="
+                    datepicker: endDate,
+                    datepickerOptions: {
+                        dateFormat: 'yy-mm-dd'
+                    }" />
+        </label>
     </li>
     <!-- ko foreach: views -->
     <li>
@@ -28,5 +32,7 @@
     <!-- /ko -->
 </ul>
 
-<div class="feed-view" data-bind="component: { name: 'components/' + view().name, params: $data }">
+<div id="topic-view">
+    <h1 data-bind="text: topic.name"></h1>
+    <!-- ko component: { name: 'components/' + view().name, params: $data } --><!-- /ko -->
 </div>
