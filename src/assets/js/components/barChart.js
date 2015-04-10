@@ -110,7 +110,7 @@ define([
 
         self.graphGroups = ko.pureComputed(function() {
             return sources.map(function(source, index) {
-                return { id: index, content: source.title };
+                return { id: index, content: source.title, className: 'graphGroup' + index.toString(10) };
             });
         });
 

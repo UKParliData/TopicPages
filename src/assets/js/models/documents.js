@@ -165,7 +165,6 @@ define([
             topic;
 
         self.items = ko.observableArray([]);
-        self.items.extend({rateLimit: {timeout: 50, method: 'notifyWhenChangesStop'}});
         self.loading = ko.observable(false);
 
 
@@ -198,10 +197,33 @@ define([
             var deferred = $.Deferred();
             self.loading(true);
             var s = activeSources.map(function(x) { return x.aggregate; });
+
+            var requiredTopics = [];
+
+            function pushTopic(topic) {
+                requiredTopics.push(topic);
+                for (var i = 0; i < topic.children().length; i++)
+                    pushTopic(topic.children()[i]);
+            }
+            pushTopic(aTopic);
+
+            console.log(requiredTopics);
+
+            s = s.reduce(function(sources, nextSource) {
+                return sources.concat(requiredTopics.map(function(topic) {
+                    var result = $.extend({}, nextSource);
+                    result.args = $.extend({}, result.args, {
+                        topic: topic.uri
+                    });
+                    return result;
+                }));
+            }, []);
+
+            console.log(s);
+
             loaderModule.loadMultiple(s, {
                 _page: pageNumber,
-                _pageSize: config.pageSize,
-                topic: topic.uri
+                _pageSize: config.pageSize
             })
             .progress(function(items) {
                 for (var j = 0; j < items.length; j++) {
@@ -237,7 +259,10 @@ define([
 
             return deferred.promise();
         };
+
+        self.items.extend({rateLimit: {timeout: 50, method: 'notifyWhenChangesStop'}});
     }
+
 
     return {
         sources: sources,
