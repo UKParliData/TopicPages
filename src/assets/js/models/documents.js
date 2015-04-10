@@ -29,6 +29,7 @@ define([
             transform: function(item) {
                 return {
                     type: sources.briefingPapers,
+                    id: item._about,
                     uri: item.contentLocation,
                     date: new Date(item.date._value),
                     title: (item.identifier && item.identifier._value ? item.identifier._value + ': ' : '')
@@ -53,6 +54,7 @@ define([
             transform: function(item) {
                 return {
                     type: sources.edms,
+                    id: item._about,
                     uri: item.externalLocation,
                     title: (item.edmNumber && item.edmNumber._value
                             ? 'EDM ' + item.edmNumber._value + ' - ' : ''
@@ -80,6 +82,7 @@ define([
             transform: function(item) {
                 return {
                     type: sources.papersLaid,
+                    id: item._about,
                     uri: item.internalLocation,
                     date: new Date(item.dateLaid._value),
                     title: item.title,
@@ -103,6 +106,7 @@ define([
             transform: function(item) {
                 return {
                     type: sources.proceedings,
+                    id: item._about,
                     uri: item.externalLocation,
                     date: new Date(item.date._value),
                     title: item.title,
@@ -125,6 +129,7 @@ define([
             transform: function (item) {
                 return {
                     type: sources.wms,
+                    id: item._about,
                     uri: item._about,
                     date: new Date(item.date._value),
                     title: item.title,
@@ -162,7 +167,8 @@ define([
             pageNumber,
             activeSources,
             loaderModule = aLoader ? aLoader : loader,
-            topic;
+            topic,
+            loadedItems = {};
 
         self.items = ko.observableArray([]);
         self.loading = ko.observable(false);
@@ -207,8 +213,6 @@ define([
             }
             pushTopic(aTopic);
 
-            console.log(requiredTopics);
-
             s = s.reduce(function(sources, nextSource) {
                 return sources.concat(requiredTopics.map(function(topic) {
                     var result = $.extend({}, nextSource);
@@ -219,19 +223,23 @@ define([
                 }));
             }, []);
 
-            console.log(s);
-
             loaderModule.loadMultiple(s, {
                 _page: pageNumber,
                 _pageSize: config.pageSize
             })
             .progress(function(items) {
                 for (var j = 0; j < items.length; j++) {
-                    var i = 0;
                     var ins = items[j];
-                    var si = self.items(), sil = si.length;
-                    while (i < sil && si[i].date > ins.date) i++;
-                    self.items.splice(i, 0, ins);
+                    if (!loadedItems.hasOwnProperty(ins.id)) {
+                        var i = 0;
+                        var si = self.items(), sil = si.length;
+                        while (i < sil && si[i].date > ins.date) i++;
+                        self.items.splice(i, 0, ins);
+                        loadedItems[ins.id] = 1;
+                    }
+                    else {
+                        loadedItems[ins.id]++;
+                    }
                 }
             })
             .done(function(items, pages, version) {
