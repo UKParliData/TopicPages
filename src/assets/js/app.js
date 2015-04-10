@@ -17,6 +17,10 @@ define([
             loaded: ko.observable(0)
         };
 
+        self.goToTopicPicker = function() {
+            self.selectedModule('home');
+        };
+
         topics.loadTerms()
             .progress(function(state) {
                 self.progress.loaded(state.loaded);

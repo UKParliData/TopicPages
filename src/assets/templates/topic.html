@@ -3,6 +3,9 @@
 <ul class="toolbar">
     <input type="date" data-bind="datepicker: startDate, datepickerOptions: { dateFormat: 'yy-mm-dd' }" />
     <input type="date" data-bind="datepicker: endDate,   datepickerOptions: { dateFormat: 'yy-mm-dd' }" />
+    <li>
+        <a class="change-topic-button" href="#" data-bind="click: $root.goToTopicPicker">Change topic</a>
+    </li>
     <!-- ko foreach: views -->
     <li>
         <a href="#" data-bind="click: $parent.view, text: caption"></a>
