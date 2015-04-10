@@ -26,6 +26,7 @@ define([
 
         self.views = [
             { name: 'barChart', caption: 'Bar Chart' },
+            { name: 'timeline', caption: 'Timeline' },
             { name: 'feed', caption: 'Feed' },
         ];
         self.view = ko.observable(self.views[0]);

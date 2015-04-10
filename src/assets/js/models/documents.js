@@ -20,6 +20,8 @@ define([
 
     sources.briefingPapers = {
         title: 'Briefing Papers',
+        name: 'briefingPaper',
+        displayName: 'Briefing Paper',
         aggregate : {
             dataset: 'briefingpapers',
             args: {
@@ -45,6 +47,8 @@ define([
 
     sources.edms = {
         title: 'EDMs',
+        name: 'edm',
+        displayName: 'Early Day Motion',
         aggregate : {
             dataset: 'edms',
             args: {
@@ -72,6 +76,8 @@ define([
 
     sources.papersLaid = {
         title: 'Papers Laid',
+        name: 'paperLaid',
+        displayName: 'Paper Laid',
         aggregate : {
             dataset: 'paperslaid',
             args: {
@@ -97,6 +103,8 @@ define([
 
     sources.proceedings = {
         title: 'Proceedings',
+        name: 'proceeding',
+        displayName: 'Proceeding',
         aggregate: {
             dataset: 'proceedings',
             args: {
@@ -121,6 +129,8 @@ define([
 
     sources.wms = {
         title: 'Written Ministerial Statements',
+        name: 'wms',
+        displayName: 'Written Ministerial Statement',
         aggregate: {
             dataset: 'writtenministerialstatements',
             args : {
