@@ -175,6 +175,9 @@ define([
         self.date = new Date(item.date._value);
         self.title = item.title;
         self.content = item.statementText;
+
+        self.text = '';
+        self.html = self.content;
     }
 
     sources.wms = {
