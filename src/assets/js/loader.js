@@ -128,20 +128,22 @@ define([
 
         $.when.apply(this, requests)
             .done(function() {
+                var args = sources.length > 1 ? arguments : [ arguments ];
                 var items = [];
                 var pages = [];
                 var version = false;
-                for (var i = 0; i < arguments.length; i++) {
-                    items = items.concat(arguments[i][0]);
-                    pages.push(arguments[i][1]);
+                for (var i = 0; i < args.length; i++) {
+                    items = items.concat(args[i][0]);
+                    pages.push(args[i][1]);
                     if (version === false) {
-                        version = arguments[i][2];
+                        version = args[i][2];
                     }
                 }
                 deferred.resolve(items, pages, version);
             })
             .fail(function() {
-                deferred.reject.apply(this, arguments);
+                var args = sources.length > 1 ? arguments : [ arguments ];
+                deferred.reject.apply(this, args);
             });
         return deferred.promise();
     }
