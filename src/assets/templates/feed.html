@@ -1,9 +1,4 @@
-<div
-    data-bind="timeline: {
-        items: timeline,
-        options: {}
-    }"></div>
-
+<!--
 <p>
     Filter this topic:
     <select data-bind="
@@ -15,8 +10,9 @@
 
     <button>Subscribe to this view</button>
 </p>
+-->
 
-<ul data-bind="foreach: filteredItems, scrollend: load" class="feed">
+<ul data-bind="foreach: items" class="feed">
     <li data-bind="attr: { class: type.name }">
         <a href="#" data-bind="click: load" class="item-strapline">
             <label
@@ -26,10 +22,10 @@
             <span data-bind="text: title" class="item-heading"></span>
             <label data-bind="text: date.toDateString()" class="item-date"></label>
         </a>
-        <div class="feed-content" data-bind="if: content.visible">
-            <h3 data-bind="text: content.heading"></h3>
-            <div data-bind="html: content.html"></div>
-            <!-- ko text: content.text --><!-- /ko -->
+        <div class="feed-content" data-bind="if: visible">
+            <h3 data-bind="text: title"></h3>
+            <div data-bind="html: html"></div>
+            <!-- ko text: text --><!-- /ko -->
         </div>
     </li>
 </ul>

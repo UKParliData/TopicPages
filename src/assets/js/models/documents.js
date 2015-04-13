@@ -16,7 +16,34 @@ define([
     var sources = {};
 
 
+    function Document(item) {
+        var self = this;
+
+        self.visible = ko.observable(false);
+        self.text = ko.pureComputed(function() { return self.content; });
+        self.html = '';
+
+        self.load = function() {
+            self.visible(!self.visible());
+        }
+    }
+
+
     /* ====== Briefing Papers ====== */
+
+    function BriefingPaper(item) {
+        var self = this;
+        Document.call(this, item);
+
+        self.type = sources.briefingPapers;
+        self.id = item._about;
+        self.uri = item.contentLocation;
+        self.date = new Date(item.date._value);
+        self.title = (item.identifier && item.identifier._value ? item.identifier._value + ': ' : '')
+            + item.title;
+        self.content = item.description[0];
+    }
+
 
     sources.briefingPapers = {
         title: 'Briefing Papers',
@@ -29,21 +56,30 @@ define([
                 _sort: '-date'
             },
             transform: function(item) {
-                return {
-                    type: sources.briefingPapers,
-                    id: item._about,
-                    uri: item.contentLocation,
-                    date: new Date(item.date._value),
-                    title: (item.identifier && item.identifier._value ? item.identifier._value + ': ' : '')
-                        + item.title,
-                    content: item.description[0]
-                };
+                return new BriefingPaper(item);
             }
         }
+
     };
 
 
     /* ====== EDMs ====== */
+
+    function EDM(item) {
+        var self = this;
+        Document.call(this, item);
+
+        self.type = sources.edms,
+        self.id = item._about,
+        self.uri = item.externalLocation,
+        self.title = (item.edmNumber && item.edmNumber._value
+                ? 'EDM ' + item.edmNumber._value + ' - '  : ''
+            )
+            + item.title,
+        self.date = new Date(item.dateTabled._value),
+        self.content = item.motionText;
+    }
+
 
     sources.edms = {
         title: 'EDMs',
@@ -56,23 +92,27 @@ define([
                 _sort: '-date'
             },
             transform: function(item) {
-                return {
-                    type: sources.edms,
-                    id: item._about,
-                    uri: item.externalLocation,
-                    title: (item.edmNumber && item.edmNumber._value
-                            ? 'EDM ' + item.edmNumber._value + ' - ' : ''
-                        )
-                        + item.title,
-                    date: new Date(item.dateTabled._value),
-                    content: item.motionText
-                };
+                return new EDM(item);
             }
         }
     };
 
 
     /* ====== Papers Laid ====== */
+
+
+    function PaperLaid(item) {
+        var self = this;
+        Document.call(self, item);
+
+        self.type = sources.papersLaid;
+        self.id = item._about;
+        self.uri = item.internalLocation;
+        self.date = new Date(item.dateLaid._value);
+        self.title = item.title;
+        self.content = null;
+    }
+
 
     sources.papersLaid = {
         title: 'Papers Laid',
@@ -86,20 +126,25 @@ define([
                 _sort: '-date'
             },
             transform: function(item) {
-                return {
-                    type: sources.papersLaid,
-                    id: item._about,
-                    uri: item.internalLocation,
-                    date: new Date(item.dateLaid._value),
-                    title: item.title,
-                    content: null
-                };
+                return new PaperLaid(item);
             }
         }
     };
 
 
     /* ====== proceedings ====== */
+
+    function Proceeding(item) {
+        var self = this;
+        Document.call(self, item);
+
+        self.type = sources.proceedings;
+        self.id = item._about;
+        self.uri = item.externalLocation;
+        self.date = new Date(item.date._value);
+        self.title = item.title;
+        self.content = item.indexerSummary;
+    }
 
     sources.proceedings = {
         title: 'Proceedings',
@@ -112,20 +157,25 @@ define([
                 _sort: '-date'
             },
             transform: function(item) {
-                return {
-                    type: sources.proceedings,
-                    id: item._about,
-                    uri: item.externalLocation,
-                    date: new Date(item.date._value),
-                    title: item.title,
-                    content: item.indexerSummary
-                };
+                return new Proceeding(item);
             }
         }
     };
 
 
     /* ====== Written Ministerial Statements ====== */
+
+    function WrittenMinisterialStatement(item) {
+        var self = this;
+        Document.call(self, item);
+
+        self.type = sources.wms;
+        self.id = item._about;
+        self.uri = item._about;
+        self.date = new Date(item.date._value);
+        self.title = item.title;
+        self.content = item.statementText;
+    }
 
     sources.wms = {
         title: 'Written Ministerial Statements',
@@ -137,14 +187,7 @@ define([
                 _sort: '-date'
             },
             transform: function (item) {
-                return {
-                    type: sources.wms,
-                    id: item._about,
-                    uri: item._about,
-                    date: new Date(item.date._value),
-                    title: item.title,
-                    content: item.statementText
-                };
+                return new WrittenMinisterialStatement(item);
             }
         }
     };
