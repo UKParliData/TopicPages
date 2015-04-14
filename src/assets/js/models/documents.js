@@ -264,8 +264,8 @@ define([
 
             function pushTopic(topic) {
                 requiredTopics.push(topic);
-                for (var i = 0; i < topic.children().length; i++)
-                    pushTopic(topic.children()[i]);
+                for (var i = 0; i < topic.children.length; i++)
+                    pushTopic(topic.children[i]);
             }
             pushTopic(aTopic);
 

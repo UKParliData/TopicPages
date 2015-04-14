@@ -12,11 +12,10 @@
         </header>
 
         <div id="all">
-            <div id="container" data-bind="
-                visible: !loading(),
-                component: { name: 'components/' + selectedModule() }
-                "></div>
-            <div id="loading" data-bind="visible: loading">
+            <div id="container" data-bind="if: !loading()">
+                <!-- ko component: { name: 'components/' + selectedModule() } --><!-- /ko -->
+            </div>
+            <div id="loading" data-bind="if: loading">
                 <p>Loading</p>
                 <img src="assets/images/ajax-loader.gif" alt="Loading..." />
             </div>
@@ -26,5 +25,6 @@
             Copyright 2015, Houses of Parliament
         </footer>
     </body>
+
     <script src="assets/lib/requirejs/require.js" data-main="assets/js/main"></script>
 </html>

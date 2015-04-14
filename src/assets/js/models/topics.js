@@ -10,10 +10,10 @@ define([
     var terms = null;
     var termsLookup = {};
     var loaded = false;
-    var roots = ko.observableArray([]);
+    var roots = [];
+    var baseTopics = [];
     var selection = ko.observable(null);
 
-    roots.extend({ rateLimit: { timeout: 100, method: "notifyWhenChangesStop" } });
 
     /* ====== Topic class ====== */
 
@@ -23,11 +23,8 @@ define([
         self.id = parseInt(/[0-9]+$/.exec(term._about)[0], 10);
         self.name = term.prefLabel._value;
         self.uri = term._about;
-        self.children = ko.observableArray([]);
-        self.parents = ko.observableArray([]);
-
-        self.children.extend({ rateLimit: { timeout: 100, method: "notifyWhenChangesStop" } });
-        self.parents.extend({ rateLimit: { timeout: 100, method: "notifyWhenChangesStop" } });
+        self.children = [];
+        self.parents = [];
 
         var parentIDs;
 
@@ -69,7 +66,7 @@ define([
                     parent.children.push(self);
                 }
             }
-            if (!self.parents().length) {
+            if (!self.parents.length) {
                 roots.push(self);
             }
             delete(self.setParents);
@@ -83,19 +80,6 @@ define([
 
     function readTerm(term) {
         return new Topic(term);
-    }
-
-
-    function postProcessTerms() {
-        for (var i = 0; i < terms.length; i++) {
-            termsLookup[terms[i].uri] =
-            termsLookup[terms[i].id] =
-                terms[i];
-        }
-
-        for (var i = 0; i < terms.length; i++) {
-            terms[i].setParents();
-        }
     }
 
 
@@ -148,22 +132,35 @@ define([
     }
 
 
+
+    function postProcessTerms() {
+        for (var i = 0; i < terms.length; i++) {
+            termsLookup[terms[i].uri] =
+            termsLookup[terms[i].id] =
+                terms[i];
+        }
+
+        for (var i = 0; i < terms.length; i++) {
+            terms[i].setParents();
+        }
+
+        baseTopics = roots
+            .map(function(x) { return x.children; })
+            .reduce(function(a, b) { return a.concat(b); }, []);
+    }
+
+
     return {
         loadTerms: loadTerms,
         getTerms: function() {
-            if (terms == null) {
-                throw 'Taxonomy has not yet been loaded.';
-            }
             return terms;
         },
         getTerm: function(id) {
             return termsLookup[id];
         },
-        getBaseTopics: ko.pureComputed(function() {
-            return roots()
-                .map(function(x) { return x.children(); })
-                .reduce(function(a, b) { return a.concat(b); }, []);
-        }),
+        getBaseTopics: function() {
+            return baseTopics;
+        },
         selection: selection,
         Topic: Topic
     };
