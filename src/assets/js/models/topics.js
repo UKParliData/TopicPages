@@ -87,13 +87,19 @@ define([
         var deferred = $.Deferred();
 
         function loadTermsPage(page) {
-            var url = cfg.topics.query.format(page, cfg.topics.pageSize);
+            var url = cfg.topics.query;
 
             $.ajax({
                 url: url,
                 dataType: 'json',
                 method: 'GET',
                 timeout: 60000,
+                data: {
+                    _page: page,
+                    _pageSize: cfg.topics.pageSize,
+                    _properties: 'termCount,prefLabel,broader',
+                    'class': 'TPG'
+                },
                 success: function(data) {
                     terms = terms.concat(data.result.items.map(readTerm));
                     page++;
