@@ -189,5 +189,24 @@ define([
     };
 
 
+    /* ====== Custom binding: network ====== */
+
+    ko.bindingHandlers.network = {
+        init: function(element, valueAccessor, allBindings, data, context) {
+            var value = ko.unwrap(valueAccessor());
+            var data = {
+                nodes: value.nodes,
+                edges: value.edges
+            };
+            var options = value.options;
+            var network = new vis.Network(element, data, options);
+
+            ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+                network.destroy();
+            });
+        }
+    };
+
+
     ko.applyBindings(app);
 });
