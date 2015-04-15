@@ -11,6 +11,9 @@ define([
         var topics = modTopics.getTerms();
 
         self.nodes = topics
+            .filter(function(topic) {
+                return topic.parents.length > 0;
+            })
             .map(function(topic) {
                 return {
                     id: topic.id,
