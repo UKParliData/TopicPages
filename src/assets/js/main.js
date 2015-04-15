@@ -199,7 +199,13 @@ define([
                 edges: value.edges
             };
             var options = value.options;
+            var events = value.events;
             var network = new vis.Network(element, data, options);
+            for (var i in events) {
+                if (events.hasOwnProperty(i) && typeof events[i] === 'function') {
+                    network.on(i, events[i]);
+                }
+            }
 
             ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
                 network.destroy();

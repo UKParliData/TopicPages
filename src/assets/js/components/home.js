@@ -38,6 +38,17 @@ define([
             }, []);
 
         self.rootTopics = modTopics.getBaseTopics();
+
+        self.selectNodes = function(properties) {
+            var nodes = properties.nodes;
+            if (nodes.length > 0) {
+                var node = nodes.pop();
+                var term = modTopics.getTerm(node);
+                if (term) {
+                    modTopics.selection(term);
+                }
+            }
+        };
     }
 
     return {
