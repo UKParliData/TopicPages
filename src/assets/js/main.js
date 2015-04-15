@@ -207,7 +207,16 @@ define([
                 }
             }
 
+            function redraw() {
+                network.freezeSimulation(true);
+                network.redraw();
+                network.freezeSimulation(false);
+            }
+
+            $(window).on('resize', redraw);
+
             ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+                $(window).off('resize', redraw);
                 network.destroy();
             });
         }
