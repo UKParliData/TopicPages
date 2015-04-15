@@ -110,6 +110,10 @@
 
 // ====== General layout ====== //
 
+html, body {
+    height: 100%;
+}
+
 body {
     .with-background(@background);
     font: 14px arial, helvetica, sans-serif;
@@ -197,6 +201,7 @@ footer#main-footer {
 #all {
     z-index: 0;
     margin-top: 3.5em;
+    height: 100%;
 }
 
 #topic-view {
@@ -208,10 +213,17 @@ footer#main-footer {
     padding-top: 10em;
 }
 
+#container {
+    height: 100%;
+}
 
 #loading {
     text-align: center;
     padding-top: 10em;
+}
+
+#network {
+    height: 100%;
 }
 
 #nav-links {

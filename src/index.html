@@ -12,19 +12,25 @@
         </header>
 
         <div id="all">
-            <div id="container" data-bind="if: !loading()">
-                <!-- ko component: { name: 'components/' + selectedModule() } --><!-- /ko -->
-            </div>
-            <div id="loading" data-bind="if: loading">
+            <div id="loading" data-bind="visible: loading">
                 <p>Loading</p>
                 <img src="assets/images/ajax-loader.gif" alt="Loading..." />
             </div>
+            <!-- ko if !loading() -->
+                <!-- ko template: { name: 'container-template' } --><!-- /ko -->
+            <!-- /ko -->
         </div>
 
         <footer id="main-footer">
             Copyright 2015, Houses of Parliament
         </footer>
     </body>
+
+    <script type="text/html" id="container-template">
+        <div id="container">
+            <!-- ko component: { name: 'components/' + selectedModule() } --><!-- /ko -->
+        </div>
+    </script>
 
     <script src="assets/lib/requirejs/require.js" data-main="assets/js/main"></script>
 </html>
