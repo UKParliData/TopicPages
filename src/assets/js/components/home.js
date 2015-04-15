@@ -1,7 +1,6 @@
 define([
     'text!../../templates/home-graph.html',
     '../models/topics'
-
 ], function(tpl, modTopics) {
     "use strict";
 
@@ -19,7 +18,12 @@ define([
                     id: topic.id,
                     label: topic.name,
                     value: topic.termCount,
-                    group: 'main'
+                    group: topic.hasOwnProperty('level')
+                        ? 'level' + topic.level.toString()
+                        : 'level3',
+                    mass: topic.hasOwnProperty('level') && topic.level > 0
+                        ? topic.level
+                        : 1
                 };
             });
 

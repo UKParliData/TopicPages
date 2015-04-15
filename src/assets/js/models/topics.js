@@ -154,6 +154,18 @@ define([
         baseTopics = roots
             .map(function(x) { return x.children; })
             .reduce(function(a, b) { return a.concat(b); }, []);
+
+        function setLevel(term, level) {
+            term.level = level;
+            for (var i = 0; i < term.children.length; i++) {
+                var child = term.children[i];
+                if (!child.hasOwnProperty('level'))
+                    setLevel(term.children[i], level + 1);
+            }
+        }
+
+        for (var i = 0; i < baseTopics.length; i++)
+            setLevel(baseTopics[i], 1);
     }
 
 
