@@ -22,7 +22,9 @@ require.config({
     'css-builder': '../lib/require-css/css-builder',
     normalize: '../lib/require-css/normalize',
     'jquery-ui': '../lib/jquery-ui/jquery-ui',
-    vis: '../lib/vis/dist/vis.min'
+    vis: '../lib/vis/dist/vis.min',
+    'Chart.StackedBar': '../lib/Chart.StackedBar.js/Chart.StackedBar',
+    raphael: '../lib/raphael/raphael'
   },
   packages: [
 
