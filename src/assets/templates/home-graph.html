@@ -1,7 +1,7 @@
 <div id="network"
     data-bind="network: {
-        nodes: nodes,
-        edges: edges,
+        nodes: nodes(),
+        edges: edges(),
         options: {
             groups: {
                 level1: {
@@ -25,9 +25,20 @@
                     }
                 }
             },
-            stabilize: false
+            stabilize: false,
+            physics: {
+                barnesHut: {
+                    gravitationalConstant: -15000,
+                    centralGravity: 3,
+                    springLength: 250,
+                    springConstant: 0.15,
+                    damping: 2
+                }
+            },
+            smoothCurves: false
         },
         events: {
+            click: expandNode,
             doubleClick: selectNodes
         },
     }"></div>

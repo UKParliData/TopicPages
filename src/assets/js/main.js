@@ -219,6 +219,33 @@ define([
                 $(window).off('resize', redraw);
                 network.destroy();
             });
+
+            context.updateGraph = function() {
+                network.freezeSimulation(true);
+                var positions = network.getPositions();
+                console.log(positions);
+                var value = ko.unwrap(valueAccessor());
+                var data = {
+                    nodes: value.nodes,
+                    edges: value.edges
+                };
+                for (var i = 0; i < data.nodes.length; i++) {
+                    var node = data.nodes[i];
+                    if (positions.hasOwnProperty(node.id)) {
+                        node.x = positions[node.id].x;
+                        node.y = positions[node.id].y;
+                        node.allowedToMoveX = true;
+                        node.allowedToMoveY = true;
+                    }
+                }
+                var options = value.options;
+                network.setData(data);
+                network.setOptions(options);
+                network.freezeSimulation(false);
+            }
+        },
+        update: function(element, valueAccessor, allBindings, data, context) {
+            context.updateGraph();
         }
     };
 

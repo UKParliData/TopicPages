@@ -164,8 +164,8 @@ define([
             }
         }
 
-        for (var i = 0; i < baseTopics.length; i++)
-            setLevel(baseTopics[i], 1);
+        for (var i = 0; i < roots.length; i++)
+            setLevel(roots[i], 0);
     }
 
 
