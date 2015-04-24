@@ -23,7 +23,7 @@ define([
         self.id = parseInt(/[0-9]+$/.exec(term._about)[0], 10);
         self.name = term.prefLabel._value;
         self.uri = term._about;
-        self.termCount = term.termCount;
+        self.termCount = term.termCount ? term.termCount : 0;
         self.children = [];
         self.parents = [];
 

@@ -15,7 +15,7 @@
 <script type="text/html" id="childTopics-template">
     <ul data-bind="foreach: children">
         <li>
-            <a href="#" data-bind="text: name, click: select"></a>
+            <a href="#" data-bind="text: name + ' (' + termCount + ')', click: select"></a>
             <!-- ko template: 'childTopics-template' --><!-- /ko -->
         </li>
     </ul>
