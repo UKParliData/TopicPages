@@ -30,9 +30,9 @@ define([
                         id: topic.id,
                         label: topic.name,
                         value: topic.termCount,
-                        group: topic.hasOwnProperty('level')
-                            ? 'level' + topic.level.toString()
-                            : 'level3',
+                        group: (!topic.hasOwnProperty('level') || topic.level === 1)
+                            ? 'root'
+                            : (topic.children.length > 0 ? 'parent' : 'leaf'),
                         mass: topic.hasOwnProperty('level') && topic.level > 0
                             ? topic.level
                             : 1
@@ -68,7 +68,7 @@ define([
 
                 for (var j = 0; j < related.length; j++) {
                     var child = related[j];
-                    if (!topicStates[child.id]) {
+                    if (child.level > 0 && !topicStates[child.id]) {
                         self.topics.push(child);
                         topicStates[child.id] = true;
                     }
