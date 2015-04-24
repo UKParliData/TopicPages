@@ -26,9 +26,13 @@ define([
         self.nodes = ko.pureComputed(function() {
             return self.topics()
                 .map(function(topic) {
+                    var name = topic.name;
+                    if (topic.level > 1 && topic.termCount > 0) {
+                        name = '(' + topic.termCount.toString(10) + ')\n' + name;
+                    }
                     return {
                         id: topic.id,
-                        label: topic.name,
+                        label: name,
                         value: topic.termCount,
                         group: (!topic.hasOwnProperty('level') || topic.level === 1)
                             ? 'root'
