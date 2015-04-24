@@ -1,0 +1,22 @@
+<div id="selector" data-bind="
+    accordion: { active: false, collapsible: true, heightStyle: 'content' },
+    foreach: rootTopics">
+    <h3 data-bind="text: name"></h3>
+    <!-- ko template: 'childTopics-template' --><!-- /ko -->
+</div>
+
+<!-- ====== Child topics template ====== -->
+<!--
+    Displayed when selecting a topic.
+    Rendered: recursively in Search template and self
+    Context: a topic.
+-->
+
+<script type="text/html" id="childTopics-template">
+    <ul data-bind="foreach: children">
+        <li>
+            <a href="#" data-bind="text: name, click: select"></a>
+            <!-- ko template: 'childTopics-template' --><!-- /ko -->
+        </li>
+    </ul>
+</script>
