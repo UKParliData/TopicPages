@@ -64,8 +64,10 @@ define([
             for (var i = 0; i < nodes.length; i++) {
                 var topic = modTopics.getTerm(nodes[i]);
 
-                for (var j = 0; j < topic.children.length; j++) {
-                    var child = topic.children[j];
+                var related = topic.children.concat(topic.parents);
+
+                for (var j = 0; j < related.length; j++) {
+                    var child = related[j];
                     if (!topicStates[child.id]) {
                         self.topics.push(child);
                         topicStates[child.id] = true;
