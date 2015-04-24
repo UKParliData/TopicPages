@@ -42,7 +42,6 @@ define([
     "use strict";
     $.support.cors = true;
 
-
     /* ===== Components ====== */
 
     var componentLoader = {

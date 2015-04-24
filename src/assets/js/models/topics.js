@@ -147,7 +147,7 @@ define([
                 terms[i];
         }
 
-        for (var i = 0; i < terms.length; i++) {
+        for (i = 0; i < terms.length; i++) {
             terms[i].setParents();
         }
 
@@ -164,7 +164,7 @@ define([
             }
         }
 
-        for (var i = 0; i < roots.length; i++)
+        for (i = 0; i < roots.length; i++)
             setLevel(roots[i], 0);
     }
 
