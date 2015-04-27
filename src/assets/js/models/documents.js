@@ -25,7 +25,7 @@ define([
 
         self.load = function() {
             self.visible(!self.visible());
-        }
+        };
     }
 
 
@@ -163,6 +163,37 @@ define([
     };
 
 
+    /* ====== Select Committee Reports ====== */
+
+    function SelectCommitteeReport(item) {
+        var self = this;
+        Document.call(self, item);
+
+        self.type = sources.selectCommitteeReports;
+        self.id = item._about;
+        self.uri = item.location;
+        self.date = new Date(item.date._value);
+        self.title = item.title;
+        self.content = null;
+    }
+
+
+    sources.selectCommitteeReports = {
+        title: 'Select Committee Reports',
+        name: 'select-committee-report',
+        displayName: 'Select Committee Report',
+        aggregate: {
+            dataset: 'scrparlisearch',
+            args: {
+                _sort: '-date',
+                _view: 'all'
+            },
+            transform: function(item) {
+                return new SelectCommitteeReport(item);
+            }
+        }
+    };
+
     /* ====== Written Ministerial Statements ====== */
 
     function WrittenMinisterialStatement(item) {
@@ -201,6 +232,7 @@ define([
         sources.edms,
         sources.papersLaid,
         sources.proceedings,
+        sources.selectCommitteeReports,
         sources.wms
     ];
 
