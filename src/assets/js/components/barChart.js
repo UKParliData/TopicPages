@@ -30,7 +30,7 @@ define([
 
         self.toString = function() {
             return str;
-        }
+        };
     };
 
 
@@ -43,7 +43,7 @@ define([
         for (var i = 0; i < sources.length; i++) {
             var source = sources[i];
             documents[source.title] = [];
-        };
+        }
 
         self.addDocument = function(document) {
             var type = document.type.title;
@@ -68,7 +68,7 @@ define([
                     return { source: source, count: 0 };
                 }
             });
-        }
+        };
     };
 
 
