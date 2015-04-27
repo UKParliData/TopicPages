@@ -5,13 +5,6 @@
 @footer-background: #efefef;
 @keylines: #999999;
 
-@briefingPaper: #333399;
-@wms: #339933;
-@proceeding: #993333;
-@edm: #996633;
-@paperLaid: #015a2d;
-
-
 @padding-small: 10px;
 
 @selector-width: 400px;
@@ -21,7 +14,28 @@
 
 @stage-width-min: 500px;
 
+@colour0: #4f81bd;
+@colour1: #f79646;
+@colour2: #8c51cf;
+@colour3: #75c841;
+@colour4: #ff0100;
+@colour5: #37d8e6;
+@colour6: #042662;
+@colour7: #00ff26;
+@colour8: #ff00ff;
+@colour9: #8f3938;
+
+
+@briefingPaper: @colour0;
+@edm: @colour1;
+@paperLaid: @colour2;
+@proceeding: @colour3;
+@select-committee-report: @colour4;
+@wms: @colour5;
+
+
 // ====== Mixins ====== //
+
 
 .with-background(@bg) when (lightness(@bg) >= 50%) {
     background-color: @bg;
@@ -349,6 +363,7 @@ footer#main-footer {
         &.proceeding { .feed-labels(@proceeding); }
         &.edm { .feed-labels(@edm); }
         &.paperLaid { .feed-labels(@paperLaid); }
+        &.select-committee-report { .feed-labels(@select-committee-report); }
 
         .feed-content {
             margin: 0.5em;
@@ -360,10 +375,10 @@ footer#main-footer {
 .vis.timeline {
 
     .color-code(@color) {
-        background-color: lighten(@color, 50%);
+        background-color: lighten(@color, 30%);
         color: @color;
         border: 1px solid @color;
-        box-shadow: 2px 2px 2px lighten(@color, 35%);
+        box-shadow: 2px 2px 2px lighten(@color, 25%);
         border-radius: 6px;
     }
 
@@ -373,6 +388,7 @@ footer#main-footer {
         &.proceeding { .color-code(@proceeding); }
         &.edm { .color-code(@edm); }
         &.paperLaid { .color-code(@paperLaid); }
+        &.select-committee-report { .color-code(@select-committee-report); }
     }
 
     .event-title {
