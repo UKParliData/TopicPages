@@ -25,13 +25,14 @@
 @colour8: #ff00ff;
 @colour9: #8f3938;
 
-
 @briefingPaper: @colour0;
 @edm: @colour1;
 @paperLaid: @colour2;
-@proceeding: @colour3;
-@select-committee-report: @colour4;
-@wms: @colour5;
+@proceedings-debate: @colour3;
+@proceedings-statement: @colour4;
+@proceedings-question: @colour5;
+@select-committee-report: @colour6;
+@wms: @colour7;
 
 
 // ====== Mixins ====== //
@@ -360,7 +361,9 @@ footer#main-footer {
 
         &.briefingPaper { .feed-labels(@briefingPaper); }
         &.wms { .feed-labels(@wms); }
-        &.proceeding { .feed-labels(@proceeding); }
+        &.proceedings-debate { .feed-labels(@proceedings-debate); }
+        &.proceedings-statement { .feed-labels(@proceedings-statement); }
+        &.proceedings-question { .feed-labels(@proceedings-question); }
         &.edm { .feed-labels(@edm); }
         &.paperLaid { .feed-labels(@paperLaid); }
         &.select-committee-report { .feed-labels(@select-committee-report); }
@@ -385,7 +388,9 @@ footer#main-footer {
     .item.box {
         &.briefingPaper { .color-code(@briefingPaper); }
         &.wms { .color-code(@wms); }
-        &.proceeding { .color-code(@proceeding); }
+        &.proceedings-debate { .color-code(@proceedings-debate); }
+        &.proceedings-statement { .color-code(@proceedings-statement); }
+        &.proceedings-question { .color-code(@proceedings-question); }
         &.edm { .color-code(@edm); }
         &.paperLaid { .color-code(@paperLaid); }
         &.select-committee-report { .color-code(@select-committee-report); }

@@ -132,13 +132,13 @@ define([
     };
 
 
-    /* ====== proceedings ====== */
+    /* ====== Proceedings - Debates ====== */
 
-    function Proceeding(item) {
+    function ProceedingDebate(item) {
         var self = this;
         Document.call(self, item);
 
-        self.type = sources.proceedings;
+        self.type = sources.proceedingsDebates;
         self.id = item._about;
         self.uri = item.externalLocation;
         self.date = new Date(item.date._value);
@@ -146,21 +146,84 @@ define([
         self.content = item.indexerSummary;
     }
 
-    sources.proceedings = {
-        title: 'Proceedings',
-        name: 'proceeding',
-        displayName: 'Proceeding',
+    sources.proceedingsDebates = {
+        title: 'Proceedings - Debates',
+        name: 'proceedings-debate',
+        displayName: 'Proceedings - Debate',
         aggregate: {
-            dataset: 'proceedings',
+            dataset: 'proceedingsdebates',
             args: {
                 _view: 'all',
                 _sort: '-date'
             },
             transform: function(item) {
-                return new Proceeding(item);
+                return new ProceedingDebate(item);
             }
         }
     };
+
+
+    /* ====== Proceedings - Statements ====== */
+
+    function ProceedingStatement(item) {
+        var self = this;
+        Document.call(self, item);
+
+        self.type = sources.proceedingsStatements;
+        self.id = item._about;
+        self.uri = item.externalLocation;
+        self.date = new Date(item.date._value);
+        self.title = item.title;
+        self.content = item.indexerSummary;
+    }
+
+    sources.proceedingsStatements = {
+        title: 'Proceedings - Statements',
+        name: 'proceedings-statement',
+        displayName: 'Proceedings - Statement',
+        aggregate: {
+            dataset: 'proceedingsstatements',
+            args: {
+                _view: 'all',
+                _sort: '-date'
+            },
+            transform: function(item) {
+                return new ProceedingStatement(item);
+            }
+        }
+    };
+
+
+    /* ====== Proceedings - Questions ====== */
+
+    function ProceedingQuestion(item) {
+        var self = this;
+        Document.call(self, item);
+
+        self.type = sources.proceedingsQuestions;
+        self.id = item._about;
+        self.uri = item.externalLocation;
+        self.date = new Date(item.date._value);
+        self.title = item.title;
+        self.content = item.indexerSummary;
+    }
+
+    sources.proceedingsQuestions = {
+        title: 'Proceedings - Questions',
+        name: 'proceedings-question',
+        displayName: 'Proceedings - Question',
+        aggregate: {
+            dataset: 'proceedingsquestions',
+            args: {
+                _view: 'all',
+                _sort: '-date'
+            },
+            transform: function(item) {
+                return new ProceedingStatement(item);
+            }
+        }
+    };
+
 
 
     /* ====== Select Committee Reports ====== */
@@ -231,7 +294,9 @@ define([
         sources.briefingPapers,
         sources.edms,
         sources.papersLaid,
-        sources.proceedings,
+        sources.proceedingsDebates,
+        sources.proceedingsQuestions,
+        sources.proceedingsStatements,
         sources.selectCommitteeReports,
         sources.wms
     ];
