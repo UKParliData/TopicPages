@@ -3,5 +3,20 @@
 </h1>
 
 <p>
-    <input type="text" />
+    <input type="text" data-bind="textInput: searchText" />
 </p>
+
+<h2>Subjects found:</h2>
+
+<ul data-bind="foreach: items">
+    <li>
+        <strong data-bind="text: title"></strong>
+        <ul data-bind="foreach: topics">
+            <li>
+                <a href="#" data-bind="{
+                    text: title
+                }"></a>
+            </li>
+        </ul>
+    </li>
+</ul>
