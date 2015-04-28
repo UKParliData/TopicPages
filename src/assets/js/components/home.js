@@ -8,6 +8,7 @@ define([
         var self = this;
 
         self.views = [
+            { name: 'search', caption: 'Search' },
             { name: 'graph', caption: 'Graph' },
             { name: 'topic-list', caption: 'Topics' }
         ];
