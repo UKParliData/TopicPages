@@ -1,10 +1,6 @@
-<h1>
-    Look up a topic by subject:
-</h1>
+<h1>Look up a topic by subject:</h1>
 
-<p>
-    <input type="text" data-bind="textInput: searchText" />
-</p>
+<p><input type="text" data-bind="textInput: searchText" /></p>
 
 <h2>Subjects found:</h2>
 
@@ -14,7 +10,8 @@
         <ul data-bind="foreach: topics">
             <li>
                 <a href="#" data-bind="{
-                    text: title
+                    text: title,
+                    click: select
                 }"></a>
             </li>
         </ul>

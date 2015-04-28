@@ -8,10 +8,30 @@
 define([
     'text!../../templates/search.html',
     'knockout',
-    '../loader'
-
-], function(tpl, ko, loader) {
+    '../loader',
+    '../models/topics'
+], function(tpl, ko, loader, topics) {
     "use strict";
+
+    var Topic = function(data) {
+        var self = this;
+        self.title = data.prefLabel._value;
+        self.id = data._about;
+        self.select = function() {
+            var topic = topics.getTerm(self.id);
+            if (topic) {
+                topics.selection(topic);
+            }
+        };
+    };
+
+    var Subject = function(item) {
+        var self = this;
+        self.title = item.prefLabel._value;
+        self.topics = item.mappedTopic.map(function(x) {
+            return new Topic(x);
+        });
+    };
 
     function SearchViewModel() {
         var self = this;
@@ -35,15 +55,7 @@ define([
             };
 
             var transform = function(item) {
-                return {
-                    title: item.prefLabel._value,
-                    topics: item.mappedTopic.map(function(x) {
-                        return {
-                            title: x.prefLabel._value,
-                            id: x._about
-                        };
-                    })
-                };
+                return new Subject(item);
             };
 
             loader.load('terms', args, transform)
