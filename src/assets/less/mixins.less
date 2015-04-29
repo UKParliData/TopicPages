@@ -1,0 +1,50 @@
+@import "mixins.less";
+
+// ====== Mixins ====== //
+
+.with-background(@bg, @fg) {
+    background-color: @bg;
+    color: @fg;
+
+    a, a:hover, a:active, a:focus, a:visited {
+        color: @fg;
+    }
+}
+
+.with-background(@bg) when (lightness(@bg) >= 50%) {
+    .with-background(@bg, black);
+}
+
+.with-background(@bg) when (lightness(@bg) < 50%) {
+    .with-background(@bg, white);
+}
+
+.clear-floats() {
+    &:after {
+        clear: both;
+        content: "";
+        display: table;
+    }
+}
+
+
+.horizontal-list(@item-padding) {
+
+    &, li {
+        margin: 0px;
+        list-style-type: none;
+    }
+
+    padding: 0px;
+    display: block;
+
+    li {
+        padding: @item-padding;
+        display: inline-block;
+
+        a {
+            margin: -@item-padding;
+            padding: @item-padding;
+        }
+    }
+}

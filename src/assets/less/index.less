@@ -1,0 +1,78 @@
+
+body {
+    font: @body-font;
+    margin: 0px;
+    padding: 0px;
+}
+
+#main-header {
+    .with-background(@header-background);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+
+    h1 {
+        margin: 0px;
+        padding: 0.5em;
+        font-size: 1.2em;
+        line-height: 1.2em;
+    }
+}
+
+#main-footer {
+    .with-background(@footer-background);
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    font-size: 0.8em;
+    line-height: 0.8em;
+    margin: 0px;
+    padding: 0.75em;
+    border-top: 1px solid @keylines;
+}
+
+
+#container {
+    min-height: 100%;
+}
+
+.toolbar {
+    .horizontal-list(0.5em);
+    .with-background(@toolbar-background);
+    position: fixed;
+    top: 2.65em;
+    left: 0px;
+    right: 0px;
+
+    li {
+        white-space: nowrap;
+    }
+
+    a:hover, a:active, a:visited {
+        background-color: #f93;
+    }
+
+    input {
+        &:hover, &:active, &:focus {
+            border: 6px solid #f93;
+            margin: -8px -8px -8px 0px;
+        }
+        margin: -2px -2px -2px 6px;
+        padding: 2px;
+        border: none;
+    }
+
+}
+
+.stage {
+    padding: 1em;
+    position: fixed;
+    top: 5em;
+    bottom: 1.9em;
+    left: 0px;
+    right: 0px;
+    overflow-y: scroll;
+}
+
