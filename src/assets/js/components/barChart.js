@@ -125,6 +125,30 @@ define([
                 return result.concat(items);
             }, []);
         });
+		
+		self.selectBar = function (args) {
+            if ((args.what == "background") && (args.event.target.attributes["class"] != null) && (args.event.target.attributes["class"].nodeValue.indexOf("graphGroup") == 0)) {
+                var index = args.event.target.attributes["class"].nodeValue.split(" ")[0].replace("graphGroup", "")*1;
+                var date = args.time;
+                var startDate = new Date(date.getFullYear(), date.getMonth(), 1);
+                var endDate = new Date(date.getFullYear(), date.getMonth()+1, 0);
+                var documentType = ko.utils.arrayFirst(self.graphGroups(), function (item) {
+                    return item.id == index;
+                });
+
+                topicViewModel.documentType(documentType.name);
+                topicViewModel.startDate(startDate);
+                topicViewModel.endDate(endDate);
+                topicViewModel.view(topicViewModel.views[2]);
+            }
+        };
+		
+		self.init = function () {
+            topicViewModel.reset();
+        };
+
+        self.init();
+		
     };
 
     return {

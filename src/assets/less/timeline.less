@@ -31,4 +31,24 @@
             font-style: italic;
         }
     }
+
+    &.root{
+        border: 0px none !important;
+    }
+
+    .bar{
+        stroke-width: 0px !important;
+        cursor:pointer;
+        &:hover {
+            fill-opacity: 0.8 !important;
+        }
+    }
+}
+
+.grid.minor, .grid.major{
+    border-color:transparent !important;
+}
+
+.dataaxis rect{
+    display: none !important;
 }

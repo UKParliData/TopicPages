@@ -18,8 +18,11 @@
             }
         },
         legend: true,
-        orientation: 'top',
+        orientation: 'bottom',
         start: $parent.startDate(),
         end: $parent.endDate()
+    },
+    events: {
+        click: selectBar
     }
 }"></div>

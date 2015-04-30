@@ -17,10 +17,11 @@ define([
         self.startDate =ko.observable(startOfMonthoneYearAgo);
         self.endDate = ko.observable(now);
         self.topic = topics.selection();
+        self.documentType = ko.observable(null);
 
         self.items = ko.pureComputed(function() {
             return feedLoader.items().filter(function(doc) {
-                return doc.date >= self.startDate() && doc.date <= self.endDate();
+                return doc.date >= self.startDate() && doc.date <= self.endDate() && (self.documentType()==null || doc.type.name==self.documentType());
             });
         });
 
@@ -32,6 +33,12 @@ define([
         self.view = ko.observable(self.views[0]);
 
         feedLoader.load(self.topic);
+
+        self.reset = function () {
+            self.documentType(null);
+            self.startDate(startOfMonthoneYearAgo);
+            self.endDate(now);
+        };
     }
 
     return {
