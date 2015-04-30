@@ -171,6 +171,13 @@ define([
             var items = new vis.DataSet(value.items());
             var options = value.options;
             var graph2d = new vis.Graph2d(element, items, groups, options);
+            var events = value.events;
+
+            for (var i in events) {
+                if (events.hasOwnProperty(i) && typeof events[i] === 'function') {
+                    graph2d.on(i, events[i]);
+                }
+            }
 
             context.updateGraph = function() {
                 var value = ko.unwrap(valueAccessor());
@@ -181,7 +188,7 @@ define([
 
             ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
                 graph2d.destroy();
-            });
+            });            
 
         },
         update: function(element, valueAccessor, allBindings, data, context) {
