@@ -21,14 +21,17 @@ define([
 
         self.items = ko.pureComputed(function() {
             return feedLoader.items().filter(function(doc) {
-                return doc.date >= self.startDate() && doc.date <= self.endDate() && (self.documentType()==null || doc.type.name==self.documentType());
+                var isInDateRange = doc.date >= self.startDate() && doc.date <= self.endDate();
+                var isSpecifiedDocumentType = self.documentType() === doc.type.name;
+                var isAnyDocumentType = !self.documentType();
+                return isInDateRange && (isAnyDocumentType || isSpecifiedDocumentType);
             });
         });
 
         self.views = [
             { name: 'barChart', caption: 'Bar Chart' },
             { name: 'timeline', caption: 'Timeline' },
-            { name: 'feed', caption: 'Feed' },
+            { name: 'feed', caption: 'Feed' }
         ];
         self.view = ko.observable(self.views[0]);
 

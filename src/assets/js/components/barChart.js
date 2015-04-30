@@ -110,7 +110,12 @@ define([
 
         self.graphGroups = ko.pureComputed(function() {
             return sources.map(function(source, index) {
-                return { id: index, content: source.title, className: 'graphGroup' + index.toString(10) };
+                return {
+                    id: index,
+                    content: source.title,
+                    className: 'graphGroup' + index.toString(10),
+                    name: source.name
+                };
             });
         });
 
@@ -125,9 +130,13 @@ define([
                 return result.concat(items);
             }, []);
         });
-		
-		self.selectBar = function (args) {
-            if ((args.what == "background") && (args.event.target.attributes["class"] != null) && (args.event.target.attributes["class"].nodeValue.indexOf("graphGroup") == 0)) {
+
+        self.selectBar = function (args) {
+            if (
+                (args.what === "background")
+                && (args.event.target.attributes["class"])
+                && (args.event.target.attributes["class"].nodeValue.indexOf("graphGroup") === 0)
+            ) {
                 var index = args.event.target.attributes["class"].nodeValue.split(" ")[0].replace("graphGroup", "")*1;
                 var date = args.time;
                 var startDate = new Date(date.getFullYear(), date.getMonth(), 1);
@@ -142,13 +151,13 @@ define([
                 topicViewModel.view(topicViewModel.views[2]);
             }
         };
-		
-		self.init = function () {
+
+        self.init = function () {
             topicViewModel.reset();
         };
 
         self.init();
-		
+
     };
 
     return {
