@@ -139,8 +139,17 @@ define([
             ) {
                 var index = args.event.target.attributes["class"].nodeValue.split(" ")[0].replace("graphGroup", "")*1;
                 var date = args.time;
-                var startDate = new Date(date.getFullYear(), date.getMonth(), 1);
-                var endDate = new Date(date.getFullYear(), date.getMonth()+1, 0);
+                var year = date.getFullYear();
+                var month = date.getMonth();
+                if (date.getDate() > 15) {
+                    month += 1;
+                    if (month > 11) {
+                        month = 0;
+                        year++;
+                    }
+                }
+                var startDate = new Date(year, month, 1);
+                var endDate = new Date(year, month+1, 0, 23, 59, 59);
                 var documentType = ko.utils.arrayFirst(self.graphGroups(), function (item) {
                     return item.id == index;
                 });
