@@ -46,7 +46,6 @@ define([
 
     $.extend(BriefingPaper, {
         title: 'Briefing Papers',
-        name: 'briefingPaper',
         displayName: 'Briefing Paper',
         aggregate : {
             dataset: 'briefingpapers',
@@ -74,7 +73,6 @@ define([
 
     $.extend(CommonsWrittenQuestion, {
         title: 'Commons Written Questions',
-        name: 'commonsWrittenQuestion',
         displayName: 'Commons Written Question',
         aggregate: {
             dataset: 'commonswrittenquestions',
@@ -105,7 +103,6 @@ define([
 
     $.extend(EDM, {
         title: 'EDMs',
-        name: 'edm',
         displayName: 'Early Day Motion',
         aggregate : {
             dataset: 'edms',
@@ -133,7 +130,6 @@ define([
 
     $.extend(PaperLaid, {
         title: 'Papers Laid',
-        name: 'paperLaid',
         displayName: 'Paper Laid',
         aggregate : {
             dataset: 'paperslaid',
@@ -162,7 +158,6 @@ define([
 
     $.extend(ProceedingDebate, {
         title: 'Proceedings - Debates',
-        name: 'proceedings-debate',
         displayName: 'Proceedings - Debate',
         aggregate: {
             dataset: 'proceedingsdebates',
@@ -190,7 +185,6 @@ define([
 
     $.extend(ProceedingStatement, {
         title: 'Proceedings - Statements',
-        name: 'proceedings-statement',
         displayName: 'Proceedings - Statement',
         aggregate: {
             dataset: 'proceedingsstatements',
@@ -218,7 +212,6 @@ define([
 
     $.extend(ProceedingQuestion, {
         title: 'Proceedings - Questions',
-        name: 'proceedings-question',
         displayName: 'Proceedings - Question',
         aggregate: {
             dataset: 'proceedingsquestions',
@@ -247,7 +240,6 @@ define([
 
     $.extend(SelectCommitteeReport, {
         title: 'Select Committee Reports',
-        name: 'select-committee-report',
         displayName: 'Select Committee Report',
         aggregate: {
             dataset: 'scrparlisearch',
@@ -278,7 +270,6 @@ define([
 
     $.extend(WrittenMinisterialStatement, {
         title: 'Written Ministerial Statements',
-        name: 'wms',
         displayName: 'Written Ministerial Statement',
         aggregate: {
             dataset: 'writtenministerialstatements',
