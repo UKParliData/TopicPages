@@ -60,6 +60,34 @@ define([
     sources.briefingPapers = BriefingPaper;
 
 
+    /* ====== Commons Written Questions ====== */
+
+    function CommonsWrittenQuestion(item) {
+        var self = this;
+        Document.call(self, item);
+
+        self.date = new Date(item.dateTabled._value);
+        self.title = 'Commons Written Question: ' + item.tablingMemberPrinted[0]._value;
+        self.content = item.questionText;
+    }
+
+
+    $.extend(CommonsWrittenQuestion, {
+        title: 'Commons Written Questions',
+        name: 'commonsWrittenQuestion',
+        displayName: 'Commons Written Question',
+        aggregate: {
+            dataset: 'commonswrittenquestions',
+            args: {
+                _sort: '-date',
+                _properties: 'questionText,dateTabled,tablingMemberPrinted,AnsweringBody'
+            },
+            idFunc: function(topic) { return topic.id; }
+        }
+    });
+
+    sources.commonsWrittenQuestions = CommonsWrittenQuestion;
+
     /* ====== EDMs ====== */
 
     function EDM(item) {
@@ -265,6 +293,7 @@ define([
 
     sources.all = [
         sources.briefingPapers,
+        sources.commonsWrittenQuestions,
         sources.edms,
         sources.papersLaid,
         sources.proceedingsDebates,
@@ -347,7 +376,9 @@ define([
                 return sources.concat(requiredTopics.map(function(topic) {
                     var result = $.extend({}, nextSource);
                     result.args = $.extend({}, result.args, {
-                        topic: topic.uri
+                        topic: nextSource.hasOwnProperty('idFunc')
+                            ? nextSource.idFunc(topic)
+                            : topic.uri
                     });
                     return result;
                 }));
