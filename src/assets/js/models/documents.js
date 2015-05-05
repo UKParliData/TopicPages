@@ -15,9 +15,11 @@ define([
 
     var sources = {};
 
-
     function Document(item) {
         var self = this;
+
+        self.type = self.constructor;
+        self.id = item._about;
 
         self.visible = ko.observable(false);
         self.text = ko.pureComputed(function() { return self.content; });
@@ -35,8 +37,6 @@ define([
         var self = this;
         Document.call(this, item);
 
-        self.type = sources.briefingPapers;
-        self.id = item._about;
         self.uri = item.contentLocation;
         self.date = new Date(item.date._value);
         self.title = (item.identifier && item.identifier._value ? item.identifier._value + ': ' : '')
@@ -44,8 +44,7 @@ define([
         self.content = item.description[0];
     }
 
-
-    sources.briefingPapers = {
+    $.extend(BriefingPaper, {
         title: 'Briefing Papers',
         name: 'briefingPaper',
         displayName: 'Briefing Paper',
@@ -54,13 +53,11 @@ define([
             args: {
                 _view: 'all',
                 _sort: '-date'
-            },
-            transform: function(item) {
-                return new BriefingPaper(item);
             }
         }
+    });
 
-    };
+    sources.briefingPapers = BriefingPaper;
 
 
     /* ====== EDMs ====== */
@@ -69,19 +66,16 @@ define([
         var self = this;
         Document.call(this, item);
 
-        self.type = sources.edms,
-        self.id = item._about,
-        self.uri = item.externalLocation,
+        self.uri = item.externalLocation;
         self.title = (item.edmNumber && item.edmNumber._value
                 ? 'EDM ' + item.edmNumber._value + ' - '  : ''
             )
-            + item.title,
-        self.date = new Date(item.dateTabled._value),
+            + item.title;
+        self.date = new Date(item.dateTabled._value);
         self.content = item.motionText;
     }
 
-
-    sources.edms = {
+    $.extend(EDM, {
         title: 'EDMs',
         name: 'edm',
         displayName: 'Early Day Motion',
@@ -90,31 +84,26 @@ define([
             args: {
                 _view: 'all',
                 _sort: '-date'
-            },
-            transform: function(item) {
-                return new EDM(item);
             }
         }
-    };
+    });
+
+    sources.edms = EDM;
 
 
     /* ====== Papers Laid ====== */
-
 
     function PaperLaid(item) {
         var self = this;
         Document.call(self, item);
 
-        self.type = sources.papersLaid;
-        self.id = item._about;
         self.uri = item.internalLocation;
         self.date = new Date(item.dateLaid._value);
         self.title = item.title;
         self.content = null;
     }
 
-
-    sources.papersLaid = {
+    $.extend(PaperLaid, {
         title: 'Papers Laid',
         name: 'paperLaid',
         displayName: 'Paper Laid',
@@ -124,12 +113,11 @@ define([
                 'exists-topic': true,
                 _view: 'all',
                 _sort: '-date'
-            },
-            transform: function(item) {
-                return new PaperLaid(item);
             }
         }
-    };
+    });
+
+    sources.papersLaid = PaperLaid;
 
 
     /* ====== Proceedings - Debates ====== */
@@ -138,15 +126,13 @@ define([
         var self = this;
         Document.call(self, item);
 
-        self.type = sources.proceedingsDebates;
-        self.id = item._about;
         self.uri = item.externalLocation;
         self.date = new Date(item.date._value);
         self.title = item.title;
         self.content = item.indexerSummary;
     }
 
-    sources.proceedingsDebates = {
+    $.extend(ProceedingDebate, {
         title: 'Proceedings - Debates',
         name: 'proceedings-debate',
         displayName: 'Proceedings - Debate',
@@ -155,12 +141,11 @@ define([
             args: {
                 _view: 'all',
                 _sort: '-date'
-            },
-            transform: function(item) {
-                return new ProceedingDebate(item);
             }
         }
-    };
+    });
+
+    sources.proceedingsDebates = ProceedingDebate;
 
 
     /* ====== Proceedings - Statements ====== */
@@ -169,15 +154,13 @@ define([
         var self = this;
         Document.call(self, item);
 
-        self.type = sources.proceedingsStatements;
-        self.id = item._about;
         self.uri = item.externalLocation;
         self.date = new Date(item.date._value);
         self.title = item.title;
         self.content = item.indexerSummary;
     }
 
-    sources.proceedingsStatements = {
+    $.extend(ProceedingStatement, {
         title: 'Proceedings - Statements',
         name: 'proceedings-statement',
         displayName: 'Proceedings - Statement',
@@ -186,12 +169,11 @@ define([
             args: {
                 _view: 'all',
                 _sort: '-date'
-            },
-            transform: function(item) {
-                return new ProceedingStatement(item);
             }
         }
-    };
+    });
+
+    sources.proceedingsStatements = ProceedingStatement;
 
 
     /* ====== Proceedings - Questions ====== */
@@ -200,15 +182,13 @@ define([
         var self = this;
         Document.call(self, item);
 
-        self.type = sources.proceedingsQuestions;
-        self.id = item._about;
         self.uri = item.externalLocation;
         self.date = new Date(item.date._value);
         self.title = item.title;
         self.content = item.indexerSummary;
     }
 
-    sources.proceedingsQuestions = {
+    $.extend(ProceedingQuestion, {
         title: 'Proceedings - Questions',
         name: 'proceedings-question',
         displayName: 'Proceedings - Question',
@@ -217,12 +197,11 @@ define([
             args: {
                 _view: 'all',
                 _sort: '-date'
-            },
-            transform: function(item) {
-                return new ProceedingStatement(item);
             }
         }
-    };
+    });
+
+    sources.proceedingsQuestions = ProceedingQuestion;
 
 
 
@@ -232,16 +211,13 @@ define([
         var self = this;
         Document.call(self, item);
 
-        self.type = sources.selectCommitteeReports;
-        self.id = item._about;
         self.uri = item.location;
         self.date = new Date(item.date._value);
         self.title = item.title;
         self.content = null;
     }
 
-
-    sources.selectCommitteeReports = {
+    $.extend(SelectCommitteeReport, {
         title: 'Select Committee Reports',
         name: 'select-committee-report',
         displayName: 'Select Committee Report',
@@ -250,12 +226,12 @@ define([
             args: {
                 _sort: '-date',
                 _view: 'all'
-            },
-            transform: function(item) {
-                return new SelectCommitteeReport(item);
             }
         }
-    };
+    });
+
+    sources.selectCommitteeReports = SelectCommitteeReport;
+
 
     /* ====== Written Ministerial Statements ====== */
 
@@ -263,8 +239,6 @@ define([
         var self = this;
         Document.call(self, item);
 
-        self.type = sources.wms;
-        self.id = item._about;
         self.uri = item._about;
         self.date = new Date(item.date._value);
         self.title = item.title;
@@ -274,7 +248,7 @@ define([
         self.html = self.content;
     }
 
-    sources.wms = {
+    $.extend(WrittenMinisterialStatement, {
         title: 'Written Ministerial Statements',
         name: 'wms',
         displayName: 'Written Ministerial Statement',
@@ -282,12 +256,11 @@ define([
             dataset: 'writtenministerialstatements',
             args : {
                 _sort: '-date'
-            },
-            transform: function (item) {
-                return new WrittenMinisterialStatement(item);
             }
         }
-    };
+    });
+
+    sources.wms = WrittenMinisterialStatement;
 
 
     sources.all = [
@@ -355,7 +328,11 @@ define([
             if (!activeSources.length) return;
             var deferred = $.Deferred();
             self.loading(true);
-            var s = activeSources.map(function(x) { return x.aggregate; });
+            var s = activeSources.map(function(X) {
+                return $.extend({
+                    transform: function(item) { return new X(item); }
+                }, X.aggregate);
+            });
 
             var requiredTopics = [];
 
