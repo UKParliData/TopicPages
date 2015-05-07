@@ -55,6 +55,12 @@ module.exports = function(grunt) {
         var serveStatic = require('serve-static');
         var serve = serveStatic('./src/');
         var server = http.createServer(function(req, res) {
+            res.on('finish', function() {
+                console.log('HTTP/' + req.httpVersion + ' '
+                    + req.method + ' ' + req.url + ' '
+                    + res.statusCode);
+            });
+
             var done = finalhandler(req, res);
             serve(req, res, done);
         });
