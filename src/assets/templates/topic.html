@@ -6,6 +6,9 @@
         <a href="#" data-bind="click: $root.goToTopicPicker">Change topic</a>
     </li>
     <li>
+        <a href="#" data-bind="click: $root.showFilter">Filter</a>
+    </li>
+    <li>
         <label>
             From:
             <input type="date"
@@ -34,5 +37,18 @@
     </li>
     <!-- /ko -->
 </ul>
+
+<div class="filter">
+    <div class="filter-inner">
+        <ul data-bind="foreach: sources">
+            <li>
+                <label>
+                    <input type="checkbox" data-bind="checked: selected"></input>
+                    <!-- ko text: title --><!-- /ko -->
+                </label>
+            </li>
+        </ul>
+    </div>
+</div>
 
 <div class="stage" data-bind="component: { name: 'components/' + view().name, params: $data }"></div>

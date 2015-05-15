@@ -30,6 +30,11 @@ define([
         };
     }
 
+    function extend(cls, statics) {
+        $.extend(cls, statics);
+        cls.selected = ko.observable(true);
+    }
+
 
     /* ====== Briefing Papers ====== */
 
@@ -38,13 +43,15 @@ define([
         Document.call(this, item);
 
         self.uri = item.contentLocation;
-        self.date = new Date(item.date._value);
+        if (item.date && item.date._value)
+            self.date = new Date(item.date._value);
         self.title = (item.identifier && item.identifier._value ? item.identifier._value + ': ' : '')
             + item.title;
-        self.content = item.description[0];
+        if (item.description && item.description.length)
+            self.content = item.description[0];
     }
 
-    $.extend(BriefingPaper, {
+    extend(BriefingPaper, {
         title: 'Briefing Papers',
         displayName: 'Briefing Paper',
         aggregate : {
@@ -71,7 +78,7 @@ define([
     }
 
 
-    $.extend(CommonsWrittenQuestion, {
+    extend(CommonsWrittenQuestion, {
         title: 'Commons Written Questions',
         displayName: 'Commons Written Question',
         aggregate: {
@@ -97,11 +104,12 @@ define([
                 ? 'EDM ' + item.edmNumber._value + ' - '  : ''
             )
             + item.title;
-        self.date = new Date(item.dateTabled._value);
+        if (item.dateTabled && item.dateTabled._value)
+            self.date = new Date(item.dateTabled._value);
         self.content = item.motionText;
     }
 
-    $.extend(EDM, {
+    extend(EDM, {
         title: 'EDMs',
         displayName: 'Early Day Motion',
         aggregate : {
@@ -128,7 +136,7 @@ define([
         self.content = null;
     }
 
-    $.extend(PaperLaid, {
+    extend(PaperLaid, {
         title: 'Papers Laid',
         displayName: 'Paper Laid',
         aggregate : {
@@ -156,7 +164,7 @@ define([
         self.content = item.indexerSummary;
     }
 
-    $.extend(ProceedingDebate, {
+    extend(ProceedingDebate, {
         title: 'Proceedings - Debates',
         displayName: 'Proceedings - Debate',
         aggregate: {
@@ -183,7 +191,7 @@ define([
         self.content = item.indexerSummary;
     }
 
-    $.extend(ProceedingStatement, {
+    extend(ProceedingStatement, {
         title: 'Proceedings - Statements',
         displayName: 'Proceedings - Statement',
         aggregate: {
@@ -210,7 +218,7 @@ define([
         self.content = item.indexerSummary;
     }
 
-    $.extend(ProceedingQuestion, {
+    extend(ProceedingQuestion, {
         title: 'Proceedings - Questions',
         displayName: 'Proceedings - Question',
         aggregate: {
@@ -238,7 +246,7 @@ define([
         self.content = null;
     }
 
-    $.extend(SelectCommitteeReport, {
+    extend(SelectCommitteeReport, {
         title: 'Select Committee Reports',
         displayName: 'Select Committee Report',
         aggregate: {
@@ -268,7 +276,7 @@ define([
         self.html = self.content;
     }
 
-    $.extend(WrittenMinisterialStatement, {
+    extend(WrittenMinisterialStatement, {
         title: 'Written Ministerial Statements',
         displayName: 'Written Ministerial Statement',
         aggregate: {

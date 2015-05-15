@@ -31,7 +31,7 @@ require.config({
   ]
 });
 
-(function(window){
+(function(window, document){
 define([
     'jquery',
     'knockout',
@@ -65,7 +65,7 @@ define([
     ko.bindingHandlers.accordion = {
         init: function(element, valueAccessor) {
             var options = valueAccessor() || {};
-            setTimeout(function() {
+            window.setTimeout(function() {
                 $(element).accordion(options);
             }, 0);
 
@@ -203,13 +203,13 @@ define([
     ko.bindingHandlers.network = {
         init: function(element, valueAccessor, allBindings, data, context) {
             var value = ko.unwrap(valueAccessor());
-            var data = {
+            var graph = {
                 nodes: value.nodes,
                 edges: value.edges
             };
             var options = value.options;
             var events = value.events;
-            var network = new vis.Network(element, data, options);
+            var network = new vis.Network(element, graph, options);
             for (var i in events) {
                 if (events.hasOwnProperty(i) && typeof events[i] === 'function') {
                     network.on(i, events[i]);
@@ -260,4 +260,4 @@ define([
 
     ko.applyBindings(app);
 });
-})(window);
+})(window, document);

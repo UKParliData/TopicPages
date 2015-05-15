@@ -99,6 +99,7 @@ define([
                     _page: page,
                     _pageSize: cfg.topics.pageSize,
                     _properties: 'termCount,prefLabel,broader',
+                    _view: 'basic',
                     'class': 'TPG'
                 },
                 success: function(data) {

@@ -12,12 +12,18 @@ define([
         var feedLoader = new documents.FeedLoader();
 
         var now = new Date();
-        var startOfMonthoneYearAgo = new Date(Math.floor(now / 86400000 - 365 - now.getDate() + 1) * 86400000);
+        var startOfMonthOneYearAgo = new Date(Math.floor(now / 86400000 - 365 - now.getDate() + 1) * 86400000);
 
-        self.startDate =ko.observable(startOfMonthoneYearAgo);
+        self.startDate = ko.observable(startOfMonthOneYearAgo);
         self.endDate = ko.observable(now);
         self.topic = topics.selection();
         self.documentType = ko.observable(null);
+        self.sources = documents.sources.all.map(function(a) {
+            return {
+                selected: a.selected,
+                title: a.title
+            };
+        });
 
         self.items = ko.pureComputed(function() {
             return feedLoader.items().filter(function(doc) {
@@ -39,7 +45,7 @@ define([
 
         self.reset = function () {
             self.documentType(null);
-            self.startDate(startOfMonthoneYearAgo);
+            self.startDate(startOfMonthOneYearAgo);
             self.endDate(now);
         };
     }
