@@ -1,5 +1,8 @@
 <ul class="toolbar">
     <li>
+        <strong data-bind="text: topic.name"></strong>
+    </li>
+    <li>
         <a href="#" data-bind="click: $root.goToTopicPicker">Change topic</a>
     </li>
     <li>
@@ -32,7 +35,4 @@
     <!-- /ko -->
 </ul>
 
-<div class="stage">
-    <h1 data-bind="text: topic.name"></h1>
-    <!-- ko component: { name: 'components/' + view().name, params: $data } --><!-- /ko -->
-</div>
+<div class="stage" data-bind="component: { name: 'components/' + view().name, params: $data }"></div>
