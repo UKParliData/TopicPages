@@ -75,8 +75,8 @@ define([
 
         self.select = function() {
             selection(self);
-        }
-    }
+        };
+    };
 
 
     function readTerm(term) {
@@ -107,7 +107,7 @@ define([
 
                     var state = {
                         loaded: terms.length,
-                        expected: data.result.totalResults,
+                        expected: data.result.totalResults
                     };
 
                     deferred.notify(state);

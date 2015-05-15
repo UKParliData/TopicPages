@@ -13,19 +13,19 @@ define(function() {
         },
         components: {
             briefingPapers: {
-                title: 'Briefing Papers',
+                title: 'Briefing Papers'
             },
             edms: {
-                title: 'Early Day Motions',
+                title: 'Early Day Motions'
             },
             papersLaid : {
-                title: 'Papers Laid',
+                title: 'Papers Laid'
             },
             proceedings: {
-                title: 'Proceedings',
+                title: 'Proceedings'
             },
             wms: {
-                title: 'Written Ministerial Statements',
+                title: 'Written Ministerial Statements'
             }
         }
     };

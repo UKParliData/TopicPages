@@ -4,6 +4,7 @@ define([
     'es5-shim',
     './utils'
 ], function($, cfg) {
+    "use strict";
 
     /* ====== load function ====== */
 
@@ -37,7 +38,6 @@ define([
      */
 
     function load(dataset, args, transform) {
-        var url = cfg.ddpBase + dataset;
 
         var deferred = $.Deferred();
 
@@ -74,7 +74,7 @@ define([
                 }
             }
             else {
-                items = result.items;
+                items = data.result.items;
             }
 
             deferred.resolve(items, page, data['DDP API Version']);
@@ -114,7 +114,6 @@ define([
      */
 
     function loadMultiple(sources, extend) {
-        var result = [];
         var deferred = $.Deferred();
 
         var requests = sources.map(function(source) {
@@ -126,7 +125,7 @@ define([
         });
 
 
-        $.when.apply(this, requests)
+        $.when.apply(undefined, requests)
             .done(function() {
                 var args = sources.length > 1 ? arguments : [ arguments ];
                 var items = [];

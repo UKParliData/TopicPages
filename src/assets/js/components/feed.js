@@ -5,9 +5,6 @@ define([
 ], function(tpl, ko, documents) {
     "use strict";
 
-    var sources = documents.sources.all;
-
-
     function FeedViewModel(topicViewModel) {
         var self = this;
         self.items = topicViewModel.items;

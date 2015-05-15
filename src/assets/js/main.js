@@ -31,13 +31,14 @@ require.config({
   ]
 });
 
+(function(window){
 define([
     'jquery',
     'knockout',
     'vis',
     './app',
     './models/topics',
-    'jquery-ui',
+    'jquery-ui'
 ], function($, ko, vis, app, topics) {
     "use strict";
     $.support.cors = true;
@@ -188,7 +189,7 @@ define([
 
             ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
                 graph2d.destroy();
-            });            
+            });
 
         },
         update: function(element, valueAccessor, allBindings, data, context) {
@@ -231,7 +232,6 @@ define([
             context.updateGraph = function() {
                 network.freezeSimulation(true);
                 var positions = network.getPositions();
-                console.log(positions);
                 var value = ko.unwrap(valueAccessor());
                 var data = {
                     nodes: value.nodes,
@@ -250,7 +250,7 @@ define([
                 network.setData(data);
                 network.setOptions(options);
                 network.freezeSimulation(false);
-            }
+            };
         },
         update: function(element, valueAccessor, allBindings, data, context) {
             context.updateGraph();
@@ -260,3 +260,4 @@ define([
 
     ko.applyBindings(app);
 });
+})(window);
