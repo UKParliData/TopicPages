@@ -66,6 +66,10 @@ define([
 
         self.selectAllTypes = selectOrDeselectAll.bind(null, true);
         self.deselectAllTypes = selectOrDeselectAll.bind(null, false);
+
+        self.filteredItems = ko.pureComputed(function() {
+            return self.items().filter(function(i) { return i.type.selected(); });
+        });
     }
 
     return {

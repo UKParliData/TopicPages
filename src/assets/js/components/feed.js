@@ -7,7 +7,7 @@ define([
 
     function FeedViewModel(topicViewModel) {
         var self = this;
-        self.items = topicViewModel.items;
+        self.items = topicViewModel.filteredItems;
     }
 
     return {

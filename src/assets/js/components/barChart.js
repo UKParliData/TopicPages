@@ -78,12 +78,12 @@ define([
         self.byMonth = ko.pureComputed(function() {
             var months = { },
                 monthArr = [],
-                items = topicViewModel.items(),
+                items = topicViewModel.filteredItems(),
                 i, monthKey, month, item;
 
             for (i = 0; i < items.length; i++) {
                 item = items[i];
-                if (!isNaN(item.date)) {
+                if (item.type.selected() && !isNaN(item.date)) {
                     monthKey = new Month(item.date);
                     if (!months.hasOwnProperty(monthKey.key)) {
                         month = new MonthViewModel(monthKey);
@@ -166,7 +166,6 @@ define([
         };
 
         self.init();
-
     };
 
     return {

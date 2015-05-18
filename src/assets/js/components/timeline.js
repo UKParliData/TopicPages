@@ -11,7 +11,7 @@ define([
         var self = this;
 
         self.timeline = ko.pureComputed(function() {
-            return topicViewModel.items().map(function(x, index, array) {
+            return topicViewModel.filteredItems().map(function(x, index, array) {
                 return {
                     id: x.id,
                     content: '<div class="event-title">' + x.title + '</div>' +
