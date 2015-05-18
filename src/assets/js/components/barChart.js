@@ -78,12 +78,12 @@ define([
         self.byMonth = ko.pureComputed(function() {
             var months = { },
                 monthArr = [],
-                items = topicViewModel.filteredItems(),
+                items = topicViewModel.items(),
                 i, monthKey, month, item;
 
             for (i = 0; i < items.length; i++) {
                 item = items[i];
-                if (item.type.selected() && !isNaN(item.date)) {
+                if (!isNaN(item.date)) {
                     monthKey = new Month(item.date);
                     if (!months.hasOwnProperty(monthKey.key)) {
                         month = new MonthViewModel(monthKey);
@@ -114,7 +114,8 @@ define([
                     id: index,
                     content: source.title,
                     className: 'graphGroup' + index.toString(10),
-                    name: source.name
+                    name: source.name,
+                    visible: source.selected()
                 };
             });
         });
