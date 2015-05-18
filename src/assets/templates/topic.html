@@ -6,7 +6,7 @@
         <a href="#" data-bind="click: $root.goToTopicPicker">Change topic</a>
     </li>
     <li>
-        <a href="#" data-bind="click: $root.showFilter">Filter</a>
+        <a href="#" data-bind="click: showFilter">Filter</a>
     </li>
     <li>
         <label>
@@ -38,8 +38,9 @@
     <!-- /ko -->
 </ul>
 
-<div class="filter">
+<div class="filter" data-bind="visible: filtering">
     <div class="filter-inner">
+        <h3>Select topics to display</h3>
         <ul data-bind="foreach: sources">
             <li>
                 <label>
@@ -48,6 +49,15 @@
                 </label>
             </li>
         </ul>
+        <p class="buttons">
+            <span class="select">
+                Select:
+                <a href="#" data-bind="click: selectAllTypes">all</a>
+                |
+                <a href="#" data-bind="click: deselectAllTypes">none</a>
+            </span>
+            <button data-bind="click: closeFilter">OK</button>
+        </p>
     </div>
 </div>
 

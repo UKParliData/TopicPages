@@ -18,6 +18,7 @@ define([
         self.endDate = ko.observable(now);
         self.topic = topics.selection();
         self.documentType = ko.observable(null);
+        self.filtering = ko.observable(false);
         self.sources = documents.sources.all.map(function(a) {
             return {
                 selected: a.selected,
@@ -48,6 +49,23 @@ define([
             self.startDate(startOfMonthOneYearAgo);
             self.endDate(now);
         };
+
+        self.showFilter = function() {
+            self.filtering(true);
+        };
+
+        self.closeFilter = function() {
+            self.filtering(false);
+        };
+
+        function selectOrDeselectAll(active) {
+            for (var i = 0; i < self.sources.length; i++) {
+                self.sources[i].selected(active);
+            }
+        }
+
+        self.selectAllTypes = selectOrDeselectAll.bind(null, true);
+        self.deselectAllTypes = selectOrDeselectAll.bind(null, false);
     }
 
     return {
