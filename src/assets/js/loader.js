@@ -1,10 +1,13 @@
 define([
     'jquery',
     './config',
+    './app',
     'es5-shim',
     './utils'
-], function($, cfg) {
+], function($, cfg, app) {
     "use strict";
+
+    console.log(app);
 
     /* ====== load function ====== */
 
@@ -38,6 +41,7 @@ define([
      */
 
     function load(dataset, args, transform) {
+        app.loading(app.loading() + 1);
 
         var deferred = $.Deferred();
 
@@ -78,9 +82,11 @@ define([
             }
 
             deferred.resolve(items, page, data['DDP API Version']);
+            app.loading(app.loading() - 1);
         })
         .fail(function() {
             deferred.reject.apply(this, arguments);
+            app.loading(app.loading() - 1);
         });
 
         return deferred.promise();

@@ -1,16 +1,16 @@
 define([
     'knockout',
     './config',
-    './loader',
     './models/topics',
     'es5-shim'
-], function(ko, cfg, loader, topics) {
+], function(ko, cfg, topics) {
     "use strict";
 
     function App() {
         var self = this;
 
-        self.loading = ko.observable(true);
+        self.loading = ko.observable(1);
+        self.loaded = ko.observable(false);
         self.selectedModule = ko.observable('home');
         self.progress = {
             expected: ko.observable(100),
@@ -27,10 +27,13 @@ define([
                 self.progress.expected(state.expected);
             })
             .always(function() {
-                self.loading(false);
+                self.loading(0);
+                self.loaded(true);
             })
             .fail(function() {
                 self.selectedModule('error');
+                self.loading(0);
+                self.loaded(true);
             });
 
         topics.selection.subscribe(function(newValue) {
