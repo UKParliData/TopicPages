@@ -182,9 +182,22 @@ define([
 
             context.updateGraph = function() {
                 var value = ko.unwrap(valueAccessor());
-                graph2d.setGroups(new vis.DataSet(value.groups()));
-                graph2d.setItems(new vis.DataSet(value.items()));
+                var groups = value.groups();
+                var items = value.items();
+                graph2d.setGroups(new vis.DataSet(groups));
+                graph2d.setItems(new vis.DataSet(items));
                 graph2d.setOptions(value.options);
+
+                if (options.tooltips) {
+                    $(element).find('rect.bar').each(function(ix, el) {
+                        var cls = Array.prototype.map.call(el.classList, function(x) {
+                            return /^graphGroup([0-9]+)/.exec(x);
+                        })
+                        .filter(function(x) { return x !== null; });
+                        cls = parseInt(cls[0][1], 10);
+                        el.setAttribute('title', groups[cls].content);
+                    });
+                }
             };
 
             ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
