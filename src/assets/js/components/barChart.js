@@ -110,6 +110,7 @@ define([
 
         self.graphGroups = ko.pureComputed(function() {
             return sources.map(function(source, index) {
+                console.log(source.name);
                 return {
                     id: index,
                     content: source.title,

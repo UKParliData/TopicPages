@@ -7,8 +7,6 @@ define([
 ], function($, cfg, app) {
     "use strict";
 
-    console.log(app);
-
     /* ====== load function ====== */
 
     /**
