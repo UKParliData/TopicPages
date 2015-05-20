@@ -6,7 +6,8 @@
 define([
     'text!../../templates/barChart.html',
     'knockout',
-    '../models/documents'
+    '../models/documents',
+    '../utils'
 ], function(tpl, ko, documents) {
     "use strict";
 
@@ -110,7 +111,6 @@ define([
 
         self.graphGroups = ko.pureComputed(function() {
             return sources.map(function(source, index) {
-                console.log(source.name);
                 return {
                     id: index,
                     content: source.title,
@@ -134,33 +134,32 @@ define([
         });
 
         self.selectBar = function (args) {
-            if (
-                (args.what === "background")
-                && (args.event.target.attributes["class"])
-                && (args.event.target.attributes["class"].nodeValue.indexOf("graphGroup") === 0)
-            ) {
-                var index = args.event.target.attributes["class"].nodeValue.split(" ")[0].replace("graphGroup", "")*1;
-                var date = args.time;
-                var year = date.getFullYear();
-                var month = date.getMonth();
-                if (date.getDate() > 15) {
-                    month += 1;
-                    if (month > 11) {
-                        month = 0;
-                        year++;
-                    }
-                }
-                var startDate = new Date(year, month, 1);
-                var endDate = new Date(year, month+1, 0, 23, 59, 59);
-                var documentType = ko.utils.arrayFirst(self.graphGroups(), function (item) {
-                    return item.id == index;
-                });
+            if (args.what !== 'background') return;
+            var cls = args.event.target.attributes['class'];
+            var match = /graphGroup([0-9]+)/.exec(cls.value);
+            if (!match) return;
+            var index = parseInt(match[1], 10);
 
-                topicViewModel.documentType(documentType.name);
-                topicViewModel.startDate(startDate);
-                topicViewModel.endDate(endDate);
-                topicViewModel.view(topicViewModel.views[2]);
+            var date = args.time;
+            var year = date.getFullYear();
+            var month = date.getMonth();
+            if (date.getDate() > 15) {
+                month += 1;
+                if (month > 11) {
+                    month = 0;
+                    year++;
+                }
             }
+            var startDate = new Date(year, month, 1);
+            var endDate = new Date(year, month+1, 0, 23, 59, 59);
+            var documentType = ko.utils.arrayFirst(self.graphGroups(), function (item) {
+                return item.id == index;
+            });
+
+            topicViewModel.documentType(documentType.name);
+            topicViewModel.startDate(startDate);
+            topicViewModel.endDate(endDate);
+            topicViewModel.view(topicViewModel.views[2]);
         };
 
         self.init = function () {
